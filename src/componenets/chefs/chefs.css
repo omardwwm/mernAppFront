@@ -1,0 +1,84 @@
+.chefsDiv{
+    background-color: dimgray;
+    color: #fff;
+    min-height: 100vh;
+}
+
+.chefDiv{
+    height: 200px;
+    margin-bottom: 12px;
+    border: gold solid 1px ;
+    /* display: inline-block; */
+    padding: 2%;
+}
+
+.chefCrad{
+    background-color: rgb(201, 114, 15);
+    color: rgb(255, 255, 255); 
+    display: inline-block;
+    margin:auto; 
+    height: 150px;
+    padding: 5px;
+    align-items: center;
+    justify-content: center;
+    text-align: center; 
+}
+#chefCard{
+    background-color: green;
+    width: 80%;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.chefRealisations{
+    height: 150px; 
+    margin: auto;
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    /* text-align: center;
+    flex-direction: row; */
+    /* overflow: scroll; */
+}
+
+.recipeCard{
+    height: 140px;
+    width: 45%; 
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+}
+.card{
+    flex-direction: row;
+    display: flex;
+    background-color: rgb(210, 231, 14);
+}
+.emptyRecipeCard{
+    /* height: 100px; */
+    width: 90%;
+    margin: auto;
+    color: rgb(0, 0, 0);
+}
+#existingRecipes{
+    flex-direction: column;
+    height: 130px;
+    padding: 4px;
+    color: rgb(22, 2, 53); 
+}
+.chefPic{
+    width: 35%;
+    height: 80px;
+    border-radius: 50%;
+    margin-left: 8px;
+}
+
+.recipeChefPic{
+    width: 70%;
+    height: 70px;
+    border-radius: 4px;
+    display: flex;
+}
+#titreRealisation{
+    color: grey;
+}

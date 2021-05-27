@@ -1,0 +1,12 @@
+#btn_inscription{
+  color: rgb(235, 226, 228);  
+}
+.divImage{
+    /* align-items: center;
+    justify-content: center; */
+    text-align: center;
+}
+.modalImage{
+    width: 400px;
+    height: 300px;
+}

@@ -1,0 +1,21 @@
+.nav-link{
+    display: inline-block;
+    padding: .5rem 1rem;
+}
+button{
+    margin: 10px;
+}
+
+.profilePic{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+
+.nav-item{
+   padding: 10px;
+}
+
+.nav-item a{
+    color: rgba(145, 20, 202, 0.986);
+}

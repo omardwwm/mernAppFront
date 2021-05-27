@@ -1,0 +1,13 @@
+.homePage{
+    background-color: rgb(71, 67, 67);
+    min-height: 100vh;
+}
+
+.homeCarousel{
+    margin: 10px;
+}
+#carouselImg{
+    width: 100%;
+    height: 300px;
+    margin: auto;
+}

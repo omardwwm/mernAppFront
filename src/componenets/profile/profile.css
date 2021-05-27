@@ -1,0 +1,15 @@
+.imgCard{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 25%;
+    height: 200px;
+}
+
+#profileCard{
+    background-color: rgb(12, 85, 12);
+    color: rgb(255, 255, 255);
+    margin: 10px;
+    width: 80%;
+}
