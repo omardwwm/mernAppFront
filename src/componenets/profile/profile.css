@@ -3,13 +3,23 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    width: 25%;
+    width: 45%;
     height: 200px;
+    padding: 5px;
+    margin: auto;
 }
 
-#profileCard{
-    background-color: rgb(12, 85, 12);
+#profileCardParent{
+    background-color: rgb(95, 218, 95);
     color: rgb(255, 255, 255);
     margin: 10px;
-    width: 80%;
+    padding: 5px;
+}
+.profileCard{
+    background-color: rgb(79, 9, 170);
+    margin: 3px;
+}
+
+.collapsCard{
+    background-color: rgb(94, 91, 91);
 }

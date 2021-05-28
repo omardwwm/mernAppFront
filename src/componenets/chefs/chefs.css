@@ -52,7 +52,7 @@
 .card{
     flex-direction: row;
     display: flex;
-    background-color: rgb(210, 231, 14);
+    /* background-color: rgb(210, 231, 14); */
 }
 .emptyRecipeCard{
     /* height: 100px; */
