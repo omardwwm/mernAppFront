@@ -27,7 +27,7 @@ const RecipeDetails = (props)=>{
     // const test2 = localStorage.thisRecipe && JSON.parse(localStorage.thisRecipe).recipeName;
     // console.log(test2);    
     const token = localStorage.getItem('userToken');
-    console.log(token); 
+    // console.log(token); 
     // const user = localStorage.getItem('myUser');
     // const [user, setUser] = useState(null);
     const user = localStorage.getItem('myUser') && JSON.parse(localStorage.getItem('myUser'));
@@ -117,15 +117,18 @@ const RecipeDetails = (props)=>{
         }     
     }
     const currentRecipeComments = testRecipe && testRecipe.comments && testRecipe.comments;
-    console.log(currentRecipeComments);
+    // console.log(currentRecipeComments);
 
     const fetchRecipe =async()=>{
         await axios.get(`http://localhost:8080/recipes/${recipeId}`).then(response=>{
             setTestRecipe(response.data);
         })      
     } 
-    testRecipe && console.log('recipeFinalIs', testRecipe);
-    const isMine = testRecipe.recipeCreator ===user && user.id || testRecipe.recipeCreator===user && user._id ? true : false;    
+    testRecipe && console.log('recipeFinalIs', testRecipe.recipeCreator);
+    const idFromRecipe = testRecipe.recipeCreator;
+    idFromRecipe == userId ? console.log('okkkk'): console.log('not working')
+    // const isMine = (testRecipe.recipeCreator ===user && user.id || testRecipe.recipeCreator===user && user._id) ? true : false;    
+    const isMine = idFromRecipe == userId ? true : false;
     console.log(isMine);
 
     useEffect(()=>{
@@ -140,7 +143,7 @@ const RecipeDetails = (props)=>{
         // }
         localStorage.getItem('userToken');
         // console.log(currentPath)
-    },[currentPath]);     
+    },[]);     
 
     // useEffect(()=>{
     //     localStorage.setItem('myUser', JSON.stringify(user)); 
