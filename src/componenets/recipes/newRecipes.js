@@ -56,7 +56,7 @@ const Recipes = ()=>{
     const [ingredientsError, setIngredientsError] = useState("");
     const [ingredientName, setIngredientName] = useState("");
     const [ quantity, setQauntity] = useState("");
-    const recipeCreator = user && user.id;
+    const recipeCreator = user && user.id ? user.id : user && user._id;
     const recipeCreatorName = user && user.username;
     console.log(recipeCreator);
     const handleChange = (event)=>{
@@ -142,6 +142,9 @@ const Recipes = ()=>{
         }      
     }
 
+    useEffect(()=>{
+        setModal(false);
+    }, [])
     const removeIngredient =(ing, index)=>{
         let filtredArray = [...recipeIngrediants];
         filtredArray.splice(index, 1)
@@ -181,15 +184,15 @@ const Recipes = ()=>{
         // )
         dispatch(createRecipe(formData, config)).then(setModal(showModale)).then(()=>setTimeout(() => {
             history.push(`/recipes`);
+            setModal(false);
         }, 4000));
-        setModal(false);
+        
             
     }
     useEffect(()=>{
         localStorage.getItem('myUser');
         localStorage.getItem('userToken');
-        setModal(showModale);
-    }, [showModale])
+    }, [])
     
     if(user){
         return (

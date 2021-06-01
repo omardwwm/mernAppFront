@@ -13,6 +13,8 @@ import RecipeDetails from "./componenets/recipes/recipeDetails";
 import updateRecipe from "./componenets/recipes/UpdateRecipe";
 import Profile from "./componenets/profile/Profile";
 import Chefs from "./componenets/chefs/Chefs";
+import ForgotPassword from "./componenets/login/ForgotPaasword";
+import ResetPassword from "./componenets/login/ResetPassword"
 import NavBar, {} from "../src/componenets/navBar/navBar";
 
 
@@ -25,6 +27,8 @@ function App() {
           <Switch>
             <Route exact path ="/" component={Home}/>
             <Route exact path = "/login" component={Auth} />
+            <Route exact path = "/forgot-password" component={ForgotPassword} />
+            <Route exact path = "/reset-password/:id/:token" component={ResetPassword} />
             <Route exact path="/profile/:id" component={Profile} />
             <Route exact path="/create-account" component={Signup} />
             <Route exact path="/create-recipes" component={newRecipes} />

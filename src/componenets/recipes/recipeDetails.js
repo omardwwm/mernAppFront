@@ -41,7 +41,7 @@ const RecipeDetails = (props)=>{
     //     }
     //     getUser();
     // }
-    const userId = user &&  user.id ? user.id : user._id;
+    const userId = user &&  user.id ? user.id : user && user._id;
     console.log('userID Is:', userId);
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!showModale);
@@ -71,7 +71,7 @@ const RecipeDetails = (props)=>{
     //   console.log(state1);
     // console.log(testRecipe.recipeDescription);
     const ingredients = testRecipe && testRecipe.recipeIngrediants;
-    const [commentContent, setCommentContent] = useState(null);
+    const [commentContent, setCommentContent] = useState('');
     const [errorComment, setErrorComment] = useState('')
     const handleChangeComment =(e)=>{
         e.preventDefault();
@@ -89,16 +89,19 @@ const RecipeDetails = (props)=>{
             'Authorisation': `Bearer ${token}`,
             "x-auth-token":`${token}`
         }};
-        if(commentContent){
-          dispatch(postComment(recipeId, userId, commentContent, config)).then(setModal(true)).then(setCommentContent("")).then(()=>setTimeout(() => {
-            setModal(false)
-        }, 2000)).then(()=>fetchRecipe()); 
-        ;
-        // console.log(commentContent)  
+        if(user && token){
+            if(commentContent){
+                dispatch(postComment(recipeId, userId, commentContent, config)).then(setModal(true)).then(setCommentContent("")).then(()=>setTimeout(() => {
+                    setModal(false)
+                }, 2000)).then(()=>fetchRecipe()); 
+                ;
+                // console.log(commentContent)  
+                }else{
+                    setErrorComment('Vous devez ecrire le commentaire avant de l\'envoyer')
+                }
         }else{
-            setErrorComment('Vous devez ecrire le commentaire avant de l\'envoyer')
-        }
-        
+            setErrorComment('Vous devez vous connecter pour pouvoir poster des commentaires');
+        }  
     }
     
     const deleteThisRecipe=()=>{
@@ -122,7 +125,7 @@ const RecipeDetails = (props)=>{
         })      
     } 
     testRecipe && console.log('recipeFinalIs', testRecipe);
-    const isMine = testRecipe.recipeCreator === user.id ? true : false;    
+    const isMine = testRecipe.recipeCreator ===user && user.id || testRecipe.recipeCreator===user && user._id ? true : false;    
     console.log(isMine);
 
     useEffect(()=>{
@@ -136,7 +139,7 @@ const RecipeDetails = (props)=>{
         //     setTestRecipe(recipeFromStorage); 
         // }
         localStorage.getItem('userToken');
-        console.log(currentPath)
+        // console.log(currentPath)
     },[currentPath]);     
 
     // useEffect(()=>{
@@ -159,8 +162,8 @@ const RecipeDetails = (props)=>{
                 <p>Creation of the chief: {testRecipe.recipeCreatorName}</p>
                 <img src={`http://localhost:8080${testRecipe.recipePicture}`} style={{width:'60%', height:'300px'}} />
                 <h3>The ingredients</h3>
-                {ingredients && ingredients.map((ing)=> (
-                    <ul>{ing.ingredientName}: {ing.quantity} </ul>
+                {ingredients && ingredients.map((ing, index)=> (
+                    <ul key={index}>{ing.ingredientName}: {ing.quantity} </ul>
                 ))}
                 {/* <p>{myRecipe.recipeDescription}</p> */}
                 <div className="instructions">
@@ -171,10 +174,10 @@ const RecipeDetails = (props)=>{
             </div>
             <div style={{border:'solid 2px #fff', marginTop:'5px', padding:'6px'}}>
                 <Form onSubmit={sendComment} >
-                <Label for="comment">commentaires</Label>
-                        <Input type="textarea" name="comment" id="comment" value={commentContent} placeholder="Enter un commentaire" onChange={handleChangeComment} />
-                        <Button>Poster</Button>
-                        <span style={{color:'red'}}>{errorComment}</span>
+                    <Label for="comment">commentaires</Label>
+                    <Input type="textarea" name="comment" id="comment" value={commentContent} placeholder="Enter un commentaire" onChange={handleChangeComment} />
+                    <Button>Poster</Button>
+                    <span style={{color:'red'}}>{errorComment}</span>
                 </Form>
                 <div style={{border:'solid 2px gold', margin:'5px'}}> 
                     {testRecipe && testRecipe.comments && testRecipe.comments.length > 0? 
@@ -182,13 +185,12 @@ const RecipeDetails = (props)=>{
                         // console.log('comments are: ',testRecipe.comments)
                         <>
                         <h4>Les commentaires</h4>
-                        { testRecipe.comments.map((comment)=>
-                        
+                        { testRecipe.comments.map((comment, index)=>
                             (
-                                    <div style={{color:'#0ff8ff'}}>
+                                    <div key={index} style={{color:'#0ff8ff'}}>
                                         <Card id="commentCard">
                                             <div>
-                                                <img src={comment.userId.profilePicture} className="commentImage" /> {comment.userId.username}&nbsp;{formatDate(comment.postedAt)}
+                                                <img src={comment && comment.userId && comment.userId.profilePicture} className="commentImage" /> {comment.userId && comment.userId.username}&nbsp;{formatDate(comment.postedAt)}
                                             </div> 
                                             <div className="d-inline-block offset-1">
                                                 <p >{comment.commentText}</p>{' '}

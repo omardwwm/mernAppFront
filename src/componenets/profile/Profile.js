@@ -42,8 +42,10 @@ const Profile = ()=>{
     const [isPicOpen, setIsPicOpen] = useState(false);
     const togglePic = () => setIsPicOpen(!isPicOpen);
     const deleteMyAccount =()=>{
+        console.log(token);
+        const myCurrentProfilePicture = user.profilePicture;
         if(window.confirm('Vous etes sur de vouloir supprier votre compte?')){
-            dispatch(deletUser(userId, config)).then(()=>history.push('/'))
+            dispatch(deletUser(userId, myCurrentProfilePicture, token)).then(()=>history.push('/'))
         }      
     }
 
@@ -227,10 +229,7 @@ const Profile = ()=>{
                     </CardBody>
                 </Card>
             </Card>
-            {/* <div> */}
-                
-                
-                    
+            {/* <div> */}         
                 <Button onClick={deleteMyAccount} color="danger" size="sm">Supprimer mon compte</Button>
             {/* </div> */}
         </div>

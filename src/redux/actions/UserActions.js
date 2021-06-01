@@ -147,10 +147,20 @@ export const getProfessionnals = (config)=>{
     }
 }
 
-export const deletUser =(userId, config)=>{
+export const deletUser =(userId, myCurrentProfilePicture, token)=>{
     return async(dispatch)=>{
         try {
-            const response = await axios.delete(`http://localhost:8080/users/delete/${userId}`, config).then(()=>localStorage.clear());
+            const data ={
+                myCurrentProfilePicture: myCurrentProfilePicture
+            }
+            const response = await axios.delete(`http://localhost:8080/users/delete/${userId}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    "x-auth-token": token
+                  }, 
+                data:data
+            })
+                .then(()=>localStorage.clear());
             console.log(response);
             dispatch({
                 type: "DELETE-USER-SUCCESS",

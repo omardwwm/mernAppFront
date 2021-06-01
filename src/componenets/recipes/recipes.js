@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 import { Form, FormGroup, Label, Input} from 'reactstrap';
 import {GiCakeSlice, GiHotMeal, GiMeal} from 'react-icons/gi';
+import {SiCodechef} from 'react-icons/si';
 import "./recipes.css";
 
 const Recipes =(props)=>{
@@ -67,7 +68,7 @@ const Recipes =(props)=>{
     const checkboxList =()=>
     myCategories.map((myCategory, index)=>(
             <div className="d-inline-block" key={index}>
-                    <label check>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;               
+                    <label >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;               
                         <input  
                             type="checkbox" 
                             value={myCategory.category} 
@@ -128,7 +129,10 @@ const Recipes =(props)=>{
                         <div key={index} className="d-inline-block m-3 wrap ">
                             <p>{recipe.recipeName}</p>
                             <img src={`http://localhost:8080${recipe.recipePicture}`} style={{width:'300px', height:'200px', borderRadius:10}} alt="recipe illustration" />
-                            {user && recipe.recipeCreator === user.id? <p>Chef: <GiCakeSlice style={{color:'rgb(216, 62, 126)'}}/></p> : <p>By: {recipe.recipeCreatorName}</p>}
+                            {recipe.recipeCreator && recipe.recipeCreator._id ===user && user.id || recipe.recipeCreator && recipe.recipeCreator._id ===user && user._id ? 
+                            <p>By: Me</p> 
+                            : <p>By: {recipe.recipeCreatorName}</p>}
+                            {recipe.recipeCreator && recipe.recipeCreator.isPro == true? <SiCodechef style={{color:'#fff', fontSize:24}}/>: null}
                             <Link to={{pathname: `/recipesDetails/${recipe._id}`, state:{recipe}}} >See more..</Link>
                         </div>
                     )
