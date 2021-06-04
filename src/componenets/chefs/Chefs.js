@@ -32,7 +32,7 @@ const Chefs = ()=>{
                         <div className= "chefCrad col-3">
                             <Card id="chefCard" className="row" >
                                 <CardTitle>{chef.username}</CardTitle>
-                                <img className="img-fluid chefPic" src={chef.profilePicture} alt="picture-profile-chef" />
+                                <img className="img-fluid chefPic" src={`https://mern-recipes.herokuapp.com${chef.profilePicture}`} alt="picture-profile-chef" />
                             </Card>
                         </div>
                         <div className="col-9 chefRealisations p-1" >
