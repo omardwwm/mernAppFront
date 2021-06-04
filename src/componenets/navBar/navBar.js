@@ -93,7 +93,7 @@ const NavBar = (props)=>{
               <div>
                  <Link to={{pathname:`/profile/${user.id}`}} ><Button className="d-inline-block">
                    {/* <RiAccountPinBoxLine style={{color:'#ddff13', fontSize:'22px'}}/> */}
-                   <img src={user && user.profilePicture} className="profilePic" style={{width:'24px', height:'24px'}} />
+                   <img src={user && `https://mern-recipes.herokuapp.com${user.profilePicture}`} className="profilePic" style={{width:'24px', height:'24px'}} />
                    My info</Button></Link>
                 <Button onClick={logoutFromNavBar}> <RiLogoutBoxLine style={{color:'#f00', fontSize:'22px'}}/>LOGOUT</Button>
               </div>
