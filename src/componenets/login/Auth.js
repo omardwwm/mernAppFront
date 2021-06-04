@@ -78,7 +78,7 @@ const Auth = (props)=>{
         e.preventDefault();
         if(inputs.name){
            try {
-            const response = await axios.post(`http://localhost:8080/reset/send-url/${inputs.name}`);
+            const response = await axios.post(`https://mern-recipes.herokuapp.com/reset/send-url/${inputs.name}`);
             console.log(response.data);
             setMsgUrlReset(response.data.message)
         } catch (error) {

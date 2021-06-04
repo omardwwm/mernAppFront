@@ -139,7 +139,7 @@ const Profile = ()=>{
             formData.append('profilePicture',newProfilePicture);
             formData.append('oldProfilePicture',user.profilePicture);
 
-             await axios.put(`http://localhost:8080/users/updatePicture/${userId}`, formData, config)
+             await axios.put(`https://mern-recipes.herokuapp.com/users/updatePicture/${userId}`, formData, config)
             .then(res=>{
                 console.log(res);
                 setMsgUpdateImgSuccess(res.data.message);

@@ -3,7 +3,7 @@ import axios from "axios";
 export const createRecipe = (formData, config)=>{
     return async(dispatch)=>{
         try {
-            const response = await axios.post('http://localhost:8080/recipes/add-recipe', formData, config);
+            const response = await axios.post('https://mern-recipes.herokuapp.com/recipes/add-recipe', formData, config);
             console.log(response);
             dispatch({
                 type: "CREATE-RECIPE",
@@ -32,7 +32,7 @@ export const getAllRecipes = ()=>{
     return async(dispatch)=>{
         dispatch({type: "GET-RECIPES-REQUEST"})
         try {
-            const response = await axios.get('http://localhost:8080/recipes');
+            const response = await axios.get('https://mern-recipes.herokuapp.com/recipes');
             // console.log(response);
             dispatch({
                 type: "GET-RECIPES",
@@ -52,7 +52,7 @@ export const getOneRecipe =(recipeId)=>{
     // console.log(recipeId);
     return async(dispatch)=>{
         try {
-            const response = await axios.get(`http://localhost:8080/recipes/${recipeId}`);
+            const response = await axios.get(`https://mern-recipes.herokuapp.com/recipes/${recipeId}`);
             // console.log(response.data);
             dispatch({
                 type: "GET-ONE-RECIPE",
@@ -69,7 +69,7 @@ export const getOneRecipe =(recipeId)=>{
 export const updateRecipe=(recipeId, formData,config)=>{
     return async(dispatch)=>{
         try {
-            const response = await axios.put(`http://localhost:8080/recipes/update/${recipeId}`,formData, config);
+            const response = await axios.put(`https://mern-recipes.herokuapp.com/recipes/update/${recipeId}`,formData, config);
             console.log(response);
             dispatch({
                 type: "UPDATE-RECIPE-SUCCESS",
@@ -93,7 +93,7 @@ export const updateRecipe=(recipeId, formData,config)=>{
 export const postComment =(recipeId, userId, commentContent, config)=>{
     return async(dispatch)=>{
         try {
-            const response = await axios.post(`http://localhost:8080/comments/add/${recipeId}/${userId}`, {commentContent}, config);
+            const response = await axios.post(`https://mern-recipes.herokuapp.com/comments/add/${recipeId}/${userId}`, {commentContent}, config);
             console.log(response);
             dispatch({
                 type:"POST-COMMENT-SUCCES",
@@ -112,7 +112,7 @@ export const deleteRecipe = (recipeId, dataToDelete, token)=>{
     return async(dispatch)=>{
         // console.log(formData);
         try {
-            const response = await axios.delete(`http://localhost:8080/recipes/delete/${recipeId}`, { headers: {
+            const response = await axios.delete(`https://mern-recipes.herokuapp.com/recipes/delete/${recipeId}`, { headers: {
                 Accept:'*/*',
                 'Content-Type': '*',
                 'Authorisation': `Bearer ${token}`,

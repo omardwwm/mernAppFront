@@ -120,7 +120,7 @@ const RecipeDetails = (props)=>{
     // console.log(currentRecipeComments);
 
     const fetchRecipe =async()=>{
-        await axios.get(`http://localhost:8080/recipes/${recipeId}`).then(response=>{
+        await axios.get(`https://mern-recipes.herokuapp.com/recipes/${recipeId}`).then(response=>{
             setTestRecipe(response.data);
         })      
     } 

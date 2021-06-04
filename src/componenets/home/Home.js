@@ -47,7 +47,7 @@ const Home = ()=>{
       });
 
     const fetchLastRecipes =async()=>{
-        await axios.get('http://localhost:8080/recipes/lastRecipes').then(response=>{
+        await axios.get('https://mern-recipes.herokuapp.com/recipes/lastRecipes').then(response=>{
             // console.log(response.data);
             setLastRecipes([...lastRecipes, ...response.data])
             // setLastRecipes([...lastRecipes, ...response.data]);

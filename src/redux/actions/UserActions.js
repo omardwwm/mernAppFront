@@ -9,7 +9,7 @@ export const registerUser = (formData, Headers)=>{
         try {
             // const formData = new FormData();
             console.log(formData);
-            const response =  await axios.post('http://localhost:8080/users/register', formData, Headers);
+            const response =  await axios.post('https://mern-recipes.herokuapp.com/register', formData, Headers);
             console.log(response);
             dispatch({
                 type: "REGISTER",
@@ -51,7 +51,7 @@ export const login =(email, password)=>{
     return async(dispatch) =>{
         try {
             const response = await axios
-            .post(`http://localhost:8080/users/login`, {
+            .post(`https://mern-recipes.herokuapp.com/users/login`, {
             email: email,
             password: password
         });
@@ -97,7 +97,7 @@ export const changePassword=(userId, token, newPassword, newPasswordConfirm)=>{
                     newPassword: newPassword,
                     newPasswordConfirm: newPasswordConfirm
                 }
-            const response = await axios.put(`http://localhost:8080/users/changePassword/${userId}`, data,
+            const response = await axios.put(`https://mern-recipes.herokuapp.com/users/changePassword/${userId}`, data,
             {headers}
             );
             console.log(response.data.message)
@@ -134,7 +134,7 @@ export const logOut =()=>{
 export const getProfessionnals = (config)=>{
     return async(dispatch)=>{
         try {
-            const response = await axios.get(`http://localhost:8080/users/professionnals`, config);
+            const response = await axios.get(`https://mern-recipes.herokuapp.com/users/professionnals`, config);
             // console.log(response)
             dispatch({
                 type: "GET-PRO-SUCCESS",
@@ -153,7 +153,7 @@ export const deletUser =(userId, myCurrentProfilePicture, token)=>{
             const data ={
                 myCurrentProfilePicture: myCurrentProfilePicture
             }
-            const response = await axios.delete(`http://localhost:8080/users/delete/${userId}`, {
+            const response = await axios.delete(`https://mern-recipes.herokuapp.com/users/delete/${userId}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     "x-auth-token": token
