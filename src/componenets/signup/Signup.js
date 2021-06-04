@@ -14,11 +14,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const Signup =(props)=>{
-
-    // const [username, setUsername] = useState(null);
-    // const [email, setEmail] = useState(null);
-    // const [password, setPassword] = useState(null);
-    // const [roles, setRoles] = useState([]);
     const dispatch = useDispatch();
     const history = useHistory();
     const [form, setForm] = useState({
@@ -235,12 +230,13 @@ const Signup =(props)=>{
                             </Input>
                         </FormGroup> */}
                         <FormGroup style={{margin:'20px', padding:'10px'}}>
-                            {/* <Label  > */}
+                            <Label  >
                                 <Input 
                                 type="checkbox" label="isPro" name="isPro" id="isPro" checked={form.isPro}
                                 onClick={onCheckCheckBox} 
-                                />                        
-                            {/* </Label> */}
+                                /> 
+                                 Etes vous professionnel <br></br>                       
+                            </Label>
                         </FormGroup>
                         <FormGroup check>
                             <Label check>

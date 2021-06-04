@@ -12,27 +12,24 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Collapse, Card, Car
 const Auth = (props)=>{
 
     const dispatch = useDispatch();
-    const [email, setEmail] = useState(null);
+    // const [email, setEmail] = useState(null);
+    // const [emailToReset, setEmailToReset] = useState(null);
+    const [ inputs, setInputs] = useState('');
     const [password, setPassword] = useState(null);
     // const [token, setToken] = useState(null);
-    const showModale = useSelector(state => state.userReducer.showModale)
-    // console.log(showModale);
     // collapse for forgotPassword
     const [isOpen, setIsOpen] = useState(false);
     const toggleCollapse = (e) =>{
         const {name} = e.target
         setIsOpen(!isOpen);
-        setEmail('');
+        setInputs(state=>({...state, name:''}))
     } 
     const [logged, setLogged] = useState(useSelector(state=>state.userReducer.isUserLogged));
     const isUserLogged = useSelector(state=>state.userReducer.isUserLogged);
     console.log(isUserLogged);
     console.log('isuserloggedafterauth', logged);
-    const [loginMessage, setLoginMessage] = useState('');
-    const [modal, setModal] = useState(showModale);
+    // const [loginMessage, setLoginMessage] = useState('');
     const modalBody = useSelector(state=>state.userReducer.modalBody)
-    const modalTitle = useSelector(state=> state.userReducer.modalTitle);
-    const toggle = () => setModal(!showModale);
     const token = useSelector(state=>state.userReducer.userToken)
     const validEmailRegex = RegExp(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i);
     let [emailError, setEmailError] = useState('');
@@ -42,11 +39,11 @@ const Auth = (props)=>{
 
     useEffect(()=>{
         localStorage.getItem("userToken");
-       setLoginMessage(modalBody);
-       if(isUserLogged === true){
-        setTimeout(() => {
-            history.push("/recipes")
-        }, 3000);
+        // setLoginMessage(modalBody);
+        if(isUserLogged === true){
+            setTimeout(() => {
+                history.push("/recipes")
+            }, 3000);
     }        
     }, [isUserLogged]);
 
@@ -58,17 +55,17 @@ const Auth = (props)=>{
         const {name, value} = e.target
         switch (name) {
             case 'email': 
-            validEmailRegex.test(e.target.value) ? setEmailError('') : setEmailError('NOT VALID EMAIL')
+            validEmailRegex.test(value) ? setEmailError('') : setEmailError('NOT VALID EMAIL')
               break;
             case 'emailToReset': 
-            validEmailRegex.test(e.target.value) ? setErrorEmailReset('') : setErrorEmailReset('NOT VALID EMAIL')
+            validEmailRegex.test(value) ? setErrorEmailReset('') : setErrorEmailReset('NOT VALID EMAIL')
               break;
               default:
                 break;
         }
-        setEmail(e.target.value);
-        // emailError = validEmailRegex.test(e.target.value) ? setEmailError('') : setEmailError('NOT VALID EMAIL')
-       
+        // setEmail({name:e.target.value});
+        setInputs({name:e.target.value})
+        // emailError = validEmailRegex.test(e.target.value) ? setEmailError('') : setEmailError('NOT VALID EMAIL') 
     }
 //  console.log(emailError);
     const onChangePassword=(e)=>{
@@ -79,9 +76,9 @@ const Auth = (props)=>{
 // send urlREST 
     const sendUrl=async(e)=>{
         e.preventDefault();
-        if(email){
+        if(inputs.name){
            try {
-            const response = await axios.post(`http://localhost:8080/reset/send-url/${email}`);
+            const response = await axios.post(`http://localhost:8080/reset/send-url/${inputs.name}`);
             console.log(response.data);
             setMsgUrlReset(response.data.message)
         } catch (error) {
@@ -90,39 +87,26 @@ const Auth = (props)=>{
         } 
         }else{
             setErrorEmailReset('vous devez saiair un email !')
-        }
-        
+        }  
     }
-    console.log('email in login component', email);
+    // console.log('email in login component', inputs.name);
+
     const userLogin = event => {
         event.preventDefault();
-        if(!email || !password){
+        if(!inputs.name || !password){
             setSubmitError('Vous devez renseigner les deux champs')
         }else{
-             dispatch(login(email, password))
-             setLoginMessage(modalBody);
+             dispatch(login(inputs.name, password))
+            //  setLoginMessage(modalBody);
              setLogged(isUserLogged)
-            //  setModal(showModale)
-            //  .then(()=>setModal(showModale)).then(()=>setLogged(isUserLogged))            
-            //  .then(
-            //      ()=>
-            //  setTimeout(() => (
-            //     history.push("/recipes")
-            //  ), 5000)
-            //  )
-           
         }
         if(isUserLogged === true){
             setTimeout(() => {
                 history.push("/recipes")
             }, 3000);
-            
-            console.log("test logged ok")
         }    
-        // setToken(localStorage.setItem("userToken", myToken));
     }
-
-    // console.log(user);
+    console.log(modalBody);
 
     return(
         <div>
@@ -138,7 +122,7 @@ const Auth = (props)=>{
                                     className="form-control"
                                     id="inlineFormInputGroup"
                                     placeholder="email"
-                                    value={email}
+                                    value={inputs.name}
                                     onChange={onChangeEmail}
                                 />
                             </div>
@@ -171,19 +155,12 @@ const Auth = (props)=>{
                     <Collapse isOpen={isOpen}>
                         <Card>
                             <CardBody>
-                                <ForgotPassword value={email} sendUrl={sendUrl} handleChange={onChangeEmail} messageResponse={msgUrlReset} errorEmailReset={errorEmailReset} name="emailToReset"  />
+                                <ForgotPassword value={inputs.name} sendUrl={sendUrl} handleChange={onChangeEmail} messageResponse={msgUrlReset} errorEmailReset={errorEmailReset} name="emailToReset"  />
                             </CardBody>
                         </Card>                    
                     </Collapse>
                 </div>   
             </div>
-            {user && user ? 
-            <div>
-                <img src= {`${user.profilePicture}`} style={{height:'200px', width:"400px", margin:"40px"}} alt="test pic" />
-                <p>{user.username}</p>
-                <p>{user.email}</p>
-            </div> 
-            : null}
           {modalBody && <div>
               <p style={{color:'#f0f'}}>{modalBody}</p>
               </div>}

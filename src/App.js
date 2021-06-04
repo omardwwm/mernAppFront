@@ -10,7 +10,7 @@ import Signup from "../src/componenets/signup/Signup";
 import newRecipes from "./componenets/recipes/newRecipes";
 import Recipes from "./componenets/recipes/recipes";
 import RecipeDetails from "./componenets/recipes/recipeDetails";
-import updateRecipe from "./componenets/recipes/UpdateRecipe";
+import UpdateRecipe from "./componenets/recipes/UpdateRecipe";
 import Profile from "./componenets/profile/Profile";
 import Chefs from "./componenets/chefs/Chefs";
 import ForgotPassword from "./componenets/login/ForgotPaasword";
@@ -32,7 +32,7 @@ function App() {
             <Route exact path="/profile/:id" component={Profile} />
             <Route exact path="/create-account" component={Signup} />
             <Route exact path="/create-recipes" component={newRecipes} />
-            <Route exact path="/updateRecipe/:id" component={updateRecipe} />
+            <Route exact path="/updateRecipe/:id" component={UpdateRecipe} />
             <Route exact path="/recipes" component={Recipes} />
             <Route exact path="/chefs" component={Chefs} />
             <Route exact path="/recipesDetails/:_id" component={RecipeDetails} />

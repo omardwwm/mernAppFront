@@ -43,8 +43,8 @@ export const userReducer = (state = initialState, action) =>{
                 userToken: action.token,
                 isUserLogged: action.isUserLogged,
                 redirect: action.redirect,
-                showModale:action.showModale,
-                modalTitle:action.modalTitle,
+                // showModale:action.showModale,
+                // modalTitle:action.modalTitle,
                 modalBody:action.modalBody
                 // modal: true
             }; 
@@ -56,8 +56,8 @@ export const userReducer = (state = initialState, action) =>{
                 userToken: null,
                 isUserLogged: action.isUserLogged,
                 redirect: action.redirect,
-                showModale:action.showModale,
-                modalTitle:action.modalTitle,
+                // showModale:action.showModale,
+                // modalTitle:action.modalTitle,
                 modalBody:action.modalBody 
             };
 

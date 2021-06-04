@@ -13,7 +13,7 @@ import "./newRecipe.css";
 import {updateRecipe} from "../../redux/actions/RecipeActions";
 import {useHistory} from "react-router-dom";
 
-const Recipes = (props)=>{
+const UpdateRecipe = (props)=>{
 
     const recipeToUpdate = props.location.state.testRecipe;
     console.log('recipe to update is:', recipeToUpdate);
@@ -113,7 +113,7 @@ const Recipes = (props)=>{
         event.preventDefault();
         setRecipePicture(event.target.files[0])        
     };
-    console.log(recipePicture);
+    // console.log(recipePicture);
     const addIngredient =(event)=>{
         event.preventDefault();
         if(ingredientName ==="" || quantity ===""){
@@ -167,16 +167,17 @@ const Recipes = (props)=>{
         formData.append('recipeCreator', recipeCreator);
         formData.append('recipeCreatorName', recipeCreatorName);
         formData.append('recipeIngrediants', recipeToSend);
-        dispatch(updateRecipe(recipeId, formData, config)).then(setModal(showModale)).then(()=>setTimeout(() => {
-            history.push(`/recipes`)
-        }, 5000)).then(setModal(false));
+        dispatch(updateRecipe(recipeId, formData, config)).then(setModal(true)).then(()=>setTimeout(() => {
+            history.push(`/recipes`);
+            (setModal(false))
+        }, 5000));
            
     }
+    console.log('showModalIs:', showModale);
     useEffect(()=>{
         localStorage.getItem('myUser');
         localStorage.getItem('userToken');
-        setModal(showModale);
-    }, [showModale])
+    }, [])
 
     // console.log(recipePicture.name); 
 
@@ -276,11 +277,11 @@ const Recipes = (props)=>{
                         </div>}
                          
                     </FormGroup>
-                    {modalBody ? (
+                    {/* {modalBody ? (
                         <div style={{color:'#f0f'}}>
                             <p>{modalBody}</p>
                         </div>
-                    ):null}
+                    ):null} */}
                     <Button type="submit" color="primary" style={{margin:5}}>
                         Update this recipe
                     </Button>
@@ -305,4 +306,4 @@ const Recipes = (props)=>{
 
 }
 
-export default Recipes;
+export default UpdateRecipe;

@@ -126,7 +126,7 @@ const RecipeDetails = (props)=>{
     } 
     testRecipe && console.log('recipeFinalIs', testRecipe.recipeCreator);
     const idFromRecipe = testRecipe.recipeCreator;
-    idFromRecipe == userId ? console.log('okkkk'): console.log('not working')
+    // idFromRecipe == userId ? console.log('okkkk'): console.log('not working')
     // const isMine = (testRecipe.recipeCreator ===user && user.id || testRecipe.recipeCreator===user && user._id) ? true : false;    
     const isMine = idFromRecipe == userId ? true : false;
     console.log(isMine);

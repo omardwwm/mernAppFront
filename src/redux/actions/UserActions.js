@@ -55,16 +55,16 @@ export const login =(email, password)=>{
             email: email,
             password: password
         });
-        console.log(response.data);
+        console.log(response);
         dispatch({
             type: "LOGIN",
             user: response.data.user,
             token: response.data.token,
             isUserLogged: true,
             redirect: true,
-            showModale:true,
+            // showModale:true,
             modalBody: response.data.message,
-            modalTitle: "login succes test"
+            // modalTitle: "login succes test"
         })
         localStorage.setItem("userToken", response.data.token);
         localStorage.setItem("myUser", JSON.stringify(response.data.user));
@@ -74,9 +74,9 @@ export const login =(email, password)=>{
                 type: "LOGIN_FAIL",
                 isUserLogged:false,
                 redirect: false,
-                showModale:true,
+                // showModale:true,
                 modalBody: error.response.data.message,
-                modalTitle: "login failure test"     
+                // modalTitle: "login failure test"     
             })            
         }
     }
