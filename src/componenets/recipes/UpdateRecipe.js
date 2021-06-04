@@ -113,7 +113,7 @@ const UpdateRecipe = (props)=>{
         event.preventDefault();
         setRecipePicture(event.target.files[0])        
     };
-    // console.log(recipePicture);
+    console.log(recipePicture);
     const addIngredient =(event)=>{
         event.preventDefault();
         if(ingredientName ==="" || quantity ===""){
@@ -268,13 +268,13 @@ const UpdateRecipe = (props)=>{
                         <Label for="recipePicture">Image of the recipe</Label>
                         <div>
                             <h5>ancienne image</h5>
-                            <img className="d-block m-2" src={`http://localhost:8080${recipeToUpdate.recipePicture}`} style={{width:'200px', height:'100px'}} />
+                            <img className="d-block m-2" src={`https://mern-recipes.herokuapp.com${recipeToUpdate.recipePicture}`} style={{width:'200px', height:'100px'}} />
                         </div>
                         <Input type="file" name="recipePicture" id="recipePicture" placeholder="Select a picture" onChange={selectImage}/>
-                        {recipePicture && <div>
+                        {/* {recipePicture && <div>
                             <h5>nouvelle image</h5>
                             <img className="d-block m-2" src={recipePicture} style={{width:'200px', height:'100px'}} alt="test" />
-                        </div>}
+                        </div>} */}
                          
                     </FormGroup>
                     {/* {modalBody ? (

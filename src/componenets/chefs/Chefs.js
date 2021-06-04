@@ -51,7 +51,7 @@ const Chefs = ()=>{
                                                 <div className="recipeCard" key={index}>
                                                     <Card id="existingRecipes"  >
                                                         <CardTitle>{recipe.recipeName}</CardTitle>
-                                                        <img src={`http://localhost:8080${recipe.recipePicture}`} className="recipeChefPic" alt="illustration-recipe" />
+                                                        <img src={`https://mern-recipes.herokuapp.com${recipe.recipePicture}`} className="recipeChefPic" alt="illustration-recipe" />
                                                         <CardSubtitle>cat: {recipe.recipeCategory}</CardSubtitle>
                                                         <Link to={{pathname: `/recipesDetails/${recipe._id}`, state:{recipe}}}>Plus de detail</Link>
                                                     </Card>   
