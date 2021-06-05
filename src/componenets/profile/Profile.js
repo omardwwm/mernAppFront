@@ -173,7 +173,7 @@ const Profile = ()=>{
                     <CardBody>
                         <CardTitle tag="h5">{user.username}</CardTitle>
                         <CardText>Email: {user.email}</CardText>
-                        <img className="imgCard"  src={user.profilePicture} alt="Card image cap" />
+                        <img className="imgCard"  src={`https://mern-recipes.herokuapp.com${user.profilePicture}`} alt="Card image cap" />
                         <Button onClick={togglePic} size="sm">Changer votre photo</Button>
                         <Collapse isOpen={isPicOpen}>
                             <Card className="collapsCard col-8">
