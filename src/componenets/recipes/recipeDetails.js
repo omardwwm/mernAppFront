@@ -193,7 +193,7 @@ const RecipeDetails = (props)=>{
                                     <div key={index} style={{color:'#0ff8ff'}}>
                                         <Card id="commentCard">
                                             <div>
-                                                <img src={comment && comment.userId && comment.userId.profilePicture} className="commentImage" /> {comment.userId && comment.userId.username}&nbsp;{formatDate(comment.postedAt)}
+                                                <img src={comment && comment.userId && `https://mern-recipes.herokuapp.com${comment.userId.profilePicture}`} className="commentImage" /> {comment.userId && comment.userId.username}&nbsp;{formatDate(comment.postedAt)}
                                             </div> 
                                             <div className="d-inline-block offset-1">
                                                 <p >{comment.commentText}</p>{' '}
