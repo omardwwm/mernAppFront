@@ -128,7 +128,11 @@ const Recipes =(props)=>{
                     return (
                         <div key={index} className="d-inline-block m-3 wrap ">
                             <p>{recipe.recipeName}</p>
-                            <img src={`https://mern-recipes.herokuapp.com${recipe.recipePicture}`} style={{width:'300px', height:'200px', borderRadius:10}} alt="recipe illustration" />
+                            <img 
+                                // src={`https://mern-recipes.herokuapp.com${recipe.recipePicture}`} 
+                                src={recipe.recipePicture} 
+                                style={{width:'300px', height:'200px', borderRadius:10}} alt="recipe illustration"
+                            />
                             {recipe.recipeCreator && recipe.recipeCreator._id ===user && user.id || recipe.recipeCreator && recipe.recipeCreator._id ===user && user._id ? 
                             <p>By: Me</p> 
                             : <p>By: {recipe.recipeCreatorName}</p>}

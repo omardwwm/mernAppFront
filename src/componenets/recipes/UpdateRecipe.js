@@ -268,7 +268,11 @@ const UpdateRecipe = (props)=>{
                         <Label for="recipePicture">Image of the recipe</Label>
                         <div>
                             <h5>ancienne image</h5>
-                            <img className="d-block m-2" src={`https://mern-recipes.herokuapp.com${recipeToUpdate.recipePicture}`} style={{width:'200px', height:'100px'}} />
+                            <img className="d-block m-2" 
+                                // src={`https://mern-recipes.herokuapp.com${recipeToUpdate.recipePicture}`}
+                                src={recipeToUpdate.recipePicture}
+                                style={{width:'200px', height:'100px'}} 
+                            />
                         </div>
                         <Input type="file" name="recipePicture" id="recipePicture" placeholder="Select a picture" onChange={selectImage}/>
                         {/* {recipePicture && <div>

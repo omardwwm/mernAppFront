@@ -38,7 +38,11 @@ const Home = ()=>{
             onExited={() => setAnimating(false)}
             key={item.recipePicture}
           >
-            <img id="carouselImg" src={`https://mern-recipes.herokuapp.com${item.recipePicture}`} alt={item.recipeName} />
+            <img id="carouselImg"
+                // src={`https://mern-recipes.herokuapp.com${item.recipePicture}`}
+                src={item.recipePicture}
+                alt={item.recipeName}
+            />
             <Link to={{pathname: `/recipesDetails/${item._id}`, state:{item}}}>
                 <CarouselCaption captionText={item.recipeName} captionHeader={item.recipeName} />  
             </Link>
@@ -71,7 +75,7 @@ const Home = ()=>{
                 {slides}
             <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
             <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
-        </Carousel>
+            </Carousel>
         </div>
         // <UncontrolledCarousel items={lastRecipes} />
         

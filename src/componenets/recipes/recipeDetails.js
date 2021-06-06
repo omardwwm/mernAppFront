@@ -163,7 +163,11 @@ const RecipeDetails = (props)=>{
             <div className="recipeDetailsContent">
                 <h3>Recipe of: {testRecipe.recipeName}</h3>
                 <p>Creation of the chief: {testRecipe.recipeCreatorName}</p>
-                <img src={`https://mern-recipes.herokuapp.com${testRecipe.recipePicture}`} style={{width:'60%', height:'300px'}} />
+                <img
+                    // src={`https://mern-recipes.herokuapp.com${testRecipe.recipePicture}`}
+                    src={testRecipe.recipePicture}
+                    style={{width:'65%', height:'300px'}}
+                    />
                 <h3>The ingredients</h3>
                 {ingredients && ingredients.map((ing, index)=> (
                     <ul key={index}>{ing.ingredientName}: {ing.quantity} </ul>
