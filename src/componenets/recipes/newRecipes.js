@@ -40,7 +40,7 @@ const Recipes = ()=>{
     const history = useHistory();
     // const user = useSelector(state => state.userReducer.user);
     const user = JSON.parse(localStorage.getItem('myUser'));
-    console.log('user inside form', user);
+    // console.log('user inside form', user);
     const token = localStorage.getItem('userToken');
     // console.log(token);
     const willRedirect = useSelector(state=>state.recipeReducer.redirect);
@@ -58,7 +58,7 @@ const Recipes = ()=>{
     const [ quantity, setQauntity] = useState("");
     const recipeCreator = user && user.id ? user.id : user && user._id;
     const recipeCreatorName = user && user.username;
-    console.log(recipeCreator);
+    // console.log(recipeCreator);
     const handleChange = (event)=>{
         event.preventDefault();
         const {name, value} = event.target;
