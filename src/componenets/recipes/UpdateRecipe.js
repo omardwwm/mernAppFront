@@ -9,10 +9,9 @@ import { Editor } from "react-draft-wysiwyg";
 import {stateToHTML} from 'draft-js-export-html'
 import {RiAddCircleFill, RiDeleteBin6Fill} from "react-icons/ri"
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import "./newRecipe.css";
 import {updateRecipe} from "../../redux/actions/RecipeActions";
 import {useHistory} from "react-router-dom";
-
+import "./recipes.css";
 const UpdateRecipe = (props)=>{
 
     const recipeToUpdate = props.location.state.testRecipe;
@@ -186,8 +185,8 @@ const UpdateRecipe = (props)=>{
         return (
             <div className="formNewRecipe">
                 <h3>UPDATE THIS RECIPE</h3>
-                <Form className="m-4 col-10 m-auto" encType="multipart/form-data" onSubmit={handleSubmit }>
-                    <FormGroup className="col-5 m-auto">
+                <Form className="m-4 col-md-10 col-sm-12 m-auto" encType="multipart/form-data" onSubmit={handleSubmit }>
+                    <FormGroup className="col-md-8 col-sm-9 m-auto">
                         <Label for="recipeName">Name of the recipe</Label>
                         <Input type="text" name="recipeName" id="recipeName" defaultValue={recipeToUpdate.recipeName} onChange={handleChange} />
                     </FormGroup>
@@ -196,7 +195,7 @@ const UpdateRecipe = (props)=>{
                             {formRecipe.errors.recipeNameError}
                         </div>: null
                     }
-                    <FormGroup className="col-5 m-auto">
+                    <FormGroup className="col-md-6 col-sm-8 col-xs-8 m-auto">
                         <Label for="recipeCategory">Select a category</Label>
                         <Input type="select" name="recipeCategory" id="recipeCategory" placeholder="Choice a category" onChange={handleChange}>
                             <option defaultValue={recipeToUpdate.recipeCategory}>{recipeToUpdate.recipeCategory}</option>
@@ -210,11 +209,11 @@ const UpdateRecipe = (props)=>{
                             {formRecipe.errors.recipeCategoryError}
                         </div>: null
                     }
-                    <FormGroup className="col-5 d-inline-block mt-4">
+                    <FormGroup className="col-md-5 col-sm-6 col-xs-9 d-inline-block mt-4">
                         <Label for="ingredientName">Ingrediant name</Label>
                         <Input type="text" name="ingredientName" value={ingredientName} id="ingredientName" placeholder="Enter your recipe ingrediants" onChange={onChangeIngredientName} />
                     </FormGroup>
-                    <FormGroup className="col-4 d-inline-block">
+                    <FormGroup className="col-md-5 col-sm-6 col-xs-9 d-inline-block">
                         <Label for="quantity">Ingrediant quantity</Label>
                         <Input type="text" name="quantity" value={quantity} id="quantity" placeholder="Enter the quantity" onChange={onChangeIngredientQauntity} />
                     </FormGroup>
@@ -226,14 +225,14 @@ const UpdateRecipe = (props)=>{
                     )
                     :null}
                     {recipeIngrediants.length >0 ?
-                        (<div className="listIng">
+                        (<div className="listIng p-0 m-auto col-sm-12 col-lg-9">
                             <h4>Liste des ingredients</h4>
                             <ol>
                                 {recipeIngrediants.map((ing, index)=>(
                                     <div className="" key={index}>
                                         <li className="d-inline-block ">
                                             {ing.ingredientName}:{"   "}{ing.quantity}
-                                            <Button className="" onClick={removeIngredient}><RiDeleteBin6Fill style={{fontSize:'18px', color:'#ff0'}}/></Button>
+                                            <Button className="btnRemoveIngr" onClick={removeIngredient}><RiDeleteBin6Fill /></Button>
                                         </li>
                                        
                                     </div>                       
@@ -241,31 +240,31 @@ const UpdateRecipe = (props)=>{
                             </ol>
                         </div>) : null
                     }
-                    <div className="m-3">
+                    <div className="instructions m-3">
                         <FormGroup>
-                            <Label for="recipeDescription">Instructions of the recipe</Label>
+                            <Label for="recipeDescription">Instructions de la recette</Label>
                             <Editor 
                                 editorState={instructions}
                                 toolbarClassName="toolbarClassName"
                                 wrapperClassName="wrapperClassName"
                                 editorClassName="editorClassName"
-                                editorStyle={{ height: "200px" , padding: "10px", background:'#fff', color:'#000'}}
+                                editorStyle={{ height: "250px" , padding: "10px", background:'#fff', color:'#000'}}
                                 onEditorStateChange={onEditorStateChange}
                             />
                         </FormGroup>
                   
                     </div>
                    
-                    <FormGroup className="col-6 d-inline-block">
-                        <Label for="recipePreparationTime">Time of preparation</Label>
+                    <FormGroup className="col-lg-3 col-md-4 col-sm-5 d-inline-block">
+                        <Label for="recipePreparationTime">Temps de preparation</Label>
                         <Input type="text" name="recipePreparationTime" id="recipePreparationTime" defaultValue={recipeToUpdate.recipePreparationTime}  onChange={handleChange}/>
                     </FormGroup>
-                    <FormGroup className="col-6 d-inline-block">
-                        <Label for="recipeCookingTime">Time of cooking</Label>
+                    <FormGroup className="col-lg-3 col-md-4 col-sm-5 d-inline-block">
+                        <Label for="recipeCookingTime">Temps de cuisson</Label>
                         <Input type="text" name="recipeCookingTime" id="recipeCookingTime" defaultValue={recipeToUpdate.recipeCookingTime}  onChange={handleChange}/>
                     </FormGroup>
                     <FormGroup>
-                        <Label for="recipePicture">Image of the recipe</Label>
+                        <Label for="recipePicture">Image de la recette</Label>
                         <div>
                             <h5>ancienne image</h5>
                             <img className="d-block m-2" 
@@ -287,7 +286,7 @@ const UpdateRecipe = (props)=>{
                         </div>
                     ):null} */}
                     <Button type="submit" color="primary" style={{margin:5}}>
-                        Update this recipe
+                        Modifier cette recette
                     </Button>
                 </Form>
                 <Modal isOpen={modal} toggle={toggle} scrollable={true} >

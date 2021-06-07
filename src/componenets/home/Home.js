@@ -19,18 +19,15 @@ const Home = ()=>{
         const nextIndex = activeIndex === lastRecipes.length - 1 ? 0 : activeIndex + 1;
         setActiveIndex(nextIndex);
     }
-
     const previous = () => {
     if (animating) return;
     const nextIndex = activeIndex === 0 ? lastRecipes.length - 1 : activeIndex - 1;
     setActiveIndex(nextIndex);
     }
-    
     const goToIndex = (newIndex) => {
         if (animating) return;
         setActiveIndex(newIndex);
     }
-
     const slides = lastRecipes && lastRecipes.map((item) => {
         return (
           <CarouselItem
@@ -65,8 +62,8 @@ const Home = ()=>{
     }, [])
 
     return (
-        <div className="homePage">
-            <Carousel className="homeCarousel"
+        <div className="homePage col ">
+            <Carousel className="homeCarousel mt-2"
             activeIndex={activeIndex}
             next={next}
             previous={previous}
@@ -77,19 +74,6 @@ const Home = ()=>{
             <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
             </Carousel>
         </div>
-        // <UncontrolledCarousel items={lastRecipes} />
-        
-        // <div>
-        //     <h1>THIS IS HOME PAGE TEST FOR OMARMERN APP</h1>
-        //     <div>
-        //         {lastRecipes && lastRecipes.map((recipe, index)=>(
-        //             <div key={index}>
-        //                 <p>{recipe.recipeName}</p>
-        //             </div>
-        //         ))}
-        //     </div>
-        // </div>
-        
     )
 }
 

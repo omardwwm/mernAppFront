@@ -8,6 +8,7 @@ import {deleteRecipe, getOneRecipe, postComment} from "../../redux/actions/Recip
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory, Link} from "react-router-dom";
 import {formatDate} from "../../outils/outils";
+import "./recipes.css";
 
 const RecipeDetails = (props)=>{    
     const recipeId = props.match.params._id;
@@ -157,29 +158,32 @@ const RecipeDetails = (props)=>{
     //     )
     // }
     return(
-        <>
+        <div className="col-12 m-2">
             <div >
-                <h3>Recipe of: {testRecipe.recipeName}</h3>
-                <p>Creation of the chief: {testRecipe.recipeCreatorName}</p>
+                <h3 className="text-center" >{testRecipe.recipeName}</h3>
+                <p>Creation de : {testRecipe.recipeCreatorName}</p>
                 <img
                     // src={`https://mern-recipes.herokuapp.com${testRecipe.recipePicture}`}
                     src={testRecipe.recipePicture}
                     style={{width:'65%', height:'300px'}}
                     />
-                <h3>The ingredients</h3>
-                {ingredients && ingredients.map((ing, index)=> (
-                    <ul key={index}>{ing.ingredientName}: {ing.quantity} </ul>
-                ))}
+                <h3 className="text-center">Liste des ingredients</h3>
+                <div className="listIngDetailRecipe">
+                    {ingredients && ingredients.map((ing, index)=> (
+                        <ul key={index}>{ing.ingredientName}: {ing.quantity} </ul>
+                    ))}
+                </div>
+               
                 {/* <p>{myRecipe.recipeDescription}</p> */}
                 <div className="instructions">
-                    <h4>les instructions</h4>
+                    <h4 className="text-center" >Les instructions</h4>
                     {/* <div dangerouslySetInnerHTML={{__html: currentRecipe.recipeDescription}} />  */}
                     <div dangerouslySetInnerHTML={{__html: htmlInstructions}} />      
                 </div>   
             </div>
-            <div style={{border:'solid 2px #fff', marginTop:'5px', padding:'6px'}}>
+            <div className="commentsDiv col-12" >
                 <Form onSubmit={sendComment} >
-                    <Label for="comment">commentaires</Label>
+                    <Label for="comment">Les commentaires</Label>
                     <Input type="textarea" name="comment" id="comment" value={commentContent} placeholder="Enter un commentaire" onChange={handleChangeComment} />
                     <Button>Poster</Button>
                     <span style={{color:'red'}}>{errorComment}</span>
@@ -222,8 +226,11 @@ const RecipeDetails = (props)=>{
             { (token && isMine)? 
             <>
                 {/* <Button onClick={deleteThisRecipe}>Update</Button> */}
-                <Link to={{pathname: `/updateRecipe/${testRecipe._id}`, state:{testRecipe}}} ><span style={{color:'#fff'}}>Update</span></Link>
-                <Button onClick={deleteThisRecipe}>SUPPRIMER</Button>  
+                <Link to={{pathname: `/updateRecipe/${testRecipe._id}`, state:{testRecipe}}} >
+                    <Button color="warning" size="sm">Modifier cette recette</Button>
+                    {/* <span style={{color:'#fff'}}>Modifier</span> */}
+                </Link>
+                <Button onClick={deleteThisRecipe} color="danger" size="sm">SUPPRIMER</Button>  
             </>       
             : null}
 
@@ -237,7 +244,7 @@ const RecipeDetails = (props)=>{
                 <Button color="secondary" onClick={toggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>          
-        </>        
+        </div>        
     )
 }
 

@@ -241,14 +241,14 @@ const Recipes = ()=>{
                     )
                     :null}
                     {recipeIngrediants.length >0 ?
-                        (<div className="listIng col-md-10 col-sm-12">
-                            <h4>Appercu des ing</h4>
+                        (<div className="listIng p-0 m-auto col-sm-12 col-lg-9">
+                            <h5>Appercu des ing</h5>
                             <ol>
                                 {recipeIngrediants.map((ing, index)=>(
-                                    <div className="" key={index}>
+                                    <div className="p-0 m-0" key={index}>
                                         <li className="d-inline-block ">
                                             {ing.ingredientName}:{"   "}{ing.quantity}
-                                            <Button className="" onClick={removeIngredient}><RiDeleteBin6Fill style={{fontSize:'18px', color:'#ff0'}}/></Button>
+                                            <Button className="btnRemoveIngr" onClick={removeIngredient}><RiDeleteBin6Fill /></Button>
                                         </li>
                                        
                                     </div>                       
@@ -261,35 +261,35 @@ const Recipes = ()=>{
                         <Label for="recipeDescription">Instructions of the recipe</Label>
                         <Input type="textarea" name="recipeDescription" id="recipeDescription" placeholder="Instructions of the recipe" onChange={handleChange} />
                     </FormGroup> */}
-                    <div className="m-3">
+                    <div className="instructions m-3">
                         <FormGroup>
-                            <Label for="recipeDescription">Instructions of the recipe</Label>
+                            <Label for="recipeDescription">Instructions de la recette</Label>
                             <Editor 
                                 editorState={instructions}
                                 toolbarClassName="toolbarClassName"
                                 wrapperClassName="wrapperClassName"
                                 editorClassName="editorClassName"
-                                editorStyle={{ height: "200px" , padding: "10px", background:'#fff', color:'#000'}}
+                                editorStyle={{ height: "250px" , padding: "10px", }}
                                 onEditorStateChange={onEditorStateChange}
                             />
                         </FormGroup>
                   
                     </div>
                    
-                    <FormGroup className="col-6 d-inline-block">
-                        <Label for="recipePreparationTime">Time of preparation</Label>
-                        <Input type="text" name="recipePreparationTime" id="recipePreparationTime" placeholder="Enter preparation time duration (in minutes)"  onChange={handleChange}/>
+                    <FormGroup className="col-lg-3 col-md-4 col-sm-5 d-inline-block">
+                        <Label for="recipePreparationTime">Temps de preparation</Label>
+                        <Input type="text" name="recipePreparationTime" id="recipePreparationTime" placeholder="Enter la duree en minutes"  onChange={handleChange}/>
                     </FormGroup>
-                    <FormGroup className="col-6 d-inline-block">
-                        <Label for="recipeCookingTime">Time of cooking</Label>
-                        <Input type="text" name="recipeCookingTime" id="recipeCookingTime" placeholder="Enter cooking time duration (in minutes)"  onChange={handleChange}/>
+                    <FormGroup className="col-lg-3 col-md-4 col-sm-5 d-inline-block">
+                        <Label for="recipeCookingTime">Temps de cuisson</Label>
+                        <Input type="text" name="recipeCookingTime" id="recipeCookingTime" placeholder="Enter la duree en minutes"  onChange={handleChange}/>
                     </FormGroup>
                     <FormGroup>
-                        <Label for="recipePicture">Image of the recipe</Label>
+                        <Label for="recipePicture">Image de la recette</Label>
                         <Input type="file" name="recipePicture" id="recipePicture" placeholder="Select a picture" onChange={selectImage}/>
                     </FormGroup>
                     <Button type="submit" color="primary" style={{margin:5}}>
-                        Add this recipe
+                        Ajouter la recette
                     </Button>
                 </Form>
                 <Modal isOpen={modal} toggle={toggle} scrollable={true} >
