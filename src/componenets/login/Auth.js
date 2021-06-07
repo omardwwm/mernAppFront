@@ -5,7 +5,7 @@ import { withRouter } from "react-router";
 import {login} from "../../redux";
 import {useHistory} from "react-router-dom";
 import ForgotPassword from "./ForgotPaasword";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Collapse, Card, CardBody } from 'reactstrap';
+import { Button, Collapse, Card, CardBody } from 'reactstrap';
 
 
 
@@ -109,10 +109,10 @@ const Auth = (props)=>{
     console.log(modalBody);
 
     return(
-        <div>
+        <>
             <h3>Se connecter a votre compte</h3>
-            <div className=" row mt-5">
-                <div className="col-6 " >
+            <div className=" loginDiv col-12 mt-5">
+                <div className=" loginFormDiv col-6" >
                     <form onSubmit={userLogin} className="container d-inline-block col-lg-10">
                             <div className="form-group">
                                 {/*<label htmlFor="email">Email</label>*/}
@@ -153,7 +153,7 @@ const Auth = (props)=>{
                 <div className="col-5">
                     <Button onClick={toggleCollapse} color="warning" size="sm">Mot de passe oublie?</Button>
                     <Collapse isOpen={isOpen}>
-                        <Card>
+                        <Card id="forgotCollap">
                             <CardBody>
                                 <ForgotPassword value={inputs.name} sendUrl={sendUrl} handleChange={onChangeEmail} messageResponse={msgUrlReset} errorEmailReset={errorEmailReset} name="emailToReset"  />
                             </CardBody>
@@ -164,7 +164,7 @@ const Auth = (props)=>{
           {modalBody && <div>
               <p style={{color:'#f0f'}}>{modalBody}</p>
               </div>}
-        </div>
+        </>
        
     )
 }

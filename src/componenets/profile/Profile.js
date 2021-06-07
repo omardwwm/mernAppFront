@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from "react-redux";
 import {deletUser} from "../../redux/actions/UserActions";
 import {useHistory} from "react-router-dom";
 import {changePassword} from "../../redux/actions/UserActions";
-import {Card, CardText, CardBody, CardLink, CardTitle, CardSubtitle, Button, Collapse, Form, FormGroup, Label, Input} from 'reactstrap';
+import {Card, CardText, CardBody, CardTitle, Button, Collapse, Form, FormGroup, Label, Input} from 'reactstrap';
 import "./profile.css"
 import axios from 'axios';
 
@@ -166,10 +166,10 @@ const Profile = ()=>{
     // console.log('successMessage is:', successMsg); 
     // console.log(submitError);
     return(
-        <div>
+        <>
             <h2>Mes infos</h2>
             <Card id="profileCardParent" >
-                <Card className="profileCard col-6">
+                <Card className="profileCard col-7">
                     <CardBody>
                         <CardTitle tag="h5">{user.username}</CardTitle>
                         <CardText>Email: {user.email}</CardText>
@@ -180,7 +180,7 @@ const Profile = ()=>{
                             />
                         <Button onClick={togglePic} size="sm">Changer votre photo</Button>
                         <Collapse isOpen={isPicOpen}>
-                            <Card className="collapsCard col-8">
+                            <Card className="collapsCard col-11">
                                 <CardBody>
                                 <Form onSubmit={sendNewImage}>
                                     <FormGroup>
@@ -196,7 +196,7 @@ const Profile = ()=>{
                         </Collapse>
                         <Button onClick={toggle} color="warning" size="sm">Modifier mon mot de passe</Button>
                         <Collapse isOpen={isOpen}>
-                            <Card className="collapsCard col-7">
+                            <Card className="collapsCard col-9">
                                 <CardBody>
                                     <Form onSubmit={updatePassword}>
                                         <FormGroup>
@@ -227,7 +227,7 @@ const Profile = ()=>{
                         </Collapse>
                     </CardBody>   
                 </Card>
-                <Card className="profileCard col-6 ">
+                <Card className="presentationCard col-5" >
                     <CardBody>
                         <CardText>Presentation (TODO/ADD) .</CardText>
                     </CardBody>
@@ -236,7 +236,7 @@ const Profile = ()=>{
             {/* <div> */}         
                 <Button onClick={deleteMyAccount} color="danger" size="sm">Supprimer mon compte</Button>
             {/* </div> */}
-        </div>
+        </>
     )
 } 
 

@@ -137,7 +137,7 @@ const Recipes =(props)=>{
                             <p>By: Me</p> 
                             : <p>By: {recipe.recipeCreatorName}</p>}
                             {recipe.recipeCreator && recipe.recipeCreator.isPro == true? <SiCodechef style={{color:'#fff', fontSize:24}}/>: null}
-                            <Link to={{pathname: `/recipesDetails/${recipe._id}`, state:{recipe}}} >See more..</Link>
+                            <Link to={{pathname: `/recipesDetails/${recipe._id}`, state:{recipe}}} >Voir plus..</Link>
                         </div>
                     )
                 })}

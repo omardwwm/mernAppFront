@@ -3,7 +3,7 @@
 }
 .recipes{
     background-color: #2c2c31;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     color: darkorange;
     text-align: center;
 }
@@ -12,7 +12,6 @@
 /* recipeDetails page style */
 .recipeDetails{
     background-color: rgb(15, 131, 112);
-    min-height: 100vh;
     padding: 1%;
     color: darkorange;
     text-align: center;
@@ -44,7 +43,7 @@ h2, h3, h4{
 } */
 .instructions{
     background-color: rgb(59, 80, 80);
-    padding: 20px;
+    padding: 8px;
 }
 /* form style */
 .formNewRecipe{

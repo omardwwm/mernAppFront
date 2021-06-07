@@ -11,8 +11,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // import './Signup.css';
 
 
-
-
 const Signup =(props)=>{
     const dispatch = useDispatch();
     const history = useHistory();
@@ -102,7 +100,7 @@ const Signup =(props)=>{
             //       })
               
 
-        console.log("myfinalformis", form);
+        // console.log("myfinalformis", form);
     };
 
     const onCheckCheckBox =()=>{
@@ -110,7 +108,7 @@ const Signup =(props)=>{
             ...form,
             isPro:!form.isPro
         })
-        console.log("myfinalformis", form);
+        // console.log("myfinalformis", form);
     }
 
     const selectImage = (event)=>{
@@ -173,14 +171,11 @@ const Signup =(props)=>{
     }, [showModale])
 
     return(
-        <div>
-            <div className="row">
-                {/* <div className="col-4">
-                    <h2>test</h2>
-                </div> */}
-                <div className="col-6 m-3">
-                    <h1>CREATE YOUR ACOUNT HERE</h1>
-                    <Form onSubmit={userCreate} encType="multipart/form-data">
+        <div className="divInscription col-xs-12 col-sm-10 col-md-6 col-lg-5">
+            {/* <div className="row"> */}
+                <div className=" m-3">
+                    <h2>CREER VOTRE COMPTE</h2>
+                    <Form className="" onSubmit={userCreate} encType="multipart/form-data">
                         <FormGroup>
                             <Label for="exampleUsername">Username</Label>
                             <Input type="text" name="username" id="exampleUsername" placeholder="Choose Username" value={form.username} onChange={onChangeValue}/>
@@ -242,17 +237,17 @@ const Signup =(props)=>{
                             <Label check>
                             <Input type="checkbox" onClick={accepteCoditions}/>{' '}
                                 Accepte conditions <br></br>
-                            <Button color="secondary" style={{margin:5}} onClick={showConditions}>Learn more about our policy</Button>
+                            <Button color="secondary" style={{margin:5}} onClick={showConditions}>POLITIQUE ET CONFIDENTIALITE</Button>
                             </Label>
                         </FormGroup>
                         <Button id="btn_inscription" type="submit"  color="primary" disabled={!conditionsAccepted}>
                         Inscription 
-                        <br></br>{conditionsAccepted===false? <p style={{color:'#f00'}}>You must accepte conditions</p>:null}
+                        <br></br>{conditionsAccepted===false? <p style={{color:'#f8d404'}}>Vous devez accepter conditions</p>:null}
                         </Button>
                     </Form>
                 </div> 
-            </div>  
-            <div>
+            {/* </div>   */}
+            {/* <div> */}
                 <Modal isOpen={modal} toggle={toggle} scrollable={true} >
                     <ModalHeader toggle={toggle}>{modalTitle}</ModalHeader>
                     <ModalBody>
@@ -268,7 +263,7 @@ const Signup =(props)=>{
                     {/* <Button color="secondary" onClick={toggle}>Cancel</Button> */}
                     </ModalFooter>
                 </Modal>
-            </div>
+            {/* </div> */}
 
         </div>
 

@@ -14,8 +14,9 @@ import UpdateRecipe from "./componenets/recipes/UpdateRecipe";
 import Profile from "./componenets/profile/Profile";
 import Chefs from "./componenets/chefs/Chefs";
 import ForgotPassword from "./componenets/login/ForgotPaasword";
-import ResetPassword from "./componenets/login/ResetPassword"
+import ResetPassword from "./componenets/login/ResetPassword";
 import NavBar, {} from "../src/componenets/navBar/navBar";
+import Footer from "./componenets/footer/Footer";
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
             <Route exact path="/chefs" component={Chefs} />
             <Route exact path="/recipesDetails/:_id" component={RecipeDetails} />
           </Switch>
+          <Footer/>
         </BrowserRouter>
       </div>
     </Provider>

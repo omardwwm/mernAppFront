@@ -5,7 +5,7 @@ const Conditions = (props)=>{
    
     return (
         <div className="m-4">
-            <h1>Conditions d'utilisation et traitement des donnees</h1>
+            <h2>Conditions d'utilisation et traitement des donnees</h2>
             <p style={{color:'#0f0'}}>
             These Terms of Service (“Terms”) are a contract between you and this website. They govern your use of My site (facecook), services, mobile apps, products, and content (“Services”).
 
@@ -18,7 +18,7 @@ We can change these Terms at any time. We keep a historical record of all change
             <FormGroup check>
                 <Label check>
                 <Input type="checkbox" onClick={props.onClick}/>{' '}
-                  I'm aggree   <br></br>
+                  J'accepte   <br></br>
                 {/* <Button color="secondary" style={{margin:5}} onClick={}>Learn more about our policy</Button> */}
                 </Label>
             </FormGroup>

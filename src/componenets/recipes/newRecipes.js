@@ -3,11 +3,10 @@ import {Form, FormGroup, Label, Input, Button, Modal, ModalBody, ModalFooter, Mo
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useSelector, useDispatch} from "react-redux";
 import {createRecipe} from "../../redux/actions/RecipeActions";
-import { Redirect } from 'react-router';
 import { EditorState, convertToRaw } from 'draft-js';
 import { Editor } from "react-draft-wysiwyg";
-import draftToHtml from "draftjs-to-html";
-import {stateToHTML} from 'draft-js-export-html'
+// import draftToHtml from "draftjs-to-html";
+// import {stateToHTML} from 'draft-js-export-html'
 // import htmlToDraft from 'html-to-draftjs';
 import {RiAddCircleFill, RiDeleteBin6Fill} from "react-icons/ri"
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -43,7 +42,7 @@ const Recipes = ()=>{
     // console.log('user inside form', user);
     const token = localStorage.getItem('userToken');
     // console.log(token);
-    const willRedirect = useSelector(state=>state.recipeReducer.redirect);
+    // const willRedirect = useSelector(state=>state.recipeReducer.redirect);
     // const [willRedirect, setWillRedirect]= useState(redirect);
     const modalTitle = useSelector(state=>state.recipeReducer.modalTitle);
     const modalBody = useSelector(state=>state.recipeReducer.modalBody);
@@ -165,6 +164,7 @@ const Recipes = ()=>{
         console.log(recipeToSend);
         const config = {headers: {
             Accept:'*/*',
+            "x-auth-token":`${token}`,
             'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>'
         }};
         const formData = new FormData();
@@ -182,7 +182,7 @@ const Recipes = ()=>{
         // console.log(JSON.stringify(formRecipe));
         // axios.post('http://localhost:8080/recipes/add-recipe', formData, config
         // )
-        dispatch(createRecipe(formData, config)).then(setModal(showModale)).then(()=>setTimeout(() => {
+        dispatch(createRecipe(formData, config)).then(setModal(true)).then(()=>setTimeout(() => {
             history.push(`/recipes`);
             setModal(false);
         }, 4000));

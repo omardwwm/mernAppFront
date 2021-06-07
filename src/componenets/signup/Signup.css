@@ -1,5 +1,9 @@
+/* .divInscription{
+  width: 50%;
+} */
+
 #btn_inscription{
-  color: rgb(235, 226, 228);  
+  background-color: #f8d404; 
 }
 .divImage{
     /* align-items: center;

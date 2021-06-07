@@ -1,3 +1,10 @@
+.navBarDiv{
+    position: relative;
+    top:0;
+    top:2px;
+    width: 85%;
+}
+
 .nav-link{
     display: inline-block;
     padding: .5rem 1rem;

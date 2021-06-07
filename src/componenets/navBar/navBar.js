@@ -35,65 +35,50 @@ const NavBar = (props)=>{
     // }, [])
 
     return(
-        <div>
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">Home</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
-            <NavItem>
-              <Link to="/recipes/">Nos recettes</Link>
-            </NavItem>
-            <NavItem>
+        <div className="navBarDiv" >
+          <Navbar color="light" light expand="md">
+            <NavbarBrand href="/">Home</NavbarBrand>
+            <NavbarToggler onClick={toggle} />
+            <Collapse isOpen={isOpen} navbar>
+              <Nav className="mr-auto" navbar>
+                <NavItem>
+                  <Link to="/recipes/">Nos recettes</Link>
+                </NavItem>
+                <NavItem>
                   <Link to="/create-recipes/">Creer votre recette</Link>
                 </NavItem>
                 <NavItem>
                   <Link to="/chefs/">Nos chefs</Link>
                 </NavItem>
-            {/* {user ? 
-            (
-              <>
-                <NavItem>
-                  <Link to="/create-recipes/">Creer votre recette</Link>
-                </NavItem>
-                <NavItem>
-                  <Link to="/recipes/">Nos chefs</Link>
-                </NavItem>
-              </>
-              
-            ) : null
-            } */}
-          </Nav>
+              </Nav>
         
-        {user && token ? 
-            (
-              <div>
-                 <Link to={{pathname:`/profile/${user.id}`}} ><Button className="d-inline-block">
-                   {/* <RiAccountPinBoxLine style={{color:'#ddff13', fontSize:'22px'}}/> */}
-                   <img className="profilePic"
-                    // src={user && `https://mern-recipes.herokuapp.com${user.profilePicture}`}
-                    src={user && user.profilePicture}
-                    style={{width:'24px', height:'24px'}}
-                    />
-                   My info</Button></Link>
-                <Button onClick={logoutFromNavBar}> <RiLogoutBoxLine style={{color:'#f00', fontSize:'22px'}}/>LOGOUT</Button>
-              </div>
-            
-            )
-            :
-            (
-              <div>
-                <Link to='/login' ><Button className="d-inline-block"><GoSignIn style={{color:'#0f0', fontSize:'22px'}}/> <RiUserFill/></Button></Link>
-                <Link to='/create-account' ><Button className="d-inline-block">CREATE<RiUserAddFill style={{color:'#0f0', fontSize:'22px'}}/></Button></Link>
-              </div>
-                
-            )
-        }
-           
-        </Collapse>
-      </Navbar>
-    </div>
-    )
+              {user && token ? 
+                  (
+                    <div>
+                      <Link to={{pathname:`/profile/${user.id}`}} ><Button className="d-inline-block">
+                        {/* <RiAccountPinBoxLine style={{color:'#ddff13', fontSize:'22px'}}/> */}
+                        <img className="profilePic"
+                          // src={user && `https://mern-recipes.herokuapp.com${user.profilePicture}`}
+                          src={user && user.profilePicture}
+                          style={{width:'24px', height:'24px'}}
+                          />
+                        My info</Button></Link>
+                      <Button onClick={logoutFromNavBar}> <RiLogoutBoxLine style={{color:'#f00', fontSize:'22px'}}/>LOGOUT</Button>
+                    </div>
+                  
+                  )
+                  :
+                  (
+                    <div>
+                      <Link to='/login' ><Button className="d-inline-block"><GoSignIn style={{color:'#0f0', fontSize:'22px'}}/> <RiUserFill/></Button></Link>
+                      <Link to='/create-account' ><Button className="d-inline-block">CREATE<RiUserAddFill style={{color:'#0f0', fontSize:'22px'}}/></Button></Link>
+                    </div>     
+                  )
+              }       
+            </Collapse>
+          </Navbar>
+        </div>
+      )
 }
 
 export default withRouter (NavBar);

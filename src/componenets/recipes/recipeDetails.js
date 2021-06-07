@@ -157,10 +157,8 @@ const RecipeDetails = (props)=>{
     //     )
     // }
     return(
-        // <h2>details recipe page</h2>
-        <div className="recipeDetails">
-            <h2>Recipe detailes pages</h2>
-            <div className="recipeDetailsContent">
+        <>
+            <div >
                 <h3>Recipe of: {testRecipe.recipeName}</h3>
                 <p>Creation of the chief: {testRecipe.recipeCreatorName}</p>
                 <img
@@ -239,7 +237,7 @@ const RecipeDetails = (props)=>{
                 <Button color="secondary" onClick={toggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>          
-        </div>        
+        </>        
     )
 }
 

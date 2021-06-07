@@ -1,0 +1,9 @@
+.footerDiv{
+    background-color: green;
+    width: 100%;
+    padding: 5px;
+    bottom: 0;
+    position: fixed;
+    /* height: 50px; */
+    /* margin-top: -50px; */
+}
