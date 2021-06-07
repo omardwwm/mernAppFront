@@ -197,8 +197,8 @@ const Recipes = ()=>{
     if(user){
         return (
             <div className="formNewRecipe">
-                <Form className="m-4 col-10 m-auto" encType="multipart/form-data" onSubmit={handleSubmit }>
-                    <FormGroup className="col-5 m-auto">
+                <Form className="m-4 col-md-10 col-sm-12 m-auto" encType="multipart/form-data" onSubmit={handleSubmit }>
+                    <FormGroup className="col-md-8 col-sm-9 m-auto">
                         <Label for="recipeName">Name of the recipe</Label>
                         <Input type="text" name="recipeName" id="recipeName" placeholder="Enter a name for your recipe" onChange={handleChange} />
                     </FormGroup>
@@ -207,7 +207,7 @@ const Recipes = ()=>{
                             {formRecipe.errors.recipeNameError}
                         </div>: null
                     }
-                    <FormGroup className="col-5 m-auto">
+                    <FormGroup className="col-md-6 col-sm-8 col-xs-8 m-auto">
                         <Label for="recipeCategory">Select a category</Label>
                         <Input type="select" name="recipeCategory" id="recipeCategory" placeholder="Choice a category" onChange={handleChange}>
                             <option value="">Choice...</option>
@@ -225,13 +225,13 @@ const Recipes = ()=>{
                         <Label for="recipeCategory">Category</Label>
                         <Input type="text" name="recipeCategory" id="recipeCategory" placeholder="Choice a category" onChange={handleChange} />
                     </FormGroup> */}
-                    <FormGroup className="col-5 d-inline-block mt-4">
+                    <FormGroup className="col-md-5 col-sm-6 col-xs-9 d-inline-block mt-4">
                         <Label for="ingredientName">Ingrediant name</Label>
-                        <Input type="text" name="ingredientName" value={ingredientName} id="ingredientName" placeholder="Enter your recipe ingrediants" onChange={onChangeIngredientName} />
+                        <Input type="text" name="ingredientName" value={ingredientName} id="ingredientName" placeholder="Le nom de l'ingrediants" onChange={onChangeIngredientName} />
                     </FormGroup>
-                    <FormGroup className="col-4 d-inline-block">
+                    <FormGroup className="col-md-5 col-sm-6 col-xs-9 d-inline-block">
                         <Label for="quantity">Ingrediant quantity</Label>
-                        <Input type="text" name="quantity" value={quantity} id="quantity" placeholder="Enter the quantity" onChange={onChangeIngredientQauntity} />
+                        <Input type="text" name="quantity" value={quantity} id="quantity" placeholder="Quantity : unity" onChange={onChangeIngredientQauntity} />
                     </FormGroup>
                     <Button className="mb-4" onClick={addIngredient}><RiAddCircleFill style={{fontSize:'22px', color:'#ff0'}}/> Add ingredient</Button>
                     {ingredientsError?(
@@ -241,7 +241,7 @@ const Recipes = ()=>{
                     )
                     :null}
                     {recipeIngrediants.length >0 ?
-                        (<div className="listIng">
+                        (<div className="listIng col-md-10 col-sm-12">
                             <h4>Appercu des ing</h4>
                             <ol>
                                 {recipeIngrediants.map((ing, index)=>(

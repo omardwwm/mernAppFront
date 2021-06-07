@@ -9,7 +9,7 @@ export const registerUser = (formData, Headers)=>{
         try {
             // const formData = new FormData();
             console.log(formData);
-            const response =  await axios.post('https://mern-recipes.herokuapp.com/users/register', formData, Headers);
+            const response =  await axios.post('http://localhost:8080/users/register', formData, Headers);
             console.log(response);
             dispatch({
                 type: "REGISTER",

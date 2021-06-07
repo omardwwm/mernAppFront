@@ -169,7 +169,7 @@ const Profile = ()=>{
         <>
             <h2>Mes infos</h2>
             <Card id="profileCardParent" >
-                <Card className="profileCard col-7">
+                <Card className="profileCard col-md-7 col-xs-12">
                     <CardBody>
                         <CardTitle tag="h5">{user.username}</CardTitle>
                         <CardText>Email: {user.email}</CardText>
@@ -180,7 +180,7 @@ const Profile = ()=>{
                             />
                         <Button onClick={togglePic} size="sm">Changer votre photo</Button>
                         <Collapse isOpen={isPicOpen}>
-                            <Card className="collapsCard col-11">
+                            <Card className="collapsCard col-md-11 col-sm-12">
                                 <CardBody>
                                 <Form onSubmit={sendNewImage}>
                                     <FormGroup>
@@ -196,7 +196,7 @@ const Profile = ()=>{
                         </Collapse>
                         <Button onClick={toggle} color="warning" size="sm">Modifier mon mot de passe</Button>
                         <Collapse isOpen={isOpen}>
-                            <Card className="collapsCard col-9">
+                            <Card className="collapsCard col-md-9 col-sm-12">
                                 <CardBody>
                                     <Form onSubmit={updatePassword}>
                                         <FormGroup>
@@ -227,7 +227,7 @@ const Profile = ()=>{
                         </Collapse>
                     </CardBody>   
                 </Card>
-                <Card className="presentationCard col-5" >
+                <Card className="presentationCard col-md-5 col-xs-12" >
                     <CardBody>
                         <CardText>Presentation (TODO/ADD) .</CardText>
                     </CardBody>

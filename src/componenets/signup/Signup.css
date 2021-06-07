@@ -3,7 +3,7 @@
 } */
 
 #btn_inscription{
-  background-color: #f8d404; 
+  background-color: #170742; 
 }
 .divImage{
     /* align-items: center;
@@ -11,6 +11,6 @@
     text-align: center;
 }
 .modalImage{
-    width: 400px;
-    height: 300px;
+    width: 60%;
+    height: 120px;
 }

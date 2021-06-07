@@ -26,7 +26,18 @@
     margin-left: 5px;
 }
 
-
 .collapsCard{
     background-color: rgb(94, 91, 91);
+}
+
+@media (max-width: 768px){
+    #profileCardParent{
+        display: inline-block;
+        flex-direction: column;
+    }
+    .presentationCard{
+        margin-top: 5px;
+        margin-left: 0;
+    }
+    
 }

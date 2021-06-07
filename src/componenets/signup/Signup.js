@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // import Conditions from '../conditions/Conditions';
 // import imgRegister from '../../images/signup-reg.jpg';
 // import badReqImg from '../../images/400-bad-request-.jpg';
-// import './Signup.css';
+import './Signup.css';
 
 
 const Signup =(props)=>{
@@ -28,20 +28,22 @@ const Signup =(props)=>{
             passwordConfirmError: ""
         }
     })
-    const showModale = useSelector(state => state.userReducer.showModale)
+    // const showModale = useSelector(state => state.userReducer.showModale)
     // console.log(showModale);
     const modalImage = useSelector(state => state.userReducer.modalImage)
-    const [modal, setModal] = useState(showModale);
-    const toggle = () => setModal(!showModale);
+    const [modal, setModal] = useState(false);
+    const toggle = () =>{
+        // setModal(!showModale);
+        setModal(!modal);
+    } 
     // const [modalBody, setModalBody] = useState("");
     const modalBody = useSelector(state=>state.userReducer.modalBody)
     // const [ModalTitle, setModalTitle] = useState("");
     const modalTitle = useSelector(state=> state.userReducer.modalTitle);
     const modalButtonDisabled = useSelector(state=>state.userReducer.modalButtonDisabled);
     const isUserLogged = useSelector(state=>state.userReducer.isUserLogged);
-    const [loginMessage, setLoginMessage] = useState('');
+    const [loginCheckMessage, setLoginCheckMessage] = useState('');
     // const [modalButtonDisabled, setModalButtonDisabled] = useState(false)
-    const [test, setTest]= useState(false);
     // const [myImage, setMyImage] = useState(modalImage)
 
     const validEmailRegex = RegExp(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i);
@@ -125,7 +127,7 @@ const Signup =(props)=>{
     
     const showConditions = ()=>{
         dispatch(showConditionsPolicy());
-        setModal(showModale);
+        setModal(true);
         // setModal(true)
         // setModalTitle('Our policy confidential')
         // setModalButtonDisabled(true)
@@ -147,28 +149,33 @@ const Signup =(props)=>{
         // formData.append('role',form.role);
         formData.append('isPro', form.isPro);
         console.log(formData);
-        dispatch(registerUser(formData, config));
-        // console.log(profilePicture);
-        setModal(showModale);
-        localStorage.getItem("userToken");
-        setTimeout(() => {
-            history.push("/recipes")
-        }, 3000)
+        if(!form.email || !form.username || !form.password || !form.passwordConfirm){
+            setLoginCheckMessage('Vous devez renseigner tous les champs !')
+        }else{
+            dispatch(registerUser(formData, config));
+            // console.log(profilePicture);
+            setModal(true);
+            localStorage.getItem("userToken");
+            setTimeout(() => {
+                setModal(false);
+                history.push("/recipes");
+            }, 3000)
+            }
+        
         // if(isUserLogged === true){
         //     setTimeout(() => {
         //         history.push("/recipes")
         //     }, 3000);}
         // setMyImage(modalImage)
         // const isValid = validation();
-        // console.log("user create test function");
     }
     
     useEffect(()=>{
-        setModal(showModale);
+        // setModal(showModale);
         setForm({
             ...form
         })
-    }, [showModale])
+    }, [])
 
     return(
         <div className="divInscription col-xs-12 col-sm-10 col-md-6 col-lg-5">
@@ -244,6 +251,7 @@ const Signup =(props)=>{
                         Inscription 
                         <br></br>{conditionsAccepted===false? <p style={{color:'#f8d404'}}>Vous devez accepter conditions</p>:null}
                         </Button>
+                        <span style={{color:'#f00'}}>{loginCheckMessage}</span>
                     </Form>
                 </div> 
             {/* </div>   */}
