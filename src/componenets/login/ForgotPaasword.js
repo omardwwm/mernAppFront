@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 // import axios from "axios";
 import {Form, Input, Button} from 'reactstrap';
 import "./login.css";
@@ -30,9 +30,9 @@ const SendUrlReset =(props)=>{
     //     })
     // }
 
-    console.log(props.messageResponse);
+    // console.log(props.messageResponse);
     return(
-        <div >
+        <div>
             <h4>Modifier votre mot de passe</h4>
             <Form >
                 <Input type="email" name={props.name} id="email" placeholder="Votre Email" value={props.value} onChange={props.handleChange} />

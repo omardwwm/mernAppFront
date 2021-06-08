@@ -108,7 +108,7 @@ export const postComment =(recipeId, userId, commentContent, config)=>{
 }
 
 export const deleteRecipe = (recipeId, dataToDelete, token)=>{
-    console.log(dataToDelete);
+    // console.log(dataToDelete);
     return async(dispatch)=>{
         // console.log(formData);
         try {

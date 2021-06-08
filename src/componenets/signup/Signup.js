@@ -41,7 +41,7 @@ const Signup =(props)=>{
     // const [ModalTitle, setModalTitle] = useState("");
     const modalTitle = useSelector(state=> state.userReducer.modalTitle);
     const modalButtonDisabled = useSelector(state=>state.userReducer.modalButtonDisabled);
-    const isUserLogged = useSelector(state=>state.userReducer.isUserLogged);
+    // const isUserLogged = useSelector(state=>state.userReducer.isUserLogged);
     const [loginCheckMessage, setLoginCheckMessage] = useState('');
     // const [modalButtonDisabled, setModalButtonDisabled] = useState(false)
     // const [myImage, setMyImage] = useState(modalImage)
@@ -54,7 +54,7 @@ const Signup =(props)=>{
     const onChangeValue=(event)=>{
         event.preventDefault();
         // TODO: add checkbox to form
-        const isCheckBox = event.target.type === "checkbox";
+        // const isCheckBox = event.target.type === "checkbox";
         // console.log(event.target.name);
         const { name, value, checked} = event.target; 
         let errors = form.errors;
@@ -171,6 +171,7 @@ const Signup =(props)=>{
     }
     
     useEffect(()=>{
+        localStorage.getItem("userToken");
         // setModal(showModale);
         setForm({
             ...form

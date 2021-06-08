@@ -23,35 +23,41 @@ const Auth = (props)=>{
         const {name} = e.target
         setIsOpen(!isOpen);
         setInputs(state=>({...state, name:''}))
-    } 
-    const [logged, setLogged] = useState(useSelector(state=>state.userReducer.isUserLogged));
+    }
+    const modalBody = useSelector(state=>state.userReducer.modalBody);
+    // console.log(modalBody);
+    const [loginMessage, setLoginMessage] = useState(modalBody);
+    // console.log(loginMessage);
     const isUserLogged = useSelector(state=>state.userReducer.isUserLogged);
-    console.log(isUserLogged);
-    console.log('isuserloggedafterauth', logged);
-    // const [loginMessage, setLoginMessage] = useState('');
-    const modalBody = useSelector(state=>state.userReducer.modalBody)
-    const token = useSelector(state=>state.userReducer.userToken)
+    // console.log(isUserLogged);
+    // console.log('isuserloggedafterauth', logged);
+    // const token = useSelector(state=>state.userReducer.userToken)
     const validEmailRegex = RegExp(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i);
     let [emailError, setEmailError] = useState('');
     const [submitError, setSubmitError] = useState('');
-    const user = useSelector(state => state.userReducer.user);
+    // const user = useSelector(state => state.userReducer.user);
     const history = useHistory();
 
     useEffect(()=>{
         localStorage.getItem("userToken");
-        // setLoginMessage(modalBody);
+        setLoginMessage('');
+        if(modalBody){
+            setLoginMessage(modalBody)
+        } 
         if(isUserLogged === true){
             setTimeout(() => {
-                history.push("/recipes")
+                history.push("/recipes");
+                setLoginMessage('');
             }, 3000);
-    }        
-    }, [isUserLogged]);
+        }        
+    }, [isUserLogged, modalBody]);
 
     const [msgUrlReset, setMsgUrlReset]= useState('');
     const [errorEmailReset, setErrorEmailReset]= useState('');
 
     const onChangeEmail=(e)=>{
         e.preventDefault();
+        setSubmitError('');
         const {name, value} = e.target
         switch (name) {
             case 'email': 
@@ -98,21 +104,27 @@ const Auth = (props)=>{
         }else{
              dispatch(login(inputs.name, password))
             //  setLoginMessage(modalBody);
-             setLogged(isUserLogged)
+             if(isUserLogged === true){
+                setTimeout(() => {
+                    history.push("/recipes");
+                    setLoginMessage('');
+                    }, 3000);
+                }else{
+                    setTimeout(() => {
+                        setLoginMessage('');
+                        setInputs({name:''});
+                        setPassword('')
+                        }, 4000);
+                } 
+            }  
         }
-        if(isUserLogged === true){
-            setTimeout(() => {
-                history.push("/recipes")
-            }, 3000);
-        }    
-    }
-    console.log(modalBody);
+    // console.log(isUserLogged);
 
     return(
         <>
             <h3>Se connecter a votre compte</h3>
-            <div className=" loginDiv col-12 mt-5">
-                <div className=" loginFormDiv col-6" >
+            <div className=" loginDiv col-sm-12 mt-5">
+                <div className=" loginFormDiv col-md-6" >
                     <form onSubmit={userLogin} className="container d-inline-block col-lg-10">
                             <div className="form-group">
                                 {/*<label htmlFor="email">Email</label>*/}
@@ -140,20 +152,21 @@ const Auth = (props)=>{
                                     className="form-control"
                                     id="password-field1"
                                     placeholder="Mot de passe"
+                                    value={password}
                                     onChange={onChangePassword}
                                 />
                             </div>
                             {submitError && 
                                 <div>
-                                    <p style={{color:'#00f'}}>{submitError}</p>
+                                    <p style={{color:'#f00'}}>{submitError}</p>
                                 </div>}
                             <Button type="submit" color="primary" size="sm">Se connecter</Button>
                     </form>
                 </div>
-                <div className="col-5">
+                <div className="col-md-6">
                     <Button onClick={toggleCollapse} color="warning" size="sm">Mot de passe oublie?</Button>
                     <Collapse isOpen={isOpen}>
-                        <Card id="forgotCollap">
+                        <Card id="forgotCollap" >
                             <CardBody>
                                 <ForgotPassword value={inputs.name} sendUrl={sendUrl} handleChange={onChangeEmail} messageResponse={msgUrlReset} errorEmailReset={errorEmailReset} name="emailToReset"  />
                             </CardBody>
@@ -161,8 +174,8 @@ const Auth = (props)=>{
                     </Collapse>
                 </div>   
             </div>
-          {modalBody && <div>
-              <p style={{color:'#f0f'}}>{modalBody}</p>
+          {loginMessage && <div>
+              <p style={{color:'#f0f'}}>{loginMessage}</p>
               </div>}
         </>
        

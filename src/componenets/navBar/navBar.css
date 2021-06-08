@@ -1,7 +1,11 @@
+.navbar{
+    border-radius: 3px;
+}
+
 .navBarDiv{
     position: relative;
     top:0;
-    top:2px;
+    /* top:2px; */
     width: 85%;
 }
 
@@ -24,5 +28,10 @@ button{
 }
 
 .nav-item a{
-    color: rgba(145, 20, 202, 0.986);
+    color: rgba(240, 198, 13, 0.986);
 }
+
+.bg-dark {
+    background-color: #24046d!important;
+}
+

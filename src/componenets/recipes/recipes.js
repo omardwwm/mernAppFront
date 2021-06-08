@@ -1,15 +1,15 @@
-import React, { useEffect, useState, useCallback, useRef} from "react";
-import {useSelector, useDispatch} from "react-redux";
-import {getAllRecipes} from "../../redux";
+import React, { useEffect, useState} from "react";
+// import { useDispatch} from "react-redux";
+// import {getAllRecipes} from "../../redux";
 import {Link} from "react-router-dom";
 import axios from "axios";
-import { Form, FormGroup, Label, Input} from 'reactstrap';
+import { Form} from 'reactstrap';
 import {GiCakeSlice, GiHotMeal, GiMeal} from 'react-icons/gi';
 import {SiCodechef} from 'react-icons/si';
 import "./recipes.css";
 
 const Recipes =(props)=>{
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const [recipes, setRecipes] =useState([]);
     // const [currentPath, setCurrentPath] = useState(window.location.pathname);
     // const [recipes, setRecipes] = useState(useSelector(state=>state.recipeReducer.recipes));
@@ -17,8 +17,8 @@ const Recipes =(props)=>{
     const user = JSON.parse(localStorage.getItem('myUser'));
     // console.log(user)
     console.log('insideReact', recipes);
-    const firstUpdate = useRef(true);
-    const myCategories2 = [{category: "entree", icon:<GiMeal style={{color:'rgb(27, 214, 58)'}}/>}, {category: "plat", icon:<GiHotMeal style={{color:'rgb(224, 218, 38)'}}/>}, {category: "dessert", icon:<GiCakeSlice style={{color:'rgb(216, 62, 126)'}}/>}];
+    // const firstUpdate = useRef(true);
+    // const myCategories2 = [{category: "entree", icon:<GiMeal style={{color:'rgb(27, 214, 58)'}}/>}, {category: "plat", icon:<GiHotMeal style={{color:'rgb(224, 218, 38)'}}/>}, {category: "dessert", icon:<GiCakeSlice style={{color:'rgb(216, 62, 126)'}}/>}];
     const myCategories = [
         {"_id":1, "name": "entree"}, {"_id":2, "name": "plat"}, {"_id":3, "name": "dessert"}
     ]
@@ -133,10 +133,10 @@ const Recipes =(props)=>{
                                 src={recipe.recipePicture} 
                                 style={{width:'300px', height:'200px', borderRadius:10}} alt="recipe illustration"
                             />
-                            {recipe.recipeCreator && recipe.recipeCreator._id ===user && user.id || recipe.recipeCreator && recipe.recipeCreator._id ===user && user._id ? 
+                            {(recipe.recipeCreator && recipe.recipeCreator._id ===user && user.id) || (recipe.recipeCreator && recipe.recipeCreator._id ===user && user._id) ? 
                             <p>By: Me</p> 
                             : <p>By: {recipe.recipeCreatorName}</p>}
-                            {recipe.recipeCreator && recipe.recipeCreator.isPro == true? <SiCodechef style={{color:'#fff', fontSize:24}}/>: null}
+                            {recipe.recipeCreator && recipe.recipeCreator.isPro === true? <SiCodechef style={{color:'#fff', fontSize:24}}/>: null}
                             <Link to={{pathname: `/recipesDetails/${recipe._id}`, state:{recipe}}} >Voir plus..</Link>
                         </div>
                     )

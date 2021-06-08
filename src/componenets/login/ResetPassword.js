@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import axios from "axios";
 import {useHistory} from "react-router-dom"
-import {FormGroup, Input, Button, Form, Collapse} from 'reactstrap';
+import {FormGroup, Input, Button, Form} from 'reactstrap';
 
 
 const ResetPassword =(props)=>{

@@ -1,10 +1,10 @@
-import React, {useEffect, useState, useRef} from "react";
+import React, {useEffect, useState} from "react";
 // import {getAllRecipes} from "../../redux";
 import axios from "axios";
 import { stateToHTML } from 'draft-js-export-html';
-import { convertFromRaw, ContentState} from 'draft-js';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, Card } from 'reactstrap';
-import {deleteRecipe, getOneRecipe, postComment} from "../../redux/actions/RecipeActions";
+import { convertFromRaw} from 'draft-js';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, Label, Input, Card } from 'reactstrap';
+import {deleteRecipe, postComment} from "../../redux/actions/RecipeActions";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory, Link} from "react-router-dom";
 import {formatDate} from "../../outils/outils";
@@ -12,11 +12,10 @@ import "./recipes.css";
 
 const RecipeDetails = (props)=>{    
     const recipeId = props.match.params._id;
-    const [currentPath, setCurrentPath] = useState(window.location.pathname);
-    // console.log(currentPath);
+    // const [currentPath, setCurrentPath] = useState(window.location.pathname);
     const dispatch = useDispatch();
     const history = useHistory();
-    const thisRecipe = useSelector(state=> state.recipeReducer.recipe);
+    // const thisRecipe = useSelector(state=> state.recipeReducer.recipe);
     // const testRecipe = useSelector(state=> state.recipeReducer.recipe);
     // const savedRecipe = JSON.parse(localStorage.getItem('thisRecipe'));
     const [testRecipe, setTestRecipe ]= useState([]);
@@ -32,7 +31,7 @@ const RecipeDetails = (props)=>{
     // const user = localStorage.getItem('myUser');
     // const [user, setUser] = useState(null);
     const user = localStorage.getItem('myUser') && JSON.parse(localStorage.getItem('myUser'));
-    console.log(user);
+    // console.log(user);
 
     // const getUser = ()=>{
     //     if(JSON.parse(localStorage.getItem('myUser'))){
@@ -43,7 +42,7 @@ const RecipeDetails = (props)=>{
     //     getUser();
     // }
     const userId = user &&  user.id ? user.id : user && user._id;
-    console.log('userID Is:', userId);
+    // console.log('userID Is:', userId);
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!showModale);
     const modalTitle = useSelector(state=>state.recipeReducer.modalTitle);
@@ -117,7 +116,7 @@ const RecipeDetails = (props)=>{
             }, 4000)); 
         }     
     }
-    const currentRecipeComments = testRecipe && testRecipe.comments && testRecipe.comments;
+    // const currentRecipeComments = testRecipe && testRecipe.comments && testRecipe.comments;
     // console.log(currentRecipeComments);
 
     const fetchRecipe =async()=>{
@@ -125,24 +124,25 @@ const RecipeDetails = (props)=>{
             setTestRecipe(response.data);
         })      
     } 
-    testRecipe && console.log('recipeFinalIs', testRecipe.recipeCreator);
+    // testRecipe && console.log('recipeFinalIs', testRecipe.recipeCreator);
     const idFromRecipe = testRecipe.recipeCreator;
     // idFromRecipe == userId ? console.log('okkkk'): console.log('not working')
     // const isMine = (testRecipe.recipeCreator ===user && user.id || testRecipe.recipeCreator===user && user._id) ? true : false;    
-    const isMine = idFromRecipe == userId ? true : false;
-    console.log(isMine);
+    const isMine = idFromRecipe === userId ? true : false;
+    // console.log(isMine);
 
     useEffect(()=>{
-        const { pathname } = window.location;
-        // dispatch(getOneRecipe(recipeId));
         fetchRecipe();
+        localStorage.getItem('userToken');
+        // const { pathname } = window.location;
+        // dispatch(getOneRecipe(recipeId));
         // getUser();
-        setCurrentPath(pathname);   
+        // setCurrentPath(pathname);     
         // if(JSON.parse(localStorage.getItem('thisRecipe'))){
         //     const recipeFromStorage = JSON.parse(localStorage.getItem('thisRecipe'));
         //     setTestRecipe(recipeFromStorage); 
         // }
-        localStorage.getItem('userToken');
+        
         // console.log(currentPath)
     },[]);     
 
@@ -166,6 +166,7 @@ const RecipeDetails = (props)=>{
                     // src={`https://mern-recipes.herokuapp.com${testRecipe.recipePicture}`}
                     src={testRecipe.recipePicture}
                     style={{width:'65%', height:'300px'}}
+                    alt="recipe illustration"
                     />
                 <h3 className="text-center">Liste des ingredients</h3>
                 <div className="listIngDetailRecipe">
@@ -201,7 +202,8 @@ const RecipeDetails = (props)=>{
                                             <div>
                                                 <img
                                                     src={comment && comment.userId && comment.userId.profilePicture}
-                                                    className="commentImage" 
+                                                    className="commentImage"
+                                                    alt="comments user Illustration" 
                                                     /> 
                                                 {comment.userId && comment.userId.username}&nbsp;{formatDate(comment.postedAt)}
                                             </div> 

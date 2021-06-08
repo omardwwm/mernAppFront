@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from "react";
-import {useSelector, useDispatch} from "react-redux";
+import { useDispatch} from "react-redux";
 import {getProfessionnals} from "../../redux/actions/UserActions";
 import {Link} from "react-router-dom";
 import axios from "axios";
-import {Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption, UncontrolledCarousel } from 'reactstrap';
+import {Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption } from 'reactstrap';
 import "./home.css";
 
 
@@ -11,7 +11,7 @@ const Home = ()=>{
 
     const [lastRecipes, setLastRecipes] = useState([]);
     const dispatch = useDispatch();
-    const allProf = useSelector(state=>state.userReducer.professionnals)
+    // const allProf = useSelector(state=>state.userReducer.professionnals)
     const [activeIndex, setActiveIndex] = useState(0);
     const [animating, setAnimating] = useState(false);
     const next = () => {

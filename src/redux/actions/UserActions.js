@@ -9,10 +9,12 @@ export const registerUser = (formData, Headers)=>{
         try {
             // const formData = new FormData();
             console.log(formData);
-            const response =  await axios.post('http://localhost:8080/users/register', formData, Headers);
+            const response =  await axios.post('https://mern-recipes.herokuapp.com/users/register', formData, Headers);
             console.log(response);
             dispatch({
                 type: "REGISTER",
+                user: response.data.savedNewUser,
+                token: response.data.token,
                 showModale:true,
                 modalBody: response.data.message,
                 modalTitle: "Welcome redux test",
@@ -120,7 +122,8 @@ export const logOut =()=>{
             type: "LOGOUT",
             isUserLogged: false,
             user: null,
-            token: null
+            token: null,
+            modalBody:''
            });
            localStorage.clear();
         //    localStorage.setItem('userToken', null);
@@ -160,15 +163,17 @@ export const deletUser =(userId, myCurrentProfilePicture, token)=>{
                   }, 
                 data:data
             })
-                .then(()=>localStorage.clear());
             console.log(response);
             dispatch({
                 type: "DELETE-USER-SUCCESS",
+                modalBodyDeleteUser: response.data.message
             })
+            localStorage.clear();
         } catch (error) {
-            console.log(error.response.data);
+            console.log(error);
             dispatch({
-                type: "USER-RECIPE-FAILURE"
+                type: "DELETE-USER-FAILURE",
+                modalBodyDeleteUser: `Erreur survenue from server : ${error.response.data.message}`,
             })
         }
     }

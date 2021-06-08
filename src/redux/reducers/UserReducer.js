@@ -12,6 +12,7 @@ const initialState = {
     modalImage: null,
     redirect: false,
     successMsgPasswordChange: "",
+    modalBodyDeleteUser:""
 }
 
 export const userReducer = (state = initialState, action) =>{
@@ -19,6 +20,8 @@ export const userReducer = (state = initialState, action) =>{
         case "REGISTER":
             return {
                 ...state,
+                user: action.user,
+                userToken: action.token,
                 showModale: action.showModale,
                 modalTitle: action.modalTitle,
                 modalBody: action.modalBody,
@@ -73,14 +76,25 @@ export const userReducer = (state = initialState, action) =>{
                 user: action.user,
                 userToken: action.token,
                 isUserLogged: action.isUserLogged,
+                modalBody: action.modalBody
                 // redirect: action.redirect
             };
         case "CHANGE-PASSWORD-SUCCESS":
-            console.log(initialState.modalBody)
+            // console.log(initialState.modalBody)
             return{
                 ...state,
                 successMsgPasswordChange:action.successMsgPasswordChange
-            }            
+            }
+        case "DELETE-USER-SUCCESS":
+            return{
+                ...state,
+                modalBodyDeleteUser: action.modalBodyDeleteUser
+            }
+        case "DELETE-USER-FAILURE":
+            return{
+                ...state,
+                modalBodyDeleteUser: action.modalBodyDeleteUser
+            }                     
         default:
             return state;
     }

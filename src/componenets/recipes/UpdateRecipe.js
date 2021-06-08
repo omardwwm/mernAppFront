@@ -255,22 +255,23 @@ const UpdateRecipe = (props)=>{
                   
                     </div>
                    
-                    <FormGroup className="col-lg-3 col-md-4 col-sm-5 d-inline-block">
+                    <FormGroup className="d-inline-block m-1">
                         <Label for="recipePreparationTime">Temps de preparation</Label>
-                        <Input type="text" name="recipePreparationTime" id="recipePreparationTime" defaultValue={recipeToUpdate.recipePreparationTime}  onChange={handleChange}/>
+                        <Input className="col-xs-6 " type="text" name="recipePreparationTime" id="recipePreparationTime" defaultValue={recipeToUpdate.recipePreparationTime}  onChange={handleChange}/>
                     </FormGroup>
-                    <FormGroup className="col-lg-3 col-md-4 col-sm-5 d-inline-block">
+                    <FormGroup className="d-inline-block m-1">
                         <Label for="recipeCookingTime">Temps de cuisson</Label>
-                        <Input type="text" name="recipeCookingTime" id="recipeCookingTime" defaultValue={recipeToUpdate.recipeCookingTime}  onChange={handleChange}/>
+                        <Input className="col-xs-6 " type="text" name="recipeCookingTime" id="recipeCookingTime" defaultValue={recipeToUpdate.recipeCookingTime}  onChange={handleChange}/>
                     </FormGroup>
-                    <FormGroup>
+                    <FormGroup className="mt-4">
                         <Label for="recipePicture">Image de la recette</Label>
                         <div>
                             <h5>ancienne image</h5>
                             <img className="d-block m-2" 
                                 // src={`https://mern-recipes.herokuapp.com${recipeToUpdate.recipePicture}`}
                                 src={recipeToUpdate.recipePicture}
-                                style={{width:'200px', height:'100px'}} 
+                                style={{width:'200px', height:'100px'}}
+                                alt="recipe illustration"
                             />
                         </div>
                         <Input type="file" name="recipePicture" id="recipePicture" placeholder="Select a picture" onChange={selectImage}/>

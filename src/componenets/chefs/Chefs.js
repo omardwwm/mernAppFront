@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from "react";
+import React, { useEffect} from "react";
 import {useSelector, useDispatch} from "react-redux";
 import { Link } from "react-router-dom";
-import { Card, CardText, CardBody, CardLink, CardTitle, CardSubtitle, Button } from "reactstrap";
+import { Card, CardTitle, CardSubtitle } from "reactstrap";
 import {getProfessionnals} from "../../redux/actions/UserActions";
 import "./chefs.css";
 
@@ -17,7 +17,7 @@ const Chefs = ()=>{
 
     const dispatch = useDispatch();
     const allProfessionals = useSelector(state=>state.userReducer.professionnals);
-    console.log(allProfessionals);
+    // console.log(allProfessionals);
 
    useEffect(()=>{
        dispatch(getProfessionnals(config));  
@@ -34,7 +34,7 @@ const Chefs = ()=>{
                                 <img className="img-fluid chefPic"
                                     // src={`https://mern-recipes.herokuapp.com${chef.profilePicture}`}
                                     src={chef.profilePicture}
-                                    alt="picture-profile-chef"
+                                    alt="illustration-profile-chef"
                                     />
                             </Card>
                         <div className="col-10 chefRealisations " >
