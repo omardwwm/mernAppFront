@@ -173,7 +173,7 @@ const Profile = ()=>{
     // console.log(user);
     // console.log('successMessage is:', successMsg); 
     // console.log(submitError);
-    console.log(modalBody);
+    // console.log(modalBody);
     return(
         <>
             <h2>Mes infos</h2>

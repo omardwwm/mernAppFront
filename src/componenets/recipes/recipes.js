@@ -16,7 +16,7 @@ const Recipes =(props)=>{
     // const user = useSelector(state=>state.userReducer.user);
     const user = JSON.parse(localStorage.getItem('myUser'));
     // console.log(user)
-    console.log('insideReact', recipes);
+    // console.log('insideReact', recipes);
     // const firstUpdate = useRef(true);
     // const myCategories2 = [{category: "entree", icon:<GiMeal style={{color:'rgb(27, 214, 58)'}}/>}, {category: "plat", icon:<GiHotMeal style={{color:'rgb(224, 218, 38)'}}/>}, {category: "dessert", icon:<GiCakeSlice style={{color:'rgb(216, 62, 126)'}}/>}];
     const myCategories = [

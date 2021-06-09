@@ -8,6 +8,7 @@ import {deleteRecipe, postComment} from "../../redux/actions/RecipeActions";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory, Link} from "react-router-dom";
 import {formatDate} from "../../outils/outils";
+import {GiCampCookingPot, GiAlarmClock, GiTrashCan} from 'react-icons/gi';
 import "./recipes.css";
 
 const RecipeDetails = (props)=>{    
@@ -48,6 +49,7 @@ const RecipeDetails = (props)=>{
     const modalTitle = useSelector(state=>state.recipeReducer.modalTitle);
     const modalBody = useSelector(state=>state.recipeReducer.modalBody);
     const showModale = useSelector(state => state.recipeReducer.showModale)
+    const [commentMsg, setCommentMsg] = useState('');
     // console.log(showModale); 
     // console.log(modal);
     // const config = {headers: {
@@ -83,6 +85,12 @@ const RecipeDetails = (props)=>{
         // }  
     }
 
+    useEffect(()=>{
+        if(modalBody){
+            setCommentMsg(modalBody)
+        }
+    }, [modalBody]);
+
     const sendComment =(e)=>{
         e.preventDefault();
         const config = {headers: {
@@ -93,7 +101,7 @@ const RecipeDetails = (props)=>{
             if(commentContent){
                 dispatch(postComment(recipeId, userId, commentContent, config)).then(setModal(true)).then(setCommentContent("")).then(()=>setTimeout(() => {
                     setModal(false)
-                }, 2000)).then(()=>fetchRecipe()); 
+                }, 2500)).then(()=>fetchRecipe()); 
                 ;
                 // console.log(commentContent)  
                 }else{
@@ -118,7 +126,6 @@ const RecipeDetails = (props)=>{
     }
     // const currentRecipeComments = testRecipe && testRecipe.comments && testRecipe.comments;
     // console.log(currentRecipeComments);
-
     const fetchRecipe =async()=>{
         await axios.get(`https://mern-recipes.herokuapp.com/recipes/${recipeId}`).then(response=>{
             setTestRecipe(response.data);
@@ -130,6 +137,20 @@ const RecipeDetails = (props)=>{
     // const isMine = (testRecipe.recipeCreator ===user && user.id || testRecipe.recipeCreator===user && user._id) ? true : false;    
     const isMine = idFromRecipe === userId ? true : false;
     // console.log(isMine);
+
+    const deleteComment = async(e)=>{
+        console.log(e.currentTarget.id);
+        let commentId = e.currentTarget.id;
+        if(window.confirm('vous voulez supprimer ce commentaire?')){
+            await axios.delete(`http://localhost:8080/comments/delete/${commentId}`, {headers:{"x-auth-token":`${token}`}})
+            .then(response => setCommentMsg(response.data.message))
+            .then(setModal(true))
+            .then(()=>setTimeout(() => {
+                setModal(false)
+            }, 3000))
+            .then(()=>fetchRecipe())
+        }
+    }
 
     useEffect(()=>{
         fetchRecipe();
@@ -163,11 +184,17 @@ const RecipeDetails = (props)=>{
                 <h3 className="text-center" >{testRecipe.recipeName}</h3>
                 <p>Creation de : {testRecipe.recipeCreatorName}</p>
                 <img
+                className="d-block"
                     // src={`https://mern-recipes.herokuapp.com${testRecipe.recipePicture}`}
                     src={testRecipe.recipePicture}
                     style={{width:'65%', height:'300px'}}
                     alt="recipe illustration"
                     />
+                <p>
+                    <GiAlarmClock style={{color:'#0f0', fontSize:'32px'}}/>&nbsp;&nbsp;&nbsp;
+                    <span>Preparation : {testRecipe.recipePreparationTime}&nbsp;Min</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span>Cuisson : {testRecipe.recipePreparationTime}&nbsp;Min</span>
+                </p>    
                 <h3 className="text-center">Liste des ingredients</h3>
                 <div className="listIngDetailRecipe">
                     {ingredients && ingredients.map((ing, index)=> (
@@ -209,8 +236,14 @@ const RecipeDetails = (props)=>{
                                             </div> 
                                             <div className="d-inline-block offset-1">
                                                 <p >{comment.commentText}</p>{' '}
-                                            </div>    
-                                        </Card>    
+                                            </div> 
+                                            {(comment && comment.userId && comment.userId._id) === userId ? (
+                                                <Button className="d-inline-block" color="danger" size="sm" id={comment._id} onClick={deleteComment}>
+                                                    <GiTrashCan style={{color:'#0f0', fontSize:'22px'}}/>
+                                                </Button> 
+                                                ): null
+                                            }
+                                        </Card>     
                                     </div>
                                 )                                             
                             )}
@@ -239,7 +272,7 @@ const RecipeDetails = (props)=>{
             <Modal isOpen={modal} toggle={toggle} scrollable={true} >
                 <ModalHeader toggle={toggle}>{modalTitle}</ModalHeader>
                 <ModalBody>
-                    {modalBody}       
+                    {commentMsg}       
                 </ModalBody>
                 <ModalFooter>
                 <Button color="primary"  onClick={toggle}>OK</Button>

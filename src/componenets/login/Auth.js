@@ -175,7 +175,7 @@ const Auth = (props)=>{
                 </div>   
             </div>
           {loginMessage && <div>
-              <p style={{color:'#f0f'}}>{loginMessage}</p>
+              <p style={{color:'rgb(72, 211, 12)'}}>{loginMessage}</p>
               </div>}
         </>
        

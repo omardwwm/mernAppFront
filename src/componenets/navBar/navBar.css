@@ -28,10 +28,21 @@ button{
 }
 
 .nav-item a{
-    color: rgba(240, 198, 13, 0.986);
+    color: rgba(255, 255, 255, 0.986);
+    font-family: emoji, serif;
 }
 
-.bg-dark {
+/* .bg-dark {
     background-color: #24046d!important;
+} */
+.navbar-dark .navbar-brand {
+    color: rgb(243, 161, 8);
 }
+ .navbar-brand{
+    font-size: 1rem;
+ }
+
+ .navbar-toggler-icon {
+     color: darkgoldenrod;
+ }
 
