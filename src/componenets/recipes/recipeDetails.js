@@ -142,7 +142,7 @@ const RecipeDetails = (props)=>{
         console.log(e.currentTarget.id);
         let commentId = e.currentTarget.id;
         if(window.confirm('vous voulez supprimer ce commentaire?')){
-            await axios.delete(`http://localhost:8080/comments/delete/${commentId}`, {headers:{"x-auth-token":`${token}`}})
+            await axios.delete(`https://mern-recipes.herokuapp.com/comments/delete/${commentId}`, {headers:{"x-auth-token":`${token}`}})
             .then(response => setCommentMsg(response.data.message))
             .then(setModal(true))
             .then(()=>setTimeout(() => {
