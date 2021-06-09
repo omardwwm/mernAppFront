@@ -3,9 +3,9 @@ import React, { useEffect, useState} from "react";
 // import {getAllRecipes} from "../../redux";
 import {Link} from "react-router-dom";
 import axios from "axios";
-import { Form} from 'reactstrap';
-import {GiCakeSlice, GiHotMeal, GiMeal} from 'react-icons/gi';
-import {SiCodechef} from 'react-icons/si';
+import { Form, Button} from 'reactstrap';
+import {GiCook} from 'react-icons/gi';
+// import {SiCodechef} from 'react-icons/si';
 import "./recipes.css";
 
 const Recipes =(props)=>{
@@ -15,6 +15,7 @@ const Recipes =(props)=>{
     // const [recipes, setRecipes] = useState(useSelector(state=>state.recipeReducer.recipes));
     // const user = useSelector(state=>state.userReducer.user);
     const user = JSON.parse(localStorage.getItem('myUser'));
+    const userId = user &&  user.id ? user.id : user && user._id;
     // console.log(user)
     // console.log('insideReact', recipes);
     // const firstUpdate = useRef(true);
@@ -133,11 +134,19 @@ const Recipes =(props)=>{
                                 src={recipe.recipePicture} 
                                 style={{width:'300px', height:'200px', borderRadius:10}} alt="recipe illustration"
                             />
-                            {(recipe.recipeCreator && recipe.recipeCreator._id ===user && user.id) || (recipe.recipeCreator && recipe.recipeCreator._id ===user && user._id) ? 
-                            <p>By: Me</p> 
-                            : <p>By: {recipe.recipeCreatorName}</p>}
-                            {recipe.recipeCreator && recipe.recipeCreator.isPro === true? <SiCodechef style={{color:'#fff', fontSize:24}}/>: null}
-                            <Link to={{pathname: `/recipesDetails/${recipe._id}`, state:{recipe}}} >Voir plus..</Link>
+                            <div className="col-12">
+                                 {
+                                    // (recipe.recipeCreator && recipe.recipeCreator._id ===user && user.id) || (recipe.recipeCreator && recipe.recipeCreator._id ===user && user._id) ? 
+                                    (recipe.recipeCreator && recipe.recipeCreator._id === userId) || (recipe.recipeCreator && recipe.recipeCreator._id === userId) ? 
+                                    (<p className="pNameChef col-10">By: Me</p> )
+                                    : <p className="pNameChef col-10">By: {recipe.recipeCreatorName}</p>
+                                }
+                                {recipe.recipeCreator && recipe.recipeCreator.isPro === true? (
+                                    <span className="d-inline-block col-1"><GiCook style={{color:'#bcf70c', fontSize:24}}/></span>
+                                    ): null}
+                            </div>
+                            
+                            <Link to={{pathname: `/recipesDetails/${recipe._id}`, state:{recipe}}} ><Button color="success" size="sm">Voir plus</Button></Link>
                         </div>
                     )
                 })}

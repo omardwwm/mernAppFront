@@ -212,7 +212,7 @@ const RecipeDetails = (props)=>{
             <div className="commentsDiv col-12" >
                 <Form onSubmit={sendComment} >
                     <Label for="comment">Les commentaires</Label>
-                    <Input type="textarea" name="comment" id="comment" value={commentContent} placeholder="Enter un commentaire" onChange={handleChangeComment} />
+                    <Input type="textarea" name="comment" id="comment" value={commentContent} placeholder="Votre commentaire ici..." onChange={handleChangeComment} />
                     <Button>Poster</Button>
                     <span style={{color:'red'}}>{errorComment}</span>
                 </Form>
@@ -234,15 +234,15 @@ const RecipeDetails = (props)=>{
                                                     /> 
                                                 {comment.userId && comment.userId.username}&nbsp;{formatDate(comment.postedAt)}
                                             </div> 
-                                            <div className="d-inline-block offset-1">
-                                                <p >{comment.commentText}</p>{' '}
-                                            </div> 
-                                            {(comment && comment.userId && comment.userId._id) === userId ? (
-                                                <Button className="d-inline-block" color="danger" size="sm" id={comment._id} onClick={deleteComment}>
-                                                    <GiTrashCan style={{color:'#0f0', fontSize:'22px'}}/>
+                                            <div className="col-12" >
+                                                <p className="d-inline-block col-10 ">{comment.commentText}</p>{' '}
+                                                {(comment && comment.userId && comment.userId._id) === userId ? (
+                                                <Button className="d-inline-block offset-1"  size="sm" id={comment._id} onClick={deleteComment}>
+                                                    <GiTrashCan style={{color:'#f00', fontSize:'22px'}}/>
                                                 </Button> 
                                                 ): null
-                                            }
+                                                }
+                                            </div> 
                                         </Card>     
                                     </div>
                                 )                                             

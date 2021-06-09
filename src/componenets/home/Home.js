@@ -41,7 +41,7 @@ const Home = ()=>{
                 alt={item.recipeName}
             />
             <Link to={{pathname: `/recipesDetails/${item._id}`, state:{item}}}>
-                <CarouselCaption captionText={item.recipeName} captionHeader={item.recipeName} />  
+                <CarouselCaption className="d-block" captionText={item.recipeName} captionHeader={item.recipeName} />  
             </Link>
           </CarouselItem>
         );
@@ -64,14 +64,14 @@ const Home = ()=>{
     return (
         <div className="homePage col ">
             <Carousel className="homeCarousel mt-2"
-            activeIndex={activeIndex}
-            next={next}
-            previous={previous}
-            >
-            <CarouselIndicators items={lastRecipes} activeIndex={activeIndex} onClickHandler={goToIndex} />
-                {slides}
-            <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
-            <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
+                activeIndex={activeIndex}
+                next={next}
+                previous={previous}
+                >
+                <CarouselIndicators items={lastRecipes} activeIndex={activeIndex} onClickHandler={goToIndex} />
+                    {slides}
+                <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
+                <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
             </Carousel>
         </div>
     )
