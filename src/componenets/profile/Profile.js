@@ -82,7 +82,7 @@ const Profile = ()=>{
             ...form,
             errors, [name]:value
         })
-        console.log(form)
+        // console.log(form)
     }
 
     const selectImage = (event)=>{
@@ -149,7 +149,7 @@ const Profile = ()=>{
 
              await axios.put(`https://mern-recipes.herokuapp.com/users/updatePicture/${userId}`, formData, config)
             .then(res=>{
-                console.log(res);
+                // console.log(res);
                 setMsgUpdateImgSuccess(res.data.message);
                 localStorage.setItem('myUser', JSON.stringify(res.data.updatedUser))
             }).then(()=>setTimeout(() => {

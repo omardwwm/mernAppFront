@@ -85,10 +85,10 @@ const Auth = (props)=>{
         if(inputs.name){
            try {
             const response = await axios.post(`https://mern-recipes.herokuapp.com/reset/send-url/${inputs.name}`);
-            console.log(response.data);
+            // console.log(response.data);
             setMsgUrlReset(response.data.message)
         } catch (error) {
-            console.log(error.response.data);
+            // console.log(error.response.data);
             setMsgUrlReset(error.response.data.message)
         } 
         }else{

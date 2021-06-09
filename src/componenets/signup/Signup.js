@@ -148,7 +148,7 @@ const Signup =(props)=>{
         formData.append('profilePicture',profilePicture);
         // formData.append('role',form.role);
         formData.append('isPro', form.isPro);
-        console.log(formData);
+        // console.log(formData);
         if(!form.email || !form.username || !form.password || !form.passwordConfirm){
             setLoginCheckMessage('Vous devez renseigner tous les champs !')
         }else{

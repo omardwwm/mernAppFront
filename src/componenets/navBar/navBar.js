@@ -26,7 +26,6 @@ const NavBar = (props)=>{
    const closeNavBar =(e)=>{
     if(isOpen && ! e.target.classList.contains('navbar-toggler')){
       setIsOpen(false);
-    console.log('testCloseNavBar')
     }
     
   }

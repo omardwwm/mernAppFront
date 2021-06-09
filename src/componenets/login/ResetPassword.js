@@ -9,7 +9,7 @@ const ResetPassword =(props)=>{
     const [submitError, setSubmitError] = useState('');
     const [resResetMessage, setResResetMessage] = useState('');
     const history = useHistory();
-    console.log(props.match.params)
+    // console.log(props.match.params)
 
     const [form, setForm] = useState({
         newPassword:"",
@@ -45,7 +45,7 @@ const ResetPassword =(props)=>{
             ...form,
             errors, [name]:value
         })
-        console.log(form)
+        // console.log(form)
     }
 
     const resetPassword=async(e)=>{
@@ -59,10 +59,10 @@ const ResetPassword =(props)=>{
                 newPassword: form.newPassword,
                 newPasswordConfirm: form.newPasswordConfirm
             }
-            console.log(newPassword);
-            console.log(newPasswordConfirm);
+            // console.log(newPassword);
+            // console.log(newPasswordConfirm);
             if(newPassword && newPasswordConfirm){
-                console.log('test Reset function')
+                // console.log('test Reset function')
                 const headers = {
                     Accept:'*/*',
                     'content-type':'application/json' 
@@ -93,7 +93,7 @@ const ResetPassword =(props)=>{
         }  
     }
 
-    console.log(resResetMessage);
+    // console.log(resResetMessage);
     return(
         <div>
             <h3>Form reste password</h3>

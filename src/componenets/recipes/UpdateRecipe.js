@@ -15,7 +15,7 @@ import "./recipes.css";
 const UpdateRecipe = (props)=>{
 
     const recipeToUpdate = props.location.state.testRecipe;
-    console.log('recipe to update is:', recipeToUpdate);
+    // console.log('recipe to update is:', recipeToUpdate);
     const [formRecipe, setFormRecipe] = useState({
         recipeName: recipeToUpdate.recipeName,
         recipeDescription: recipeToUpdate.recipeDescription,
@@ -77,7 +77,7 @@ const UpdateRecipe = (props)=>{
             errors, [name]: value
         })
     }
-    console.log(formRecipe);
+    // console.log(formRecipe);
     const onChangeIngredientName = (event)=>{
         setIngredientName(event.target.value)
     }
@@ -112,7 +112,7 @@ const UpdateRecipe = (props)=>{
         event.preventDefault();
         setRecipePicture(event.target.files[0])        
     };
-    console.log(recipePicture);
+    // console.log(recipePicture);
     const addIngredient =(event)=>{
         event.preventDefault();
         if(ingredientName ==="" || quantity ===""){
@@ -155,7 +155,7 @@ const UpdateRecipe = (props)=>{
         }else{
             formData.append('oldRecipePicture',recipeToUpdate.recipePicture);
         }
-        console.log(recipePicture);
+        // console.log(recipePicture);
         // formData.append('recipePicture',recipePicture);
         formData.append('recipeName', formRecipe.recipeName);
         formData.append('recipeCategory', formRecipe.recipeCategory);
@@ -172,7 +172,7 @@ const UpdateRecipe = (props)=>{
         }, 5000));
            
     }
-    console.log('showModalIs:', showModale);
+    // console.log('showModalIs:', showModale);
     useEffect(()=>{
         localStorage.getItem('myUser');
         localStorage.getItem('userToken');

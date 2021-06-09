@@ -116,7 +116,7 @@ const RecipeDetails = (props)=>{
         const token = localStorage.getItem('userToken');
         let recipeId = testRecipe._id;
         const dataToDelete = JSON.stringify(testRecipe.recipePicture);
-        console.log(dataToDelete);
+        // console.log(dataToDelete);
         // console.log(JSON.stringify(dataToDelete));
         if(window.confirm('vous voulez supprimer cette recette?')){
             dispatch(deleteRecipe(recipeId, dataToDelete, token)).then(()=>setTimeout(() => {
@@ -139,7 +139,7 @@ const RecipeDetails = (props)=>{
     // console.log(isMine);
 
     const deleteComment = async(e)=>{
-        console.log(e.currentTarget.id);
+        // console.log(e.currentTarget.id);
         let commentId = e.currentTarget.id;
         if(window.confirm('vous voulez supprimer ce commentaire?')){
             await axios.delete(`https://mern-recipes.herokuapp.com/comments/delete/${commentId}`, {headers:{"x-auth-token":`${token}`}})

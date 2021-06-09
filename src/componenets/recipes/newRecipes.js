@@ -153,7 +153,7 @@ const Recipes = ()=>{
     const handleSubmit =(event)=>{
         event.preventDefault();
         const recipeINgTest = recipeIngrediants;
-        console.log(recipeINgTest);
+        // console.log(recipeINgTest);
         // formRecipe.recipeIngrediants.split(',');
         // [
         //     {ingredientName: "potatose",quantity: "200gr"},
@@ -161,7 +161,7 @@ const Recipes = ()=>{
         //     {ingredientName: "olive oil",quantity: "20cl"}
         // ];
         const recipeToSend = JSON.stringify(recipeINgTest);
-        console.log(recipeToSend);
+        // console.log(recipeToSend);
         const config = {headers: {
             Accept:'*/*',
             "x-auth-token":`${token}`,
