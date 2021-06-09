@@ -193,7 +193,7 @@ const RecipeDetails = (props)=>{
                 <p>
                     <GiAlarmClock style={{color:'#0f0', fontSize:'32px'}}/>&nbsp;&nbsp;&nbsp;
                     <span>Preparation : {testRecipe.recipePreparationTime}&nbsp;Min</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span>Cuisson : {testRecipe.recipePreparationTime}&nbsp;Min</span>
+                    <span>Cuisson : {testRecipe.recipeCookingTime}&nbsp;Min</span>
                 </p>    
                 <h3 className="text-center">Liste des ingredients</h3>
                 <div className="listIngDetailRecipe">
