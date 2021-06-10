@@ -184,10 +184,10 @@ const UpdateRecipe = (props)=>{
     if(user){
         return (
             <div className="formNewRecipe">
-                <h3>UPDATE THIS RECIPE</h3>
+                <h3>UPDATE/MODIFIER LA RECETTE</h3>
                 <Form className="m-4 col-md-10 col-sm-12 m-auto" encType="multipart/form-data" onSubmit={handleSubmit }>
                     <FormGroup className="col-md-8 col-sm-9 m-auto">
-                        <Label for="recipeName">Name of the recipe</Label>
+                        <Label for="recipeName">Nom de la recette</Label>
                         <Input type="text" name="recipeName" id="recipeName" defaultValue={recipeToUpdate.recipeName} onChange={handleChange} />
                     </FormGroup>
                     {formRecipe.errors.recipeNameError?
@@ -196,7 +196,7 @@ const UpdateRecipe = (props)=>{
                         </div>: null
                     }
                     <FormGroup className="col-md-6 col-sm-8 col-xs-8 m-auto">
-                        <Label for="recipeCategory">Select a category</Label>
+                        <Label for="recipeCategory">Sélectionner une catégorie</Label>
                         <Input type="select" name="recipeCategory" id="recipeCategory" placeholder="Choice a category" onChange={handleChange}>
                             <option defaultValue={recipeToUpdate.recipeCategory}>{recipeToUpdate.recipeCategory}</option>
                             <option value="entree">Entree</option>
@@ -210,14 +210,14 @@ const UpdateRecipe = (props)=>{
                         </div>: null
                     }
                     <FormGroup className="col-md-5 col-sm-6 col-xs-9 d-inline-block mt-4">
-                        <Label for="ingredientName">Ingrediant name</Label>
-                        <Input type="text" name="ingredientName" value={ingredientName} id="ingredientName" placeholder="Enter your recipe ingrediants" onChange={onChangeIngredientName} />
+                        <Label for="ingredientName">Nom de l'ingrédient</Label>
+                        <Input type="text" name="ingredientName" value={ingredientName} id="ingredientName" placeholder="Le nom de l'ingrédient" onChange={onChangeIngredientName} />
                     </FormGroup>
                     <FormGroup className="col-md-5 col-sm-6 col-xs-9 d-inline-block">
-                        <Label for="quantity">Ingrediant quantity</Label>
-                        <Input type="text" name="quantity" value={quantity} id="quantity" placeholder="Enter the quantity" onChange={onChangeIngredientQauntity} />
+                        <Label for="quantity">Quantité de l'ingrédient</Label>
+                        <Input type="text" name="quantity" value={quantity} id="quantity" placeholder="Quantité : unité (Ex : 100 gr)" onChange={onChangeIngredientQauntity} />
                     </FormGroup>
-                    <Button className="mb-4" onClick={addIngredient}><RiAddCircleFill style={{fontSize:'22px', color:'#ff0'}}/> Add ingredient</Button>
+                    <Button className="mb-4" onClick={addIngredient}><RiAddCircleFill style={{fontSize:'22px', color:'#ff0'}}/>Ajouter l'ingrédient</Button>
                     {ingredientsError?(
                         <div style={{color:'red'}}>
                             <p>{ingredientsError}</p>

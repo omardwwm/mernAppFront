@@ -44,18 +44,18 @@ const NavBar = (props)=>{
     return(
         <div className="navBarDiv" >
           <Navbar color="dark" dark expand="md">
-            <NavbarBrand href="/">Home</NavbarBrand>
+            <NavbarBrand href="/">WECOOK</NavbarBrand>
             <NavbarToggler onClick={toggle} />
             <Collapse isOpen={isOpen} navbar>
               <Nav className="mr-auto" navbar>
                 <NavItem>
-                  <Link to="/recipes/" onClick={closeNavBar} >Les recettes</Link>
+                  <Link to="/recipes/" onClick={closeNavBar} >Recettes</Link>
                 </NavItem>
                 <NavItem>
                   <Link to="/create-recipes/" onClick={closeNavBar}>Creer votre recette</Link>
                 </NavItem>
                 <NavItem>
-                  <Link to="/chefs/" onClick={closeNavBar} >Les chefs<GiCook style={{color:'#fff', fontSize:'22px'}}/></Link>
+                  <Link to="/chefs/" onClick={closeNavBar} >Chefs<GiCook style={{color:'#fff', fontSize:'22px'}}/></Link>
                 </NavItem>
               </Nav>
               {user && token ? 
@@ -70,14 +70,14 @@ const NavBar = (props)=>{
                           alt="user profilePicture"
                           />
                         My info</Button></Link>
-                      <Button onClick={logoutFromNavBar}> <RiLogoutBoxLine style={{color:'#f00', fontSize:'22px'}} onClick={closeNavBar}/>LOGOUT</Button>
+                      <Button onClick={logoutFromNavBar}> <RiLogoutBoxLine style={{color:'#f00', fontSize:'22px'}} onClick={closeNavBar}/>DECONNEXION</Button>
                     </div>         
                   )
                   :
                   (
                     <div>
-                      <Link to='/login' ><Button className="d-inline-block" size="sm" onClick={closeNavBar}><GoSignIn style={{color:'#0f0', fontSize:'22px'}}/> <RiUserFill/></Button></Link>
-                      <Link to='/create-account' ><Button className="d-inline-block" size="sm" onClick={closeNavBar}>CREATE<RiUserAddFill style={{color:'#0f0', fontSize:'22px'}}/></Button></Link>
+                      <Link to='/login' ><Button className="d-inline-block" size="sm" onClick={closeNavBar}>SE CONNECTER<GoSignIn style={{color:'#0f0', fontSize:'22px'}}/> <RiUserFill/></Button></Link>
+                      <Link to='/create-account' ><Button className="d-inline-block" size="sm" onClick={closeNavBar}>CREER UN COMPTE<RiUserAddFill style={{color:'#0f0', fontSize:'22px'}}/></Button></Link>
                     </div>     
                   )
               }       

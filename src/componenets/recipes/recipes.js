@@ -120,7 +120,7 @@ const Recipes =(props)=>{
     }else
     return (
         <div className="recipes">
-            <h1 >All our recipes</h1>
+            <h2>All our recipes/Toutes nos recettes</h2>
             <Form>
             {checkboxList()}
             </Form>

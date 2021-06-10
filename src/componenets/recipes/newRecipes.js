@@ -199,8 +199,8 @@ const Recipes = ()=>{
             <div className="formNewRecipe">
                 <Form className="m-4 col-md-10 col-sm-12 m-auto" encType="multipart/form-data" onSubmit={handleSubmit }>
                     <FormGroup className="col-md-8 col-sm-9 m-auto">
-                        <Label for="recipeName">Name of the recipe</Label>
-                        <Input type="text" name="recipeName" id="recipeName" placeholder="Enter a name for your recipe" onChange={handleChange} />
+                        <Label for="recipeName">Nom de la recette</Label>
+                        <Input type="text" name="recipeName" id="recipeName" placeholder="Enter un nom pour cette recette" onChange={handleChange} />
                     </FormGroup>
                     {formRecipe.errors.recipeNameError?
                         <div style={{color:'red'}}>
@@ -208,9 +208,9 @@ const Recipes = ()=>{
                         </div>: null
                     }
                     <FormGroup className="col-md-6 col-sm-8 col-xs-8 m-auto">
-                        <Label for="recipeCategory">Select a category</Label>
+                        <Label for="recipeCategory">Sélectionner une catégorie</Label>
                         <Input type="select" name="recipeCategory" id="recipeCategory" placeholder="Choice a category" onChange={handleChange}>
-                            <option value="">Choice...</option>
+                            <option value="">Choisir...</option>
                             <option value="entree">Entree</option>
                             <option value="plat">Plat</option>
                             <option value="dessert">Dessert</option>
@@ -226,14 +226,14 @@ const Recipes = ()=>{
                         <Input type="text" name="recipeCategory" id="recipeCategory" placeholder="Choice a category" onChange={handleChange} />
                     </FormGroup> */}
                     <FormGroup className="col-md-5 col-sm-6 col-xs-9 d-inline-block mt-4">
-                        <Label for="ingredientName">Ingrediant name</Label>
-                        <Input type="text" name="ingredientName" value={ingredientName} id="ingredientName" placeholder="Le nom de l'ingrediants" onChange={onChangeIngredientName} />
+                        <Label for="ingredientName">Nom de l'ingrédient</Label>
+                        <Input type="text" name="ingredientName" value={ingredientName} id="ingredientName" placeholder="Le nom de l'ingrédient" onChange={onChangeIngredientName} />
                     </FormGroup>
                     <FormGroup className="col-md-5 col-sm-6 col-xs-9 d-inline-block">
-                        <Label for="quantity">Ingrediant quantity</Label>
-                        <Input type="text" name="quantity" value={quantity} id="quantity" placeholder="Quantity : unity" onChange={onChangeIngredientQauntity} />
+                        <Label for="quantity">Quantité de l'ingrédient</Label>
+                        <Input type="text" name="quantity" value={quantity} id="quantity" placeholder="Quantité : unité (Ex : 100 gr)" onChange={onChangeIngredientQauntity} />
                     </FormGroup>
-                    <Button className="mb-4" onClick={addIngredient}><RiAddCircleFill style={{fontSize:'22px', color:'#ff0'}}/> Add ingredient</Button>
+                    <Button className="mb-4" onClick={addIngredient}><RiAddCircleFill style={{fontSize:'22px', color:'#ff0'}}/>Ajouter l'ingrédient</Button>
                     {ingredientsError?(
                         <div style={{color:'red'}}>
                             <p>{ingredientsError}</p>
@@ -242,7 +242,7 @@ const Recipes = ()=>{
                     :null}
                     {recipeIngrediants.length >0 ?
                         (<div className="listIng p-0 m-auto col-sm-12 col-lg-9">
-                            <h5>Appercu des ing</h5>
+                            <h5>Aperçu des ingrédients</h5>
                             <ol>
                                 {recipeIngrediants.map((ing, index)=>(
                                     <div className="p-0 m-0" key={index}>
@@ -277,7 +277,7 @@ const Recipes = ()=>{
                     </div>
                    
                     <FormGroup className=" d-inline-block m-1">
-                        <Label for="recipePreparationTime">Temps de preparation</Label>
+                        <Label for="recipePreparationTime">Temps de préparation</Label>
                         <Input className="col-xs-6 " type="text" name="recipePreparationTime" id="recipePreparationTime" placeholder="En minutes"  onChange={handleChange}/>
                     </FormGroup>
                     <FormGroup className=" d-inline-block m-1">
