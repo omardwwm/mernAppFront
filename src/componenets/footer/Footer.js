@@ -10,7 +10,7 @@ const Footer = ()=>{
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
     return(
-        <div className="container-fluid d-flex footerDiv justify-content-center align-items-center ">
+        <div className="container-fluid d-flex footerDiv align-items-center ">
             <span>Tous drois réservés.</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <span>&copy; 2021 WECOOK.</span>
             <div className="contacts">

@@ -1,6 +1,7 @@
 .homePage{
-    background-color: rgb(71, 67, 67);
-    min-height: 100vh;
+    background-color: rgb(54, 52, 52);
+    /* min-height: 100vh; */
+    padding: 15px 5px;
 }
 
 /* .d-none {
