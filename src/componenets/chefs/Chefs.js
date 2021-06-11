@@ -37,7 +37,7 @@ const Chefs = ()=>{
                                     alt="illustration-profile-chef"
                                     />
                             </Card>
-                        <div className="col-10 m-0 p-0 " >
+                        <div className="col-9 m-0 pl-2 " >
                             {chef.recipes.length <= 0?(
                                 <>
                                     <Card className="m-1  emptyRecipeCard">
@@ -54,7 +54,7 @@ const Chefs = ()=>{
                                                         <CardTitle id="titleCardRealisation">{recipe.recipeName}</CardTitle>
                                                         <Link to={{pathname: `/recipesDetails/${recipe._id}`, state:{recipe}}}>
                                                             <img src={recipe.recipePicture} className="recipeChefPic" alt="illustration-recipe" />
-                                                            <CardSubtitle>cat: {recipe.recipeCategory}</CardSubtitle>
+                                                            <CardSubtitle>{recipe.recipeCategory}</CardSubtitle>
                                                         </Link>
                                                     </Card>   
                                                 </div>       

@@ -33,8 +33,6 @@
 .chefRealisations{
     margin: auto;
     display: flex;
-    align-items: center;
-    justify-content: center;
     overflow-x: scroll;
     /* text-align: center;
     flex-direction: row; */
@@ -61,7 +59,10 @@
     align-items: center;
     justify-content: center;
 }
-
+.card-subtitle {
+    margin-top: -.275rem;
+    margin-left: 5px;
+}
 #titleCardRealisation{
     padding-left: 6px;
     overflow: hidden;
