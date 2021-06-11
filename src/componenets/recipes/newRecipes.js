@@ -211,7 +211,7 @@ const Recipes = ()=>{
                         <Label for="recipeCategory">Sélectionner une catégorie</Label>
                         <Input type="select" name="recipeCategory" id="recipeCategory" placeholder="Choice a category" onChange={handleChange}>
                             <option value="">Choisir...</option>
-                            <option value="entree">Entree</option>
+                            <option value="entree">Entrée</option>
                             <option value="plat">Plat</option>
                             <option value="dessert">Dessert</option>
                         </Input>

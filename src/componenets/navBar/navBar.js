@@ -5,7 +5,8 @@ import {useHistory, withRouter, Link} from "react-router-dom";
 import {Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, Button} from 'reactstrap';
 import {GoSignIn} from 'react-icons/go';
 import {RiLogoutBoxLine, RiUserFill, RiUserAddFill } from 'react-icons/ri';
-import {GiCook} from 'react-icons/gi'
+import {GiCook} from 'react-icons/gi';
+import avatar from "../../../src/assets/avatar-unisex.png";
 import "./navBar.css";
 
 const NavBar = (props)=>{
@@ -65,7 +66,7 @@ const NavBar = (props)=>{
                         {/* <RiAccountPinBoxLine style={{color:'#ddff13', fontSize:'22px'}}/> */}
                         <img className="profilePic"
                           // src={user && `https://mern-recipes.herokuapp.com${user.profilePicture}`}
-                          src={user && user.profilePicture}
+                          src={user && user.profilePicture ? user.profilePicture : avatar}
                           style={{width:'24px', height:'24px'}}
                           alt="user profilePicture"
                           />

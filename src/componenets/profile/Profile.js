@@ -4,8 +4,9 @@ import {deletUser} from "../../redux/actions/UserActions";
 import {useHistory} from "react-router-dom";
 import {changePassword} from "../../redux/actions/UserActions";
 import {Card, CardText, CardBody, CardTitle, Button, Collapse, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
-import "./profile.css"
 import axios from 'axios';
+import avatar from "../../../src/assets/avatar-unisex.png";
+import "./profile.css";
 
 
 const Profile = ()=>{
@@ -184,7 +185,7 @@ const Profile = ()=>{
                         <CardText>Email: {user.email}</CardText>
                         <img className="imgCard"
                             // src={`https://mern-recipes.herokuapp.com${user.profilePicture}`}
-                            src={user.profilePicture}
+                            src={user.profilePicture? user.profilePicture : avatar}
                             alt="user pictureProfile"
                             />
                         <Button onClick={togglePic} size="sm">Changer votre photo</Button>

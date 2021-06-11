@@ -21,7 +21,7 @@ const Recipes =(props)=>{
     // const firstUpdate = useRef(true);
     // const myCategories2 = [{category: "entree", icon:<GiMeal style={{color:'rgb(27, 214, 58)'}}/>}, {category: "plat", icon:<GiHotMeal style={{color:'rgb(224, 218, 38)'}}/>}, {category: "dessert", icon:<GiCakeSlice style={{color:'rgb(216, 62, 126)'}}/>}];
     const myCategories = [
-        {"_id":1, "name": "entree"}, {"_id":2, "name": "plat"}, {"_id":3, "name": "dessert"}
+        {"_id":1, "name": "entree", "affichage":"Entrées"}, {"_id":2, "name": "plat", "affichage":"Plats"}, {"_id":3, "name": "dessert", "affichage":"Desserts"}
     ]
     const [categories, setCategories] = useState([]);
     const [filtredCategories, setFiltredCategories] = useState([]);
@@ -79,7 +79,7 @@ const Recipes =(props)=>{
                             name={myCategory.name}
                         />&nbsp;  
                         {/* {myCategory.icon} */}
-                        {myCategory.name}
+                        {myCategory.affichage}
                     </label>
             </div>
         ))     

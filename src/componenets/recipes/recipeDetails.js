@@ -20,6 +20,7 @@ const RecipeDetails = (props)=>{
     // const testRecipe = useSelector(state=> state.recipeReducer.recipe);
     // const savedRecipe = JSON.parse(localStorage.getItem('thisRecipe'));
     const [testRecipe, setTestRecipe ]= useState([]);
+    const [modalMessage, setModalMessage] = useState('');
     // const test = localStorage.thisRecipe;
     // console.log(test); 
     // console.log(localStorage); 
@@ -49,7 +50,6 @@ const RecipeDetails = (props)=>{
     const modalTitle = useSelector(state=>state.recipeReducer.modalTitle);
     const modalBody = useSelector(state=>state.recipeReducer.modalBody);
     const showModale = useSelector(state => state.recipeReducer.showModale)
-    const [commentMsg, setCommentMsg] = useState('');
     // console.log(showModale); 
     // console.log(modal);
     // const config = {headers: {
@@ -87,7 +87,7 @@ const RecipeDetails = (props)=>{
 
     useEffect(()=>{
         if(modalBody){
-            setCommentMsg(modalBody)
+            setModalMessage(modalBody)
         }
     }, [modalBody]);
 
@@ -119,7 +119,7 @@ const RecipeDetails = (props)=>{
         // console.log(dataToDelete);
         // console.log(JSON.stringify(dataToDelete));
         if(window.confirm('vous voulez supprimer cette recette?')){
-            dispatch(deleteRecipe(recipeId, dataToDelete, token)).then(()=>setTimeout(() => {
+            dispatch(deleteRecipe(recipeId, dataToDelete, token)).then(setModal(true)).then(()=>setTimeout(() => {
                 history.push(`/recipes`)
             }, 4000)); 
         }     
@@ -143,7 +143,7 @@ const RecipeDetails = (props)=>{
         let commentId = e.currentTarget.id;
         if(window.confirm('vous voulez supprimer ce commentaire?')){
             await axios.delete(`https://mern-recipes.herokuapp.com/comments/delete/${commentId}`, {headers:{"x-auth-token":`${token}`}})
-            .then(response => setCommentMsg(response.data.message))
+            .then(response => setModalMessage(response.data.message))
             .then(setModal(true))
             .then(()=>setTimeout(() => {
                 setModal(false)
@@ -184,10 +184,9 @@ const RecipeDetails = (props)=>{
                 <h3 className="text-center" >{testRecipe.recipeName}</h3>
                 <p>Creation de : {testRecipe.recipeCreatorName}</p>
                 <img
-                className="d-block"
+                className="imgDetailRecipe"
                     // src={`https://mern-recipes.herokuapp.com${testRecipe.recipePicture}`}
                     src={testRecipe.recipePicture}
-                    style={{width:'65%', height:'300px'}}
                     alt="recipe illustration"
                     />
                 <p>
@@ -198,12 +197,12 @@ const RecipeDetails = (props)=>{
                 <h3 className="text-center">Liste des ingredients</h3>
                 <div className="listIngDetailRecipe">
                     {ingredients && ingredients.map((ing, index)=> (
-                        <ul key={index}>{ing.ingredientName}: {ing.quantity} </ul>
+                        <ul className="ingr" key={index}>{ing.ingredientName}: {ing.quantity} </ul>
                     ))}
                 </div>
                
                 {/* <p>{myRecipe.recipeDescription}</p> */}
-                <div className="instructions">
+                <div className="instructionsDetail">
                     <h4 className="text-center" >Les instructions</h4>
                     {/* <div dangerouslySetInnerHTML={{__html: currentRecipe.recipeDescription}} />  */}
                     <div dangerouslySetInnerHTML={{__html: htmlInstructions}} />      
@@ -211,7 +210,7 @@ const RecipeDetails = (props)=>{
             </div>
             <div className="commentsDiv col-12" >
                 <Form onSubmit={sendComment} >
-                    <Label for="comment">Les commentaires</Label>
+                    {/* <Label for="comment">Les commentaires</Label> */}
                     <Input type="textarea" name="comment" id="comment" value={commentContent} placeholder="Votre commentaire ici..." onChange={handleChangeComment} />
                     <Button>Poster</Button>
                     <span style={{color:'red'}}>{errorComment}</span>
@@ -259,20 +258,20 @@ const RecipeDetails = (props)=>{
             </div>
             
             { (token && isMine)? 
-            <>
+            <div className="btnsDeleteUpdate">
                 {/* <Button onClick={deleteThisRecipe}>Update</Button> */}
                 <Link to={{pathname: `/updateRecipe/${testRecipe._id}`, state:{testRecipe}}} >
                     <Button color="warning" size="sm">Modifier cette recette</Button>
                     {/* <span style={{color:'#fff'}}>Modifier</span> */}
                 </Link>
                 <Button onClick={deleteThisRecipe} color="danger" size="sm">SUPPRIMER</Button>  
-            </>       
+            </div>       
             : null}
 
             <Modal isOpen={modal} toggle={toggle} scrollable={true} >
                 <ModalHeader toggle={toggle}>{modalTitle}</ModalHeader>
                 <ModalBody>
-                    {commentMsg}       
+                    {modalMessage}       
                 </ModalBody>
                 <ModalFooter>
                 <Button color="primary"  onClick={toggle}>OK</Button>
