@@ -37,7 +37,7 @@ const Chefs = ()=>{
                                     alt="illustration-profile-chef"
                                     />
                             </Card>
-                        <div className="col-10 " >
+                        <div className="col-10 m-0 p-0 " >
                             {chef.recipes.length <= 0?(
                                 <>
                                     <Card className="m-1  emptyRecipeCard">
