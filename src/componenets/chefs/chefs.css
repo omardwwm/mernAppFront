@@ -7,13 +7,13 @@
 .chefDiv{
     /* height: 200px; */
     margin-bottom: 12px;
-    border: gold solid 1px ;
+    border: rgb(11, 208, 235) solid 1px ;
     /* display: inline-block; */
     padding: 1%;
 }
 
 .chefCrad{
-    background-color: rgb(201, 114, 15);
+    background-color: rgb(55, 81, 105);
     color: rgb(255, 255, 255); 
     display: inline-block;
     margin:auto; 
