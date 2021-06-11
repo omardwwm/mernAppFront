@@ -2,6 +2,7 @@
     background-color: #2c2c31;
     color: darkorange;
     text-align: center;
+    padding: 15px 5px;
 }
 
 .pNameChef{
@@ -16,19 +17,20 @@
     padding: 1%;
     color: darkorange;
     text-align: center;
+    padding-bottom: 15px;
 }
 .recipeDetailsContent{ 
     text-align: justify;
 }
 .imgDetailRecipe{
-    height: 450px;
-    /* width: 65%;  */
+    max-height: 480px;
+    width: 60%; 
     display: block;
     justify-content: center;
     align-items: center;
     text-align: center;
     border-radius: 8px;
-    margin: 40px;
+    margin: auto;
 }
 
 .listIngDetailRecipe{
@@ -91,6 +93,7 @@ h2, h3, h4{
     background-color: rgb(39, 38, 39);
     color: rgb(252, 249, 248);
     text-align: center;
+    padding-bottom: 15px;
 }
 
 /* Ingredients list style */

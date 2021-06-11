@@ -19,6 +19,11 @@
     margin: auto;
 }
 
+.presentationPerso{
+    padding: 5px;
+    margin-top: 30px;
+}
+
 @media (max-width: 900px) {
     #carouselImg{
         width: 100%;

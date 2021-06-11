@@ -73,6 +73,26 @@ const Home = ()=>{
                 <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
                 <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
             </Carousel>
+            <div className="presentationPerso">
+                <p>
+                    Ce site a été realisé dans le but d'apprendre de nouvelles technologies (MERN). La partie frontend est réalisé avec ReactJs et Redux et elle est déployée sur NETLIFY, la partie backend avec NodeJs en utilisant Express et déployée sur HEROKU, concernant la base données c'est de NOSQL en MongoDB et stockée sur MongoDB Atlas (qui donne 500 M de stockage gratuites) avec le stockage des images grâce au service AWS S3.<br/>Tous les services de déploiment et de stockage sont fournis par les différentes plateformes gratuitement et donc des fois le site reponds pas aussi rapidement qu'un site assuré par les formules payantes.<br/>
+                    Le site permet de:<br/>  
+                </p>
+                <ul>
+                    <li>
+                         Créer un compte, se connecter, déconnecter, modifier certaines informtions (utilisation du JWT pour sécuriser l'authentification et les requêtes vers l'API (backend)) et de supprimer son compte.
+                    </li>
+                    <li>
+                        Créer sa propre recette via un formulaire et un éditeur de texte integré (WYSIWYG) pour les étapes des instructions, on peut également modifier tous les champs de la recette qu'on a posté si on souhaite et de la supprimer.
+                    </li>
+                    <li>
+                        Poster des commentaires pour toutes les recettes et de supprimer ces commentaires aussi.
+                    </li>
+                </ul>
+                <p>
+                    D'autres améliorations et fonctionalitées seront ajoutées.
+                </p>
+            </div>
         </div>
     )
 }

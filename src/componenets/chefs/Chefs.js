@@ -1,7 +1,7 @@
 import React, { useEffect} from "react";
 import {useSelector, useDispatch} from "react-redux";
 import { Link } from "react-router-dom";
-import { Card, CardTitle, CardSubtitle } from "reactstrap";
+import { Card, CardTitle, CardSubtitle, Image} from "reactstrap";
 import {getProfessionnals} from "../../redux/actions/UserActions";
 import "./chefs.css";
 
@@ -24,11 +24,11 @@ const Chefs = ()=>{
    }, [])
 
     return (
-        <div className="chefsDiv p-2" >
+        <div className="chefsDiv " >
             <h2>Nos chefs</h2>
             {allProfessionals && allProfessionals.map((chef, index)=>{
                 return (
-                    <div className="chefDiv row"  key={index} >
+                    <div className="chefDiv row mr-0 ml-0"  key={index} >
                             <Card className="row chefCrad col-2 d-block" >
                                 <CardTitle>{chef.username}</CardTitle>
                                 <img className="img-fluid chefPic"
@@ -37,35 +37,33 @@ const Chefs = ()=>{
                                     alt="illustration-profile-chef"
                                     />
                             </Card>
-                        <div className="col-10 chefRealisations " >
-                            {/* <div>
-                                <h4 id="titreRealisation">Ses realisations</h4>
-                            </div> */}
-                            <div className="d-flex" >
-                                {chef.recipes.length <= 0?(
-                                    <>
-                                        <Card className="m-1  emptyRecipeCard">
-                                            <CardTitle>Ce chef n'a pas encore poste de recettes</CardTitle>
-                                        </Card>
-                                    </>                               
-                                    ):(
-                                    <>
-                                        { chef.recipes.map((recipe, index)=>{
-                                            return (
-                                                <div className="recipeCard" key={index}>
-                                                    <Card id="existingRecipes" >
+                        <div className="col-10 " >
+                            {chef.recipes.length <= 0?(
+                                <>
+                                    <Card className="m-1  emptyRecipeCard">
+                                        <CardTitle>Ce chef n'a pas encore poste de recettes</CardTitle>
+                                    </Card>
+                                </>                               
+                                ):(
+                                <div className="chefRealisations ">
+                                    { chef.recipes.map((recipe, index)=>{
+                                        return (
+                                            <div  key={index}>
+                                                <div className="recipeCard">
+                                                    <Card >
                                                         <CardTitle id="titleCardRealisation">{recipe.recipeName}</CardTitle>
-                                                        <img src={recipe.recipePicture} className="recipeChefPic" alt="illustration-recipe" />
-                                                        <CardSubtitle>cat: {recipe.recipeCategory}</CardSubtitle>
-                                                        <Link to={{pathname: `/recipesDetails/${recipe._id}`, state:{recipe}}}>Plus de detail</Link>
+                                                        <Link to={{pathname: `/recipesDetails/${recipe._id}`, state:{recipe}}}>
+                                                            <img src={recipe.recipePicture} className="recipeChefPic" alt="illustration-recipe" />
+                                                            <CardSubtitle>cat: {recipe.recipeCategory}</CardSubtitle>
+                                                        </Link>
                                                     </Card>   
-                                                </div>                  
-                                            )
-                                        })}
-                                    </>
-                                    )                       
-                                }
-                            </div>                               
+                                                </div>       
+                                            </div>                  
+                                        )
+                                    })}
+                                </div>
+                                )                       
+                            }
                         </div>                       
                     </div>
                 )
