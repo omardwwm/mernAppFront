@@ -24,13 +24,13 @@
 }
 
 .containerImg{
-    position: relative;  
-    
+    position: relative; 
 }
 .imgDetailDiv{
     display: block; 
-    width: 70%;
     margin: auto;
+    width: 68%;
+    
 }
 .imgDetailRecipe{
     max-height: 480px;
@@ -125,5 +125,9 @@ h2, h3, h4{
 @media (max-width: 768px){
     .listIng{
         width: 95%;
+    }
+
+    .imgDetailDiv{
+        width: 100%;
     }
 }
