@@ -11,7 +11,7 @@ const Footer = ()=>{
             {/* <div className="row"> */}
                 {/* <div className=""> */}
                     <div className="col-7 ">
-                        <span>Tous drois réservés.</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span>Tous droits réservés.</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <span>&copy; 2021 WECOOK.</span>
                     </div>
                     <div className="contacts pr-0">
