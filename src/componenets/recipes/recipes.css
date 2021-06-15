@@ -24,17 +24,28 @@
 }
 
 .containerImg{
-    position: relative;
+    position: relative;  
+    
+}
+.imgDetailDiv{
+    display: block; 
+    width: 70%;
+    margin: auto;
 }
 .imgDetailRecipe{
     max-height: 480px;
-    width: 60%; 
-    display: block;
-    justify-content: center;
+    width: 100%;
+    /* justify-content: center;
     align-items: center;
-    text-align: center;
+    text-align: center; */
     border-radius: 8px;
-    margin: auto;
+    
+}
+.likeDiv{
+    background-color: black;
+    position: absolute;
+    bottom: 0;
+    padding-left: 4px;
 }
 
 .listIngDetailRecipe{

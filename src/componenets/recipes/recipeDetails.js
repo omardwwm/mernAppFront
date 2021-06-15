@@ -224,24 +224,28 @@ const RecipeDetails = (props)=>{
                 <h3 className="text-center" >{testRecipe.recipeName}</h3>
                 <p>Creation de : {testRecipe.recipeCreatorName}</p>
                 <div className="containerImg">
-                    <img
-                    className="imgDetailRecipe"
-                        // src={`https://mern-recipes.herokuapp.com${testRecipe.recipePicture}`}
-                        src={testRecipe.recipePicture}
-                        alt="recipe illustration"
-                        />
-                    {testRecipe.likes? (
-                        <>
-                            {testRecipe.likes.length}:{testRecipe.likes.length ===1 ? 'LIKE' : 'LIKES'} 
-                            {testRecipe.likes.includes(userId)?(
-                                <AiOutlineLike onClick={unlikeRecipe} style={{color:'#00f', fontSize:'32px'}}/>
-                            ):<AiOutlineLike onClick={likeRecipe} style={{color:'grey', fontSize:'32px'}}/>}
-                            
-                        </> 
-                        
-                    ):
-                        <AiOutlineLike onClick={likeRecipe} style={{color:'grey', fontSize:'32px'}}/>
-                    } 
+                    <div className="imgDetailDiv">
+                        <img
+                        className="imgDetailRecipe"
+                            // src={`https://mern-recipes.herokuapp.com${testRecipe.recipePicture}`}
+                            src={testRecipe.recipePicture}
+                            alt="recipe illustration"
+                            />
+                        <div className="likeDiv">
+                        {testRecipe.likes? (
+                                <>
+                                    {testRecipe.likes.length}&nbsp;&nbsp;{testRecipe.likes.length ===1 ? 'LIKE' : 'LIKES'} 
+                                    {testRecipe.likes.includes(userId)?(
+                                        <AiOutlineLike onClick={unlikeRecipe} style={{color:'#0ed4f7', fontSize:'30px'}}/>
+                                    ):<AiOutlineLike onClick={likeRecipe} style={{color:'grey', fontSize:'30px'}}/>}
+                                    
+                                </> 
+                                
+                            ):
+                                <AiOutlineLike onClick={likeRecipe} style={{color:'grey', fontSize:'30px'}}/>
+                            }  
+                        </div>  
+                    </div>        
                     <p style={{color:'#f00'}}>{errorLikeMsg}</p>    
                 </div>
                 <p>

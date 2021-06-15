@@ -149,7 +149,7 @@ const Recipes =(props)=>{
                                     
                                 ): recipe.likes.includes(userId)?
                                     (<p className="pNameChef">
-                                    {recipe.likes.length}<AiOutlineLike style={{color:'#00f', fontSize:'32px'}}/>
+                                    {recipe.likes.length}<AiOutlineLike style={{color:'#0ed4f7', fontSize:'32px'}}/>
                                     </p>):
                                     <p className="pNameChef">
                                     {recipe.likes.length}<AiOutlineLike style={{color:'#fff', fontSize:'32px'}}/>
