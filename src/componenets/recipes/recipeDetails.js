@@ -76,6 +76,7 @@ const RecipeDetails = (props)=>{
     const ingredients = testRecipe && testRecipe.recipeIngrediants;
     const [commentContent, setCommentContent] = useState('');
     const [errorComment, setErrorComment] = useState('')
+    const [errorLikeMsg, setErrorLikeMsg] = useState('');
     const handleChangeComment =(e)=>{
         e.preventDefault();
         setErrorComment('');
@@ -155,26 +156,40 @@ const RecipeDetails = (props)=>{
 
     const unlikeRecipe=async()=>{
         console.log('function unlike');
-        await axios.put(`https://mern-recipes.herokuapp.com/recipes/unlike/${recipeId}`,{userId:userId}, {headers:{"x-auth-token":`${token}`}})
-        // .then(response => console.log(response.data.message))
-        .then(response => setModalMessage(response.data.message))
-            .then(setModal(true))
-            .then(()=>setTimeout(() => {
-                setModal(false)
-            }, 2000))
-            .then(()=>fetchRecipe())
+        if(!token){
+            setErrorLikeMsg('Vous devez vous connecter pour liker/disliker une recette !');
+            setTimeout(() => {
+                setErrorLikeMsg('');
+            }, 5000);
+        }else{
+            await axios.put(`https://mern-recipes.herokuapp.com/recipes/unlike/${recipeId}`,{userId:userId}, {headers:{"x-auth-token":`${token}`}})
+            // .then(response => console.log(response.data.message))
+            .then(response => setModalMessage(response.data.message))
+                .then(setModal(true))
+                .then(()=>setTimeout(() => {
+                    setModal(false)
+                }, 2000))
+                .then(()=>fetchRecipe())
+            } 
     }
 
     const likeRecipe=async()=>{
         console.log('function like');
-        await axios.put(`https://mern-recipes.herokuapp.com/recipes/like/${recipeId}`,{userId:userId}, {headers:{"x-auth-token":`${token}`}})
-        // .then(response => console.log(response))
-        .then(response => setModalMessage(response.data.message))
-            .then(setModal(true))
-            .then(()=>setTimeout(() => {
-                setModal(false)
-            }, 2000))
-            .then(()=>fetchRecipe())
+        if(!token){
+            setErrorLikeMsg('Vous devez vous connecter pour liker/disliker une recette !');
+            setTimeout(() => {
+                setErrorLikeMsg('');
+            }, 5000);
+        }else{
+            await axios.put(`https://mern-recipes.herokuapp.com/recipes/like/${recipeId}`,{userId:userId}, {headers:{"x-auth-token":`${token}`}})
+            // .then(response => console.log(response))
+            .then(response => setModalMessage(response.data.message))
+                .then(setModal(true))
+                .then(()=>setTimeout(() => {
+                    setModal(false)
+                }, 2000))
+                .then(()=>fetchRecipe())
+            }
     }
 
     useEffect(()=>{
@@ -226,8 +241,8 @@ const RecipeDetails = (props)=>{
                         
                     ):
                         <AiOutlineLike onClick={likeRecipe} style={{color:'grey', fontSize:'32px'}}/>
-                    }    
-                    
+                    } 
+                    <p style={{color:'#f00'}}>{errorLikeMsg}</p>    
                 </div>
                 <p>
                     <GiAlarmClock style={{color:'#0f0', fontSize:'32px'}}/>&nbsp;&nbsp;&nbsp;
