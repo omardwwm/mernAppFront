@@ -22,6 +22,10 @@
 .recipeDetailsContent{ 
     text-align: justify;
 }
+
+.containerImg{
+    position: relative;
+}
 .imgDetailRecipe{
     max-height: 480px;
     width: 60%; 

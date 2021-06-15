@@ -8,7 +8,8 @@ import {deleteRecipe, postComment} from "../../redux/actions/RecipeActions";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory, Link} from "react-router-dom";
 import {formatDate} from "../../outils/outils";
-import {GiCampCookingPot, GiAlarmClock, GiTrashCan} from 'react-icons/gi';
+import {GiAlarmClock, GiTrashCan} from 'react-icons/gi';
+import {AiOutlineLike} from 'react-icons/ai';
 import "./recipes.css";
 
 const RecipeDetails = (props)=>{    
@@ -152,6 +153,30 @@ const RecipeDetails = (props)=>{
         }
     }
 
+    const unlikeRecipe=async()=>{
+        console.log('function unlike');
+        await axios.put(`https://mern-recipes.herokuapp.com/recipes/unlike/${recipeId}`,{userId:userId}, {headers:{"x-auth-token":`${token}`}})
+        // .then(response => console.log(response.data.message))
+        .then(response => setModalMessage(response.data.message))
+            .then(setModal(true))
+            .then(()=>setTimeout(() => {
+                setModal(false)
+            }, 2000))
+            .then(()=>fetchRecipe())
+    }
+
+    const likeRecipe=async()=>{
+        console.log('function like');
+        await axios.put(`https://mern-recipes.herokuapp.com/recipes/like/${recipeId}`,{userId:userId}, {headers:{"x-auth-token":`${token}`}})
+        // .then(response => console.log(response))
+        .then(response => setModalMessage(response.data.message))
+            .then(setModal(true))
+            .then(()=>setTimeout(() => {
+                setModal(false)
+            }, 2000))
+            .then(()=>fetchRecipe())
+    }
+
     useEffect(()=>{
         fetchRecipe();
         localStorage.getItem('userToken');
@@ -183,12 +208,27 @@ const RecipeDetails = (props)=>{
             <div >
                 <h3 className="text-center" >{testRecipe.recipeName}</h3>
                 <p>Creation de : {testRecipe.recipeCreatorName}</p>
-                <img
-                className="imgDetailRecipe"
-                    // src={`https://mern-recipes.herokuapp.com${testRecipe.recipePicture}`}
-                    src={testRecipe.recipePicture}
-                    alt="recipe illustration"
-                    />
+                <div className="containerImg">
+                    <img
+                    className="imgDetailRecipe"
+                        // src={`https://mern-recipes.herokuapp.com${testRecipe.recipePicture}`}
+                        src={testRecipe.recipePicture}
+                        alt="recipe illustration"
+                        />
+                    {testRecipe.likes? (
+                        <>
+                            {testRecipe.likes.length}:{testRecipe.likes.length ===1 ? 'LIKE' : 'LIKES'} 
+                            {testRecipe.likes.includes(userId)?(
+                                <AiOutlineLike onClick={unlikeRecipe} style={{color:'#00f', fontSize:'32px'}}/>
+                            ):<AiOutlineLike onClick={likeRecipe} style={{color:'grey', fontSize:'32px'}}/>}
+                            
+                        </> 
+                        
+                    ):
+                        <AiOutlineLike onClick={likeRecipe} style={{color:'grey', fontSize:'32px'}}/>
+                    }    
+                    
+                </div>
                 <p>
                     <GiAlarmClock style={{color:'#0f0', fontSize:'32px'}}/>&nbsp;&nbsp;&nbsp;
                     <span>Preparation : {testRecipe.recipePreparationTime}&nbsp;Min</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

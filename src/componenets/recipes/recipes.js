@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 import { Form, Button} from 'reactstrap';
 import {GiCook} from 'react-icons/gi';
+import {AiOutlineLike} from 'react-icons/ai';
 // import {SiCodechef} from 'react-icons/si';
 import "./recipes.css";
 
@@ -138,8 +139,21 @@ const Recipes =(props)=>{
                                  {
                                     // (recipe.recipeCreator && recipe.recipeCreator._id ===user && user.id) || (recipe.recipeCreator && recipe.recipeCreator._id ===user && user._id) ? 
                                     (recipe.recipeCreator && recipe.recipeCreator._id === userId) || (recipe.recipeCreator && recipe.recipeCreator._id === userId) ? 
-                                    (<p className="pNameChef col-10">By: Me</p> )
-                                    : <p className="pNameChef col-10">By: {recipe.recipeCreatorName}</p>
+                                    (<p className="pNameChef col-8">By: Me</p> )
+                                    : <p className="pNameChef col-8">By: {recipe.recipeCreatorName}</p>
+                                }
+                                {recipe.likes && recipe.likes.length === 0? (
+                                    <p className="pNameChef">
+                                        0<AiOutlineLike style={{color:'grey', fontSize:'32px'}}/>
+                                    </p>
+                                    
+                                ): recipe.likes.includes(userId)?
+                                    (<p className="pNameChef">
+                                    {recipe.likes.length}<AiOutlineLike style={{color:'#00f', fontSize:'32px'}}/>
+                                    </p>):
+                                    <p className="pNameChef">
+                                    {recipe.likes.length}<AiOutlineLike style={{color:'#fff', fontSize:'32px'}}/>
+                                    </p>
                                 }
                                 {recipe.recipeCreator && recipe.recipeCreator.isPro === true? (
                                     <span className="d-inline-block col-1"><GiCook style={{color:'#bcf70c', fontSize:24}}/></span>
