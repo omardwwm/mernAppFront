@@ -160,7 +160,7 @@ const RecipeDetails = (props)=>{
             setErrorLikeMsg('Vous devez vous connecter pour liker/disliker une recette !');
             setTimeout(() => {
                 setErrorLikeMsg('');
-            }, 5000);
+            }, 6000);
         }else{
             await axios.put(`https://mern-recipes.herokuapp.com/recipes/unlike/${recipeId}`,{userId:userId}, {headers:{"x-auth-token":`${token}`}})
             // .then(response => console.log(response.data.message))
@@ -179,7 +179,7 @@ const RecipeDetails = (props)=>{
             setErrorLikeMsg('Vous devez vous connecter pour liker/disliker une recette !');
             setTimeout(() => {
                 setErrorLikeMsg('');
-            }, 5000);
+            }, 6000);
         }else{
             await axios.put(`https://mern-recipes.herokuapp.com/recipes/like/${recipeId}`,{userId:userId}, {headers:{"x-auth-token":`${token}`}})
             // .then(response => console.log(response))
@@ -245,9 +245,9 @@ const RecipeDetails = (props)=>{
                                 <AiOutlineLike onClick={likeRecipe} style={{color:'grey', fontSize:'30px'}}/>
                             }  
                         </div>  
-                    </div>        
-                    <p style={{color:'#f00'}}>{errorLikeMsg}</p>    
+                    </div>            
                 </div>
+                <p style={{color:'#f00'}}>{errorLikeMsg}</p>
                 <p>
                     <GiAlarmClock style={{color:'#0f0', fontSize:'32px'}}/>&nbsp;&nbsp;&nbsp;
                     <span>Preparation : {testRecipe.recipePreparationTime}&nbsp;Min</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
