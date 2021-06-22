@@ -195,12 +195,12 @@ const removeKitchenType =(ing, index)=>{
 const sendUserData =async(e)=>{
     e.preventDefault();
     try {
-        const kitchenTypesToSend = JSON.stringify(kitchenTypes);
-        const userDataForm = new FormData();
-        userDataForm.append('userPresentation',formUserData.userPresentation);
-        userDataForm.append('userKitchenStyles',kitchenTypes );
-        userDataForm.append('userEstablissement',formUserData.userEstablissement);
-        const data = {
+        // const kitchenTypesToSend = JSON.stringify(kitchenTypes);
+        // const userDataForm = new FormData();
+        // userDataForm.append('userPresentation',formUserData.userPresentation);
+        // userDataForm.append('userKitchenStyles',kitchenTypes );
+        // userDataForm.append('userEstablissement',formUserData.userEstablissement);
+        const data = { 
                 userPresentation : formUserData.userPresentation,
                 userKitchenStyles : kitchenTypes,
                 userEstablissement: formUserData.userEstablissement  
@@ -249,7 +249,7 @@ const updateUserMetaData=async(e)=>{
 }
 // get user metaData
 const userMetaData = async()=>{
-    await axios.get(`http://localhost:8080/users/metadata/${userId}`).then(response=>{
+    await axios.get(`https://mern-recipes.herokuapp.com/users/metadata/${userId}`).then(response=>{
         // console.log(response);
         setUserData(response.data);
     })
@@ -388,7 +388,7 @@ const userMetaData = async()=>{
                             <>
                                 <CardText>A propos de moi:</CardText>
                                 <CardText>{userData.userMetaData && userData.userMetaData.userPresentation}</CardText>
-                                <CardText>Mes Specialites et influences culinaires:{userData.userMetaData && userData.userMetaData.userKitchenStyles.map((style, index)=>
+                                <CardText>Mes Specialites et influences culinaires:{userData.userMetaData.userKitchenStyles && userData.userMetaData.userKitchenStyles.map((style, index)=>
                                     <ul key={index}>
                                         <li> 
                                             {style}
