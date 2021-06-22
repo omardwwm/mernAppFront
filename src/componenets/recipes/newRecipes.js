@@ -185,9 +185,7 @@ const Recipes = ()=>{
         dispatch(createRecipe(formData, config)).then(setModal(true)).then(()=>setTimeout(() => {
             history.push(`/recipes`);
             setModal(false);
-        }, 4000));
-        
-            
+        }, 4000));      
     }
     useEffect(()=>{
         localStorage.getItem('myUser');
