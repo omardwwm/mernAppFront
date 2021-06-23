@@ -144,10 +144,13 @@ const Recipes = ()=>{
     useEffect(()=>{
         setModal(false);
     }, [])
-    const removeIngredient =(ing, index)=>{
+
+    const removeIngredient =(index)=>{
         let filtredArray = [...recipeIngrediants];
-        filtredArray.splice(index, 1)
-        // const filtredArray = recipeIngrediants.filter(ing => ing.ingredientName !== item.ingredientName);
+        // console.log(index)
+        if(index > -1){
+            filtredArray.splice(index, 1)
+        }
         setRecipeIngrediants(filtredArray);
     }
     const handleSubmit =(event)=>{
@@ -243,10 +246,10 @@ const Recipes = ()=>{
                             <h5>Aperçu des ingrédients</h5>
                             <ol>
                                 {recipeIngrediants.map((ing, index)=>(
-                                    <div className="p-0 m-0" key={index}>
-                                        <li className="d-inline-block ">
+                                    <div className="p-0 m-0" >
+                                        <li className="d-inline-block" key={index}>
                                             {ing.ingredientName}:{"   "}{ing.quantity}
-                                            <Button className="btnRemoveIngr" onClick={removeIngredient}><RiDeleteBin6Fill /></Button>
+                                            <Button className="btnRemoveIngr" onClick={()=> removeIngredient(index)}><RiDeleteBin6Fill /></Button>
                                         </li>
                                        
                                     </div>                       

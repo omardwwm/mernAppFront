@@ -130,11 +130,15 @@ const UpdateRecipe = (props)=>{
         }      
     }
 
-    const removeIngredient =(ing, index)=>{
+    const removeIngredient =(index)=>{
         let filtredArray = [...recipeIngrediants];
-        filtredArray.splice(index, 1)
+        // console.log(index)
+        if(index > -1){
+            filtredArray.splice(index, 1)
+        }
         setRecipeIngrediants(filtredArray);
     }
+   
     const handleSubmit =(event)=>{
         event.preventDefault();
         const recipeINgTest = recipeIngrediants;
@@ -229,10 +233,10 @@ const UpdateRecipe = (props)=>{
                             <h4>Liste des ingredients</h4>
                             <ol>
                                 {recipeIngrediants.map((ing, index)=>(
-                                    <div className="" key={index}>
-                                        <li className="d-inline-block ">
+                                    <div className="" >
+                                        <li className="d-inline-block" key={index}>
                                             {ing.ingredientName}:{"   "}{ing.quantity}
-                                            <Button className="btnRemoveIngr" onClick={removeIngredient}><RiDeleteBin6Fill /></Button>
+                                            <Button className="btnRemoveIngr" onClick={()=>removeIngredient(index)}><RiDeleteBin6Fill /></Button>
                                         </li>
                                        
                                     </div>                       
