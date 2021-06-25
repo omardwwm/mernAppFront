@@ -83,10 +83,16 @@ const Home = ()=>{
                          Créer un compte, se connecter, déconnecter, modifier certaines informtions (utilisation du JWT pour sécuriser l'authentification et les requêtes vers l'API (backend)) et de supprimer son compte.
                     </li>
                     <li>
-                        Créer sa propre recette via un formulaire et un éditeur de texte integré (WYSIWYG) pour les étapes des instructions, on peut également modifier tous les champs de la recette qu'on a posté si on souhaite et de la supprimer.
+                        Une fois le compte crée, vous pouvez rajouter des informations complémentaires comme une présentation personnelle, citer ses influences culinaire et spécialités et ajouter un établissemsnt ou on pet trouver ces réalisations (son réstaurent par exemple)
                     </li>
                     <li>
-                        Poster des commentaires pour toutes les recettes et de supprimer ces commentaires aussi.
+                        Créer sa propre recette via un formulaire et un éditeur de texte integré (WYSIWYG) pour les étapes et les instructions de chaque recette, on peut également modifier tous les champs de la recette qu'on a edité si on souhaite et de la supprimer (ces fonctionalitées sont possibles seulement si on a un compte et qu'on est connecté).
+                    </li>
+                    <li>
+                        Poster des commentaires pour toutes les recettes et de supprimer ces commentaires aussi (on peut lire les commentaires sans obligation de créer un compte par contre pour poster un commentaire faut avoir un compte et être connecté).
+                    </li>
+                    <li>
+                        possibilité de mettre des Likes à des recettes. 
                     </li>
                 </ul>
                 <p>
