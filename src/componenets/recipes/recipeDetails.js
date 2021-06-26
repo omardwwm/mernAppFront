@@ -334,7 +334,6 @@ const RecipeDetails = (props)=>{
                 </ModalBody>
                 <ModalFooter>
                 <Button color="primary"  onClick={toggle}>OK</Button>
-                <Button color="secondary" onClick={toggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>          
         </div>        

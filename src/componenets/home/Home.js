@@ -75,7 +75,7 @@ const Home = ()=>{
             </Carousel>
             <div className="presentationPerso">
                 <p>
-                    Ce site a été realisé dans le but d'apprendre de nouvelles technologies (MERN). La partie frontend est réalisé avec ReactJs et Redux et elle est déployée sur NETLIFY, la partie backend avec NodeJs en utilisant Express et déployée sur HEROKU, concernant la base données c'est de NOSQL en MongoDB et stockée sur MongoDB Atlas (qui donne 500 M de stockage gratuites) avec le stockage des images grâce au service AWS S3.<br/>Tous les services de déploiment et de stockage sont fournis par les différentes plateformes gratuitement et donc des fois le site reponds pas aussi rapidement qu'un site assuré par les formules payantes.<br/>
+                    Ce site a été realisé dans le but d'apprendre de nouvelles technologies (MERN). La partie frontend est réalisé avec ReactJs et Redux et elle est déployée sur NETLIFY, la partie backend avec NodeJs en utilisant Express et déployée sur HEROKU, concernant la base données c'est de NOSQL en MongoDB et stockée sur MongoDB Atlas (qui donne 500 M de stockage gratuites) avec le stockage des images grâce au service AWS S3.<br/>Tous les services de déploiment et de stockage sont fournis par les différentes plateformes gratuitement.<br/>
                     Le site permet de:<br/>  
                 </p>
                 <ul>
@@ -86,7 +86,7 @@ const Home = ()=>{
                         Une fois le compte crée, vous pouvez rajouter des informations complémentaires comme une présentation personnelle, citer ses influences culinaire et spécialités et ajouter un établissemsnt où on peut trouver ses réalisations (son restaurant par exemple)
                     </li>
                     <li>
-                        Créer sa propre recette via un formulaire et un éditeur de texte integré (WYSIWYG) pour les étapes et les instructions de chaque recette, on peut également modifier tous les champs de la recette qu'on a edité si on souhaite et de la supprimer (ces fonctionalitées sont possibles seulement si on a un compte et qu'on est connecté).
+                        Créer sa propre recette via un formulaire et un éditeur de texte integré (WYSIWYG) pour les étapes et les instructions de chaque recette, on peut également modifier tous les champs de la recette qu'on a edité via un formulaire pré-rempli avec aussi un aperçu de l'image actuelle de la recette, il permet aussi de supprimer la recette. (ces fonctionalitées sont possibles seulement si on a un compte et qu'on est connecté).
                     </li>
                     <li>
                         Poster des commentaires pour toutes les recettes et de supprimer ces commentaires aussi (on peut lire les commentaires sans obligation de créer un compte par contre pour poster un commentaire faut avoir un compte et être connecté).
