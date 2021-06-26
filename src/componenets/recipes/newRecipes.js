@@ -28,12 +28,6 @@ const Recipes = ()=>{
             recipeCookingTimeError:"",
             recipeCategoryError:"",
         }
-        // recipeCreator: "",
-        // recipeIngrediants: [{
-        //     ingredientName: "",
-        //     quantity: ""
-        // }],
-        // recipePicture: "",
     });
 
     const history = useHistory();
@@ -64,16 +58,16 @@ const Recipes = ()=>{
         let errors = formRecipe.errors;
         switch(name){
             case "recipeName":
-                errors.recipeNameError = value.length < 2 || value.length == null? "Enter a recipe name please": "";
+                errors.recipeNameError = value.length < 2 || value.length == null? "Enter un nom pour cette recette": "";
                 break;
             case "recipeCategory":
-                errors.recipeCategoryError = value === ""? "you must Selecte a cetegory": "";
+                errors.recipeCategoryError = value === ""? "Vous devez choisir une cetegorie": "";
                 break;
             case "recipePreparationTime":
-                errors.recipePreparationTimeError = value.length === ""? "enter a duration":"";
+                errors.recipePreparationTimeError = (value.length === "" || isNaN(value) ) ? "Enter une duree en chiffre":"";
                 break;
             case "recipeCookingTime":
-                errors.recipeCookingTimeError = value.length === ""?"enter a duration":"";
+                errors.recipeCookingTimeError = (value.length === "" || isNaN(value) ) ? "Enter une duree en chiffre":"";
                 break;
             default:
                 break;         
@@ -153,6 +147,9 @@ const Recipes = ()=>{
         }
         setRecipeIngrediants(filtredArray);
     }
+    // add recipe Button gestion
+    const [disableAddButton, setDisableAddButton] = useState(true);
+    const [msgAddRecipe, setMsgAddRecipe] = useState('');
     const handleSubmit =(event)=>{
         event.preventDefault();
         const recipeINgTest = recipeIngrediants;
@@ -185,139 +182,151 @@ const Recipes = ()=>{
         // console.log(JSON.stringify(formRecipe));
         // axios.post('http://localhost:8080/recipes/add-recipe', formData, config
         // )
-        dispatch(createRecipe(formData, config)).then(setModal(true)).then(()=>setTimeout(() => {
-            history.push(`/recipes`);
-            setModal(false);
-        }, 4000));      
+        if(user && token){
+            if(!formRecipe.recipeName || !formRecipe.recipeCategory || !formRecipe.recipeCookingTime || !formRecipe.recipePreparationTime){
+                setMsgAddRecipe('Certains champs sont pas remplis');
+            }else{
+                dispatch(createRecipe(formData, config)).then(setModal(true)).then(()=>setTimeout(() => {
+                    history.push(`/recipes`);
+                    setModal(false);
+                }, 4000));
+            }
+        }     
     }
     useEffect(()=>{
         localStorage.getItem('myUser');
         localStorage.getItem('userToken');
+        if(user && token){
+            setDisableAddButton(false)
+        }else{
+            setDisableAddButton(true);
+            setMsgAddRecipe('Vous devez vous connecter pour pouvoir ajouter une recette')
+        }
     }, [])
     
-    if(user){
-        return (
-            <div className="formNewRecipe">
-                <Form className="m-4 col-md-10 col-sm-12 m-auto" encType="multipart/form-data" onSubmit={handleSubmit }>
-                    <FormGroup className="col-md-8 col-sm-9 m-auto">
-                        <Label for="recipeName">Nom de la recette</Label>
-                        <Input type="text" name="recipeName" id="recipeName" placeholder="Enter un nom pour cette recette" onChange={handleChange} />
-                    </FormGroup>
-                    {formRecipe.errors.recipeNameError?
-                        <div style={{color:'red'}}>
-                            {formRecipe.errors.recipeNameError}
-                        </div>: null
-                    }
-                    <FormGroup className="col-md-6 col-sm-8 col-xs-8 m-auto">
-                        <Label for="recipeCategory">Sélectionner une catégorie</Label>
-                        <Input type="select" name="recipeCategory" id="recipeCategory" placeholder="Choice a category" onChange={handleChange}>
-                            <option value="">Choisir...</option>
-                            <option value="entree">Entrée</option>
-                            <option value="plat">Plat</option>
-                            <option value="dessert">Dessert</option>
-                        </Input>
-                    </FormGroup>
-                    {formRecipe.errors.recipeCategoryError?
-                        <div style={{color:'red'}}>
-                            {formRecipe.errors.recipeCategoryError}
-                        </div>: null
-                    }
-                    {/* <FormGroup>
-                        <Label for="recipeCategory">Category</Label>
-                        <Input type="text" name="recipeCategory" id="recipeCategory" placeholder="Choice a category" onChange={handleChange} />
-                    </FormGroup> */}
-                    <FormGroup className="col-md-5 col-sm-6 col-xs-9 d-inline-block mt-4">
-                        <Label for="ingredientName">Nom de l'ingrédient</Label>
-                        <Input type="text" name="ingredientName" value={ingredientName} id="ingredientName" placeholder="Le nom de l'ingrédient" onChange={onChangeIngredientName} />
-                    </FormGroup>
-                    <FormGroup className="col-md-5 col-sm-6 col-xs-9 d-inline-block">
-                        <Label for="quantity">Quantité de l'ingrédient</Label>
-                        <Input type="text" name="quantity" value={quantity} id="quantity" placeholder="Quantité : unité (Ex : 100 gr)" onChange={onChangeIngredientQauntity} />
-                    </FormGroup>
-                    <Button className="mb-4" onClick={addIngredient}><RiAddCircleFill style={{fontSize:'22px', color:'#ff0'}}/>Ajouter l'ingrédient</Button>
-                    {ingredientsError?(
-                        <div style={{color:'red'}}>
-                            <p>{ingredientsError}</p>
-                        </div>
-                    )
-                    :null}
-                    {recipeIngrediants.length >0 ?
-                        (<div className="listIng p-0 m-auto col-sm-12 col-lg-9">
-                            <h5>Aperçu des ingrédients</h5>
-                            <ol>
-                                {recipeIngrediants.map((ing, index)=>(
-                                    <div className="p-0 m-0" >
-                                        <li className="d-inline-block" key={index}>
-                                            {ing.ingredientName}:{"   "}{ing.quantity}
-                                            <Button className="btnRemoveIngr" onClick={()=> removeIngredient(index)}><RiDeleteBin6Fill /></Button>
-                                        </li>
-                                       
-                                    </div>                       
-                                ))}
-                            </ol>
-                        </div>) : null
-                    }
-                    
-                    {/* <FormGroup>
-                        <Label for="recipeDescription">Instructions of the recipe</Label>
-                        <Input type="textarea" name="recipeDescription" id="recipeDescription" placeholder="Instructions of the recipe" onChange={handleChange} />
-                    </FormGroup> */}
-                    <div className="instructions m-3">
-                        <FormGroup>
-                            <Label for="recipeDescription">Instructions de la recette</Label>
-                            <Editor 
-                                editorState={instructions}
-                                toolbarClassName="toolbarClassName"
-                                wrapperClassName="wrapperClassName"
-                                editorClassName="editorClassName"
-                                editorStyle={{ height: "250px" , padding: "10px", }}
-                                onEditorStateChange={onEditorStateChange}
-                            />
-                        </FormGroup>
-                  
+
+    return (
+        <div className="formNewRecipe">
+            <Form className="m-4 col-md-10 col-sm-12 m-auto" encType="multipart/form-data" onSubmit={handleSubmit }>
+                <FormGroup className="col-md-8 col-sm-9 m-auto">
+                    <Label for="recipeName">Nom de la recette</Label>
+                    <Input type="text" name="recipeName" id="recipeName" placeholder="Enter un nom pour cette recette" required={true} onChange={handleChange} />
+                </FormGroup>
+                {formRecipe.errors.recipeNameError?
+                    <div style={{color:'red'}}>
+                        {formRecipe.errors.recipeNameError}
+                    </div>: null
+                }
+                <FormGroup className="col-md-6 col-sm-8 col-xs-8 m-auto">
+                    <Label for="recipeCategory">Sélectionner une catégorie</Label>
+                    <Input type="select" name="recipeCategory" id="recipeCategory" placeholder="Choice a category" required={true} onChange={handleChange}>
+                        <option value="">Choisir...</option>
+                        <option value="entree">Entrée</option>
+                        <option value="plat">Plat</option>
+                        <option value="dessert">Dessert</option>
+                    </Input>
+                </FormGroup>
+                {formRecipe.errors.recipeCategoryError?
+                    <div style={{color:'red'}}>
+                        {formRecipe.errors.recipeCategoryError}
+                    </div>: null
+                }
+                {/* <FormGroup>
+                    <Label for="recipeCategory">Category</Label>
+                    <Input type="text" name="recipeCategory" id="recipeCategory" placeholder="Choice a category" onChange={handleChange} />
+                </FormGroup> */}
+                <FormGroup className="col-md-5 col-sm-6 col-xs-9 d-inline-block mt-4">
+                    <Label for="ingredientName">Nom de l'ingrédient</Label>
+                    <Input type="text" name="ingredientName" value={ingredientName} id="ingredientName" placeholder="Le nom de l'ingrédient" onChange={onChangeIngredientName} />
+                </FormGroup>
+                <FormGroup className="col-md-5 col-sm-6 col-xs-9 d-inline-block">
+                    <Label for="quantity">Quantité de l'ingrédient</Label>
+                    <Input type="text" name="quantity" value={quantity} id="quantity" placeholder="Quantité unité (Ex : 100 gr ou 50 cl)" onChange={onChangeIngredientQauntity} />
+                </FormGroup>
+                <Button className="mb-4" onClick={addIngredient}><RiAddCircleFill style={{fontSize:'22px', color:'#ff0'}}/>Ajouter l'ingrédient</Button>
+                {ingredientsError?(
+                    <div style={{color:'red'}}>
+                        <p>{ingredientsError}</p>
                     </div>
-                   
-                    <FormGroup className=" d-inline-block m-1">
-                        <Label for="recipePreparationTime">Temps de préparation</Label>
-                        <Input className="col-xs-6 " type="text" name="recipePreparationTime" id="recipePreparationTime" placeholder="En minutes"  onChange={handleChange}/>
+                )
+                :null}
+                {recipeIngrediants.length >0 ?
+                    (<div className="listIng p-0 m-auto col-sm-12 col-lg-9">
+                        <h5>Aperçu des ingrédients</h5>
+                        <ol>
+                            {recipeIngrediants.map((ing, index)=>(
+                                <div className="p-0 m-0" >
+                                    <li className="d-inline-block" key={index}>
+                                        {ing.ingredientName}:{"   "}{ing.quantity}
+                                        <Button className="btnRemoveIngr" onClick={()=> removeIngredient(index)}><RiDeleteBin6Fill /></Button>
+                                    </li>
+                                   
+                                </div>                       
+                            ))}
+                        </ol>
+                    </div>) : null
+                }
+                
+                {/* <FormGroup>
+                    <Label for="recipeDescription">Instructions of the recipe</Label>
+                    <Input type="textarea" name="recipeDescription" id="recipeDescription" placeholder="Instructions of the recipe" onChange={handleChange} />
+                </FormGroup> */}
+                <div className="instructions m-3">
+                    <FormGroup>
+                        <Label for="recipeDescription" style={{fontSize:'28px'}}>INSTRUCTIONS ET ÉTAPES DE LA RECETTE</Label>
+                        <Editor 
+                            editorState={instructions}
+                            toolbarClassName="toolbarClassName"
+                            wrapperClassName="wrapperClassName"
+                            editorClassName="editorClassName"
+                            editorStyle={{ height: "250px" , padding: "10px", }}
+                            onEditorStateChange={onEditorStateChange}
+                        />
                     </FormGroup>
-                    <FormGroup className=" d-inline-block m-1">
-                        <Label for="recipeCookingTime">Temps de cuisson</Label>
-                        <Input className="col-xs-6 " type="text" name="recipeCookingTime" id="recipeCookingTime" placeholder="En minutes"  onChange={handleChange}/>
-                    </FormGroup>
-                    <FormGroup className="mt-4">
-                        <Label for="recipePicture">Image de la recette</Label>
-                        <Input type="file" name="recipePicture" id="recipePicture" placeholder="Select a picture" onChange={selectImage}/>
-                    </FormGroup>
-                    <Button type="submit" color="primary" style={{margin:5}}>
-                        Ajouter la recette
-                    </Button>
-                </Form>
-                <Modal isOpen={modal} toggle={toggle} scrollable={true} >
-                        <ModalHeader toggle={toggle}>{modalTitle}</ModalHeader>
-                        <ModalBody>
-                            {/* {modalTitle !== 'Our policy confidential' ?
-                            <div className="divImage">
-                                <img className="modalImage" src={modalImage} alt="pictur response" />
-                            </div>: null   
-                            } */}
-                            {modalBody}       
-                        </ModalBody>
-                        <ModalFooter>
-                        <Button color="primary"  onClick={toggle}>OK</Button>{' '}
-                        {/* {willRedirect ? <Redirect to="/recipes" />
-                        : null } */}
-                        {/* <Button color="secondary" onClick={toggle}>Cancel</Button> */}
-                        </ModalFooter>
-                    </Modal>
-            </div>
-            
-        )
-    }else{
-        return <div>
-            <p>vous devez vous connecter pour creer et ajouter vos recettes</p>
-        </div>
-    }
+              
+                </div>
+               
+                <FormGroup className=" d-inline-block m-1">
+                    <Label for="recipePreparationTime">Temps de préparation</Label>
+                    <Input className="col-xs-6 " type="text" name="recipePreparationTime" id="recipePreparationTime" placeholder="En minutes"  onChange={handleChange}/>
+                </FormGroup>
+                {formRecipe.errors.recipePreparationTimeError?
+                    <div style={{color:'red'}}>
+                        {formRecipe.errors.recipePreparationTimeError}
+                    </div>: null
+                }
+                <FormGroup className=" d-inline-block m-1">
+                    <Label for="recipeCookingTime">Temps de cuisson</Label>
+                    <Input className="col-xs-6 " type="text" name="recipeCookingTime" id="recipeCookingTime" placeholder="En minutes"  onChange={handleChange}/>
+                </FormGroup>
+                {formRecipe.errors.recipeCookingTimeError?
+                    <div style={{color:'red'}}>
+                        {formRecipe.errors.recipeCookingTimeError}
+                    </div>: null
+                }
+                <FormGroup className="mt-4">
+                    <Label for="recipePicture">Image de la recette</Label>
+                    <Input type="file" name="recipePicture" id="recipePicture" placeholder="Select a picture" onChange={selectImage}/>
+                </FormGroup>
+                <Button type="submit" color="primary" disabled={disableAddButton} style={{margin:5}}>
+                    Ajouter la recette
+                </Button>
+                <p style={{color:'#f00'}}>{msgAddRecipe}</p>
+            </Form>
+            <Modal isOpen={modal} toggle={toggle} scrollable={true} >
+                    <ModalHeader toggle={toggle}>{modalTitle}</ModalHeader>
+                    <ModalBody>
+                        {modalBody}       
+                    </ModalBody>
+                    <ModalFooter>
+                    <Button color="primary"  onClick={toggle}>OK</Button>{' '}
+                    {/* {willRedirect ? <Redirect to="/recipes" />
+                    : null } */}
+                    {/* <Button color="secondary" onClick={toggle}>Cancel</Button> */}
+                    </ModalFooter>
+                </Modal>
+        </div>   
+    )
 
 }
 

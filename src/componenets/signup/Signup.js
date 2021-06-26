@@ -62,25 +62,25 @@ const Signup =(props)=>{
             case 'username': 
               errors.usernameError = 
                 value.length < 5
-                  ? 'Username must be 5 characters long!'
+                  ? 'Username doit contenir 4 caracters min!'
                   : '';
               break;
             case 'email': 
               errors.emailError = 
                 validEmailRegex.test(value)
                   ? ''
-                  : 'Email is not valid!';
+                  : 'Email n\'est pas valid!';
               break;
             case 'password': 
               errors.passwordError = 
                 value.length < 6
-                  ? 'Password must be 6 characters long!'
+                  ? 'Mot de passe doit avoir au min 6 caracters!'
                   : '';
               break;
             case 'passwordConfirm':
                 errors.passwordConfirmError =
                 form.password !== value ? 
-                'Password must be the same' :
+                'les mots de passes doivent etre identiques' :
                 '';
                 break;
             default:
@@ -186,7 +186,7 @@ const Signup =(props)=>{
                     <Form className="" onSubmit={userCreate} encType="multipart/form-data">
                         <FormGroup>
                             <Label for="exampleUsername">Username</Label>
-                            <Input type="text" name="username" id="exampleUsername" placeholder="Choose Username" value={form.username} onChange={onChangeValue}/>
+                            <Input type="text" name="username" id="exampleUsername" placeholder="Choisir un Username" value={form.username} onChange={onChangeValue}/>
                         </FormGroup>
                         {form.errors.usernameError ? 
                             <div style={{color:'red'}}>
@@ -195,7 +195,7 @@ const Signup =(props)=>{
                              null}
                         <FormGroup>
                             <Label for="exampleEmail">Email</Label>
-                            <Input type="email" name="email" id="exampleEmail" placeholder="Your email" value={form.email} onChange={onChangeValue}/>
+                            <Input type="email" name="email" id="exampleEmail" placeholder="Votre email" value={form.email} onChange={onChangeValue}/>
                         </FormGroup>
                         {form.errors.emailError ? 
                             <div style={{color:'red'}}>
@@ -203,8 +203,8 @@ const Signup =(props)=>{
                             </div>:
                              null}
                         <FormGroup>
-                            <Label for="examplePassword">Password</Label>
-                            <Input type="password" name="password" id="examplePassword" placeholder="Your password" value={form.password} onChange={onChangeValue} />
+                            <Label for="examplePassword">Mot de passe</Label>
+                            <Input type="password" name="password" id="examplePassword" placeholder="Votre mot de passe" value={form.password} onChange={onChangeValue} />
                         </FormGroup>
                         {form.errors.passwordError ? 
                             <div style={{color:'red'}}>
@@ -212,8 +212,8 @@ const Signup =(props)=>{
                             </div>:
                              null}
                         <FormGroup>
-                            <Label for="examplePasswordConfirm">Password confirm</Label>
-                            <Input type="password" name="passwordConfirm" id="examplePasswordConfirm" placeholder="Confirm your password" value={form.passwordConfirm} onChange={onChangeValue} />
+                            <Label for="examplePasswordConfirm">Confirmer le mot de passe</Label>
+                            <Input type="password" name="passwordConfirm" id="examplePasswordConfirm" placeholder="Confirmer votre mot de passe" value={form.passwordConfirm} onChange={onChangeValue} />
                         </FormGroup>
                         {form.errors.passwordConfirmError ? 
                             <div style={{color:'red'}}>
@@ -222,7 +222,7 @@ const Signup =(props)=>{
                              null}
 
                         <FormGroup>
-                            <Label for="profilePicture">profile picture</Label>
+                            <Label for="profilePicture">Image de profile</Label>
                             <Input type="file" name="profilePicture" id="profilePicture" placeholder="Select a picture" onChange={selectImage}/>
                         </FormGroup>
                         {/* <FormGroup>
@@ -238,19 +238,19 @@ const Signup =(props)=>{
                                 type="checkbox" label="isPro" name="isPro" id="isPro" checked={form.isPro}
                                 onClick={onCheckCheckBox} 
                                 /> 
-                                 Etes vous professionnel <br></br>                       
+                                 Etes vous un professionnel <br></br>                       
                             </Label>
                         </FormGroup>
                         <FormGroup check>
                             <Label check>
                             <Input type="checkbox" onClick={accepteCoditions}/>{' '}
-                                Accepte conditions <br></br>
+                                Accepter nos conditions <br></br>
                             <Button color="secondary" style={{margin:5}} onClick={showConditions}>POLITIQUE ET CONFIDENTIALITE</Button>
                             </Label>
                         </FormGroup>
                         <Button id="btn_inscription" type="submit"  color="primary" disabled={!conditionsAccepted}>
                         Inscription 
-                        <br></br>{conditionsAccepted===false? <p style={{color:'#f8d404'}}>Vous devez accepter conditions</p>:null}
+                        <br></br>{conditionsAccepted===false? <p style={{color:'#f8d404'}}>Vous devez accepter les conditions</p>:null}
                         </Button>
                         <span style={{color:'#f00'}}>{loginCheckMessage}</span>
                     </Form>
