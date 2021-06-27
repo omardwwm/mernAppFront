@@ -58,16 +58,16 @@ const UpdateRecipe = (props)=>{
         let errors = formRecipe.errors;
         switch(name){
             case "recipeName":
-                errors.recipeNameError = value.length < 2 || value.length == null? "Enter a recipe name please": "";
+                errors.recipeNameError = value.length < 2 || value.length == null? "Enter un nom pour cette recette": "";
                 break;
             case "recipeCategory":
-                errors.recipeCategoryError = value === ""? "you must Selecte a cetegory": "";
+                errors.recipeCategoryError = value === ""? "Vous devez choisir une cetegorie": "";
                 break;
             case "recipePreparationTime":
-                errors.recipePreparationTimeError = value.length === ""? "enter a duration":"";
+                errors.recipePreparationTimeError = (value.length === "" || isNaN(value) ) ? "Enter une duree en chiffre":"";
                 break;
             case "recipeCookingTime":
-                errors.recipeCookingTimeError = value.length === ""?"enter a duration":"";
+                errors.recipeCookingTimeError = (value.length === "" || isNaN(value) ) ? "Enter une duree en chiffre":"";
                 break;
             default:
                 break;         
@@ -88,6 +88,7 @@ const UpdateRecipe = (props)=>{
     // console.log(recipeToUpdate.recipeDescription);
 
     const htmlInstructions = stateToHTML(convertFromRaw(JSON.parse(recipeToUpdate.recipeDescription)));
+    const [instructionsError, setInstructionsError] = useState('');
     // console.log(htmlInstructions);
     // const [instructions, setInstructions] = useState(EditorState.createWithContent((htmlInstructions.rowBlocks), null));
 
@@ -104,7 +105,8 @@ const UpdateRecipe = (props)=>{
   
     const [instructions, setInstructions] = useState(defaultInstructions);
     const onEditorStateChange = (editorState) => {
-      setInstructions(editorState)
+      setInstructions(editorState);
+      setInstructionsError('')
       }
     
     const[recipePicture, setRecipePicture] =useState(null);
@@ -116,7 +118,7 @@ const UpdateRecipe = (props)=>{
     const addIngredient =(event)=>{
         event.preventDefault();
         if(ingredientName ==="" || quantity ===""){
-            setIngredientsError("you must enter name and quantity of ingredient befor click adding")
+            setIngredientsError("Vous devez enter un nom et une (quantité unité) pour l\'ingredient avant de cliquer sur ajouter")
         }else{
             const newIngredient = {
             ingredientName:ingredientName,
@@ -139,6 +141,37 @@ const UpdateRecipe = (props)=>{
         setRecipeIngrediants(filtredArray);
     }
    
+    const [msgAddRecipe, setMsgAddRecipe] = useState('');
+    const checkFormValidation = ()=>{
+        let formIsValid = true;
+        if(!formRecipe.recipeName){
+            formIsValid = false;
+            formRecipe.errors.recipeNameError = 'Le nom ne peut pas etre vide'
+        }
+        if(!formRecipe.recipeCategory){
+            formIsValid = false;
+            formRecipe.errors.recipeCategoryError = 'Category ne peut pas etre vide'
+        }
+        if(recipeIngrediants.length === 0){
+            formIsValid = false;
+            setIngredientsError('Vous devez ajouter des ingredients !')
+        }
+        if(convertToRaw(instructions.getCurrentContent()).blocks[0].text === '' ){
+            formIsValid = false;
+            // console.log('ok')
+            setInstructionsError('Vous devez saisir les instructions et étapes de la recette');
+            // console.log(instructionsError);
+        }
+        if(!formRecipe.recipePreparationTime){
+            formIsValid = false;
+            formRecipe.errors.recipePreparationTimeError = 'La durée est obligatoire'
+        }
+        if(!formRecipe.recipeCookingTime){
+            formIsValid = false;
+            formRecipe.errors.recipeCookingTimeError = 'La durée est obligatoire'
+        }
+        return formIsValid;
+    }
     const handleSubmit =(event)=>{
         event.preventDefault();
         const recipeINgTest = recipeIngrediants;
@@ -170,11 +203,14 @@ const UpdateRecipe = (props)=>{
         formData.append('recipeCreator', recipeCreator);
         formData.append('recipeCreatorName', recipeCreatorName);
         formData.append('recipeIngrediants', recipeToSend);
-        dispatch(updateRecipe(recipeId, formData, config)).then(setModal(true)).then(()=>setTimeout(() => {
+        if(checkFormValidation()){
+            dispatch(updateRecipe(recipeId, formData, config)).then(setModal(true)).then(()=>setTimeout(() => {
             history.push(`/recipes`);
             (setModal(false))
-        }, 5000));
-           
+            }, 5000));
+        }else{
+            setMsgAddRecipe('Certains champs sont pas remplis');
+         }      
     }
     // console.log('showModalIs:', showModale);
     useEffect(()=>{
@@ -256,17 +292,31 @@ const UpdateRecipe = (props)=>{
                                 onEditorStateChange={onEditorStateChange}
                             />
                         </FormGroup>
-                  
                     </div>
+                    {instructionsError ?
+                        <div style={{color:'red'}}>
+                            {instructionsError}
+                        </div>: null
+                    }
                    
                     <FormGroup className="d-inline-block m-1">
                         <Label for="recipePreparationTime">Temps de preparation</Label>
                         <Input className="col-xs-6 " type="text" name="recipePreparationTime" id="recipePreparationTime" defaultValue={recipeToUpdate.recipePreparationTime}  onChange={handleChange}/>
                     </FormGroup>
+                    {formRecipe.errors.recipePreparationTimeError?
+                    <div style={{color:'red'}}>
+                        {formRecipe.errors.recipePreparationTimeError}
+                    </div>: null
+                }
                     <FormGroup className="d-inline-block m-1">
                         <Label for="recipeCookingTime">Temps de cuisson</Label>
                         <Input className="col-xs-6 " type="text" name="recipeCookingTime" id="recipeCookingTime" defaultValue={recipeToUpdate.recipeCookingTime}  onChange={handleChange}/>
                     </FormGroup>
+                    {formRecipe.errors.recipeCookingTimeError?
+                    <div style={{color:'red'}}>
+                        {formRecipe.errors.recipeCookingTimeError}
+                    </div>: null
+                }
                     <FormGroup className="mt-4">
                         <Label for="recipePicture">Image de la recette</Label>
                         <div>
@@ -293,6 +343,7 @@ const UpdateRecipe = (props)=>{
                     <Button type="submit" color="primary" style={{margin:5}}>
                         Modifier cette recette
                     </Button>
+                    <p style={{color:'#f00'}}>{msgAddRecipe}</p>
                 </Form>
                 <Modal isOpen={modal} toggle={toggle} scrollable={true} >
                         <ModalHeader toggle={toggle}>{modalTitle}</ModalHeader>

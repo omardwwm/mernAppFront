@@ -88,9 +88,11 @@ const Recipes = ()=>{
     }
     // console.log(recipeIngrediants);
 
-    const [instructions, setInstructions] = useState(EditorState.createEmpty())
+    const [instructions, setInstructions] = useState(EditorState.createEmpty());
+    const [instructionsError, setInstructionsError] = useState('');
     const onEditorStateChange = (editorState) => (
-      setInstructions(editorState)
+      setInstructions(editorState),
+      setInstructionsError('')
     //   console.log(draftToHtml(convertToRaw(instructions.getCurrentContent())))
       );
     
@@ -121,7 +123,7 @@ const Recipes = ()=>{
     const addIngredient =(event)=>{
         event.preventDefault();
         if(ingredientName ==="" || quantity ===""){
-            setIngredientsError("you must enter name and quantity of ingredient befor click adding")
+            setIngredientsError("Vous devez enter un nom et une (quantité unité) pour l\'ingredient avant de cliquer sur ajouter")
         }else{
             const newIngredient = {
             ingredientName:ingredientName,
@@ -147,9 +149,40 @@ const Recipes = ()=>{
         }
         setRecipeIngrediants(filtredArray);
     }
+    // console.log(convertToRaw(instructions.getCurrentContent()).blocks[0].text);
     // add recipe Button gestion
     const [disableAddButton, setDisableAddButton] = useState(true);
     const [msgAddRecipe, setMsgAddRecipe] = useState('');
+    const checkFormValidation = ()=>{
+        let formIsValid = true;
+        if(!formRecipe.recipeName){
+            formIsValid = false;
+            formRecipe.errors.recipeNameError = 'Le nom ne peut pas etre vide'
+        }
+        if(!formRecipe.recipeCategory){
+            formIsValid = false;
+            formRecipe.errors.recipeCategoryError = 'Category ne peut pas etre vide'
+        }
+        if(recipeIngrediants.length === 0){
+            formIsValid = false;
+            setIngredientsError('Vous devez ajouter des ingredients !')
+        }
+        if(convertToRaw(instructions.getCurrentContent()).blocks[0].text === '' ){
+            formIsValid = false;
+            // console.log('ok')
+            setInstructionsError('Vous devez saisir les instructions et étapes de la recette');
+            // console.log(instructionsError);
+        }
+        if(!formRecipe.recipePreparationTime){
+            formIsValid = false;
+            formRecipe.errors.recipePreparationTimeError = 'La durée est obligatoire'
+        }
+        if(!formRecipe.recipeCookingTime){
+            formIsValid = false;
+            formRecipe.errors.recipeCookingTimeError = 'La durée est obligatoire'
+        }
+        return formIsValid;
+    }
     const handleSubmit =(event)=>{
         event.preventDefault();
         const recipeINgTest = recipeIngrediants;
@@ -183,13 +216,15 @@ const Recipes = ()=>{
         // axios.post('http://localhost:8080/recipes/add-recipe', formData, config
         // )
         if(user && token){
-            if(!formRecipe.recipeName || !formRecipe.recipeCategory || !formRecipe.recipeCookingTime || !formRecipe.recipePreparationTime){
-                setMsgAddRecipe('Certains champs sont pas remplis');
-            }else{
+            
+            if(checkFormValidation()){
                 dispatch(createRecipe(formData, config)).then(setModal(true)).then(()=>setTimeout(() => {
                     history.push(`/recipes`);
                     setModal(false);
                 }, 4000));
+                
+            }else{
+               setMsgAddRecipe('Certains champs sont pas remplis');
             }
         }     
     }
@@ -210,7 +245,7 @@ const Recipes = ()=>{
             <Form className="m-4 col-md-10 col-sm-12 m-auto" encType="multipart/form-data" onSubmit={handleSubmit }>
                 <FormGroup className="col-md-8 col-sm-9 m-auto">
                     <Label for="recipeName">Nom de la recette</Label>
-                    <Input type="text" name="recipeName" id="recipeName" placeholder="Enter un nom pour cette recette" required={true} onChange={handleChange} />
+                    <Input type="text" name="recipeName" id="recipeName" placeholder="Enter un nom pour cette recette" onChange={handleChange} />
                 </FormGroup>
                 {formRecipe.errors.recipeNameError?
                     <div style={{color:'red'}}>
@@ -219,7 +254,7 @@ const Recipes = ()=>{
                 }
                 <FormGroup className="col-md-6 col-sm-8 col-xs-8 m-auto">
                     <Label for="recipeCategory">Sélectionner une catégorie</Label>
-                    <Input type="select" name="recipeCategory" id="recipeCategory" placeholder="Choice a category" required={true} onChange={handleChange}>
+                    <Input type="select" name="recipeCategory" id="recipeCategory" placeholder="Choice a category" onChange={handleChange}>
                         <option value="">Choisir...</option>
                         <option value="entree">Entrée</option>
                         <option value="plat">Plat</option>
@@ -283,9 +318,12 @@ const Recipes = ()=>{
                             onEditorStateChange={onEditorStateChange}
                         />
                     </FormGroup>
-              
                 </div>
-               
+                {instructionsError ?
+                        <div style={{color:'red'}}>
+                            {instructionsError}
+                        </div>: null
+                    }
                 <FormGroup className=" d-inline-block m-1">
                     <Label for="recipePreparationTime">Temps de préparation</Label>
                     <Input className="col-xs-6 " type="text" name="recipePreparationTime" id="recipePreparationTime" placeholder="En minutes"  onChange={handleChange}/>

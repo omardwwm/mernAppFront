@@ -180,10 +180,12 @@ const addKitchenTypes =(event)=>{
     }
 } 
 
-const removeKitchenType =(ing, index)=>{
+const removeKitchenType =(index)=>{
     if(userData.userMetaData){
         let filtredArray = [...newKitchenTypes];
-        filtredArray.splice(index, 1)
+        if(index > -1){
+           filtredArray.splice(index, 1) 
+        }
         setNewKitchenTypes(filtredArray);
     }else{
         let filtredArray = [...kitchenTypes];
@@ -422,10 +424,10 @@ const userMetaData = async()=>{
                                                         <h5>Aperçu des specialites</h5>
                                                         <ol>
                                                             {newKitchenTypes.map((type, index)=>(
-                                                                <div className="p-0 m-0" key={index}>
-                                                                    <li className="d-inline-block ">
+                                                                <div className="p-0 m-0">
+                                                                    <li className="d-inline-block" key={index}>
                                                                         {type}
-                                                                        <Button className="btnRemoveIngr" onClick={removeKitchenType}><RiDeleteBin6Fill /></Button>
+                                                                        <Button className="btnRemoveIngr" onClick={()=>removeKitchenType(index)}><RiDeleteBin6Fill /></Button>
                                                                     </li>
                                                                 </div>                       
                                                             ))}
