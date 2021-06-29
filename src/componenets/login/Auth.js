@@ -20,7 +20,7 @@ const Auth = (props)=>{
     // collapse for forgotPassword
     const [isOpen, setIsOpen] = useState(false);
     const toggleCollapse = (e) =>{
-        const {name} = e.target
+        // const {name} = e.target
         setIsOpen(!isOpen);
         setInputs(state=>({...state, name:''}))
     }

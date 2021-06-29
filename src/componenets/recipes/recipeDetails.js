@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import { stateToHTML } from 'draft-js-export-html';
 import { convertFromRaw} from 'draft-js';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, Label, Input, Card } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, Input, Card } from 'reactstrap';
 import {deleteRecipe, postComment} from "../../redux/actions/RecipeActions";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory, Link} from "react-router-dom";
@@ -133,7 +133,7 @@ const RecipeDetails = (props)=>{
             setTestRecipe(response.data);
         })      
     } 
-    // testRecipe && console.log('recipeFinalIs', testRecipe.recipeCreator);
+    testRecipe && console.log('recipeFinalIs', testRecipe);
     const idFromRecipe = testRecipe.recipeCreator;
     // idFromRecipe == userId ? console.log('okkkk'): console.log('not working')
     // const isMine = (testRecipe.recipeCreator ===user && user.id || testRecipe.recipeCreator===user && user._id) ? true : false;    
@@ -222,7 +222,12 @@ const RecipeDetails = (props)=>{
         <div className="col-12 m-2">
             <div >
                 <h3 className="text-center" >{testRecipe.recipeName}</h3>
-                <p>Creation de : {testRecipe.recipeCreatorName}</p>
+                <p>
+                    Creation de : <Link to={{pathname: `/chef/${testRecipe.recipeCreator}`}} style={{color:'#a1d80a'}}>{testRecipe.recipeCreatorName}</Link>
+                    {/* <img 
+                        src={}
+                    /> */}
+                </p>
                 <div className="containerImg">
                     <div className="imgDetailDiv">
                         <img

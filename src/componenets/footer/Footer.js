@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {ImLinkedin2} from 'react-icons/im';
 import {Card, Button, Accordion} from 'react-bootstrap';
 import {MdContactMail} from "react-icons/md";

@@ -1,7 +1,7 @@
 import React, { useEffect} from "react";
 import {useSelector, useDispatch} from "react-redux";
 import { Link } from "react-router-dom";
-import { Card, CardTitle, CardSubtitle, Image} from "reactstrap";
+import { Card, CardTitle, CardSubtitle, CardText} from "reactstrap";
 import {getProfessionnals} from "../../redux/actions/UserActions";
 import "./chefs.css";
 
@@ -17,7 +17,7 @@ const Chefs = ()=>{
 
     const dispatch = useDispatch();
     const allProfessionals = useSelector(state=>state.userReducer.professionnals);
-    // console.log(allProfessionals);
+    console.log(allProfessionals);
 
    useEffect(()=>{
        dispatch(getProfessionnals(config));  
@@ -28,44 +28,31 @@ const Chefs = ()=>{
             <h2>Nos chefs</h2>
             {allProfessionals && allProfessionals.map((chef, index)=>{
                 return (
-                    <div className="chefDiv row mr-0 ml-0"  key={index} >
-                            <Card className="row chefCrad col-2 d-block" >
-                                <CardTitle>{chef.username}</CardTitle>
-                                <img className="img-fluid chefPic"
-                                    // src={`https://mern-recipes.herokuapp.com${chef.profilePicture}`}
-                                    src={chef.profilePicture}
-                                    alt="illustration-profile-chef"
-                                    />
-                            </Card>
-                        <div className="col-9 m-0 pl-2 " >
-                            {chef.recipes.length <= 0?(
-                                <>
-                                    <Card className="m-1  emptyRecipeCard">
-                                        <CardTitle>Ce chef n'a pas encore poste de recettes</CardTitle>
-                                    </Card>
-                                </>                               
-                                ):(
-                                <div className="chefRealisations ">
-                                    { chef.recipes.map((recipe, index)=>{
-                                        return (
-                                            <div  key={index}>
-                                                <div className="recipeCard">
-                                                    <Card >
-                                                        <CardTitle id="titleCardRealisation">{recipe.recipeName}</CardTitle>
-                                                        <Link to={{pathname: `/recipesDetails/${recipe._id}`, state:{recipe}}}>
-                                                            <img src={recipe.recipePicture} className="recipeChefPic" alt="illustration-recipe" />
-                                                            <CardSubtitle>{recipe.recipeCategory}</CardSubtitle>
-                                                        </Link>
-                                                    </Card>   
-                                                </div>       
-                                            </div>                  
-                                        )
-                                    })}
-                                </div>
-                                )                       
-                            }
-                        </div>                       
-                    </div>
+                    <Card className="chefCrad col-md-3" key={index}>
+                        <Link to={{pathname: `/chef/${chef._id}`, state:{chef}}}>
+                            <CardTitle style={{color:'#fff', textAlign:'center'}}>
+                                {chef.username} 
+                            </CardTitle>
+                            <img className="img-fluid chefPic"
+                                // src={`https://mern-recipes.herokuapp.com${chef.profilePicture}`}
+                                src={chef.profilePicture}
+                                alt="illustration-profile-chef"
+                            />
+                            {chef.recipes.length ===0 ?(
+                                <CardText className="textCard">
+                                    0 recettes
+                                </CardText>
+                            ):chef.recipes.length ===1?(
+                                <CardText className="textCard">
+                                    1 recette
+                                </CardText>
+                            ):
+                                <CardText className="textCard">
+                                    {chef.recipes.length} recettes
+                                </CardText>
+                            }        
+                        </Link>            
+                    </Card>
                 )
             })}
         </div>

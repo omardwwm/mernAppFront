@@ -123,7 +123,7 @@ const Recipes = ()=>{
     const addIngredient =(event)=>{
         event.preventDefault();
         if(ingredientName ==="" || quantity ===""){
-            setIngredientsError("Vous devez enter un nom et une (quantité unité) pour l\'ingredient avant de cliquer sur ajouter")
+            setIngredientsError("Vous devez enter un nom et une (quantité unité) pour l'ingredient avant de cliquer sur ajouter")
         }else{
             const newIngredient = {
             ingredientName:ingredientName,
@@ -215,28 +215,41 @@ const Recipes = ()=>{
         // console.log(JSON.stringify(formRecipe));
         // axios.post('http://localhost:8080/recipes/add-recipe', formData, config
         // )
-        if(user && token){
-            
-            if(checkFormValidation()){
+        if(checkFormValidation()){
+            if(user && token){
                 dispatch(createRecipe(formData, config)).then(setModal(true)).then(()=>setTimeout(() => {
                     history.push(`/recipes`);
                     setModal(false);
                 }, 4000));
-                
             }else{
-               setMsgAddRecipe('Certains champs sont pas remplis');
+                setMsgAddRecipe('Vous devez vous connecter pour pouvoir ajouter une recette')
             }
-        }     
+            
+        }else{
+           setMsgAddRecipe('Certains champs sont pas remplis');
+        }
+        // if(user && token){
+            
+        //     if(checkFormValidation()){
+        //         dispatch(createRecipe(formData, config)).then(setModal(true)).then(()=>setTimeout(() => {
+        //             history.push(`/recipes`);
+        //             setModal(false);
+        //         }, 4000));
+                
+        //     }else{
+        //        setMsgAddRecipe('Certains champs sont pas remplis');
+        //     }
+        // }     
     }
     useEffect(()=>{
         localStorage.getItem('myUser');
         localStorage.getItem('userToken');
-        if(user && token){
-            setDisableAddButton(false)
-        }else{
-            setDisableAddButton(true);
-            setMsgAddRecipe('Vous devez vous connecter pour pouvoir ajouter une recette')
-        }
+        // if(user && token){
+        //     setDisableAddButton(false)
+        // }else{
+        //     setDisableAddButton(true);
+        //     setMsgAddRecipe('Vous devez vous connecter pour pouvoir ajouter une recette')
+        // }
     }, [])
     
 
@@ -346,7 +359,7 @@ const Recipes = ()=>{
                     <Label for="recipePicture">Image de la recette</Label>
                     <Input type="file" name="recipePicture" id="recipePicture" placeholder="Select a picture" onChange={selectImage}/>
                 </FormGroup>
-                <Button type="submit" color="primary" disabled={disableAddButton} style={{margin:5}}>
+                <Button type="submit" color="primary" style={{margin:5}}>
                     Ajouter la recette
                 </Button>
                 <p style={{color:'#f00'}}>{msgAddRecipe}</p>

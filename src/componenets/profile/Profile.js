@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import {deletUser} from "../../redux/actions/UserActions";
 import {useHistory} from "react-router-dom";
-import {changePassword} from "../../redux/actions/UserActions";
+import {changePassword, getUserMetaData} from "../../redux/actions/UserActions";
 import {Card, CardText, CardBody, CardTitle, Button, Collapse, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import axios from 'axios';
 import avatar from "../../../src/assets/avatar-unisex.png";
@@ -14,7 +14,8 @@ const Profile = ()=>{
     const dispatch = useDispatch();
     const history = useHistory();
     const user = JSON.parse(localStorage.getItem('myUser'));
-    const [userData, setUserData] = useState([]);
+    // const [userData, setUserData] = useState([]);
+    const userData = useSelector(state => state.userReducer.userMetaData);
     const token = localStorage.getItem('userToken');
     const userId = (user && user.id) ? user.id : user && user._id;
     const [newProfilePicture, setNewProfilePicture] = useState("");
@@ -214,7 +215,8 @@ const sendUserData =async(e)=>{
             }
         });
         console.log(response);
-        userMetaData();
+        dispatch(getUserMetaData(userId))
+        // userMetaData();
         // console.log(formUserData);
         // console.log(kitchenTypes);
     } catch (error) {
@@ -239,7 +241,8 @@ const updateUserMetaData=async(e)=>{
             }
         });
         console.log(response);
-        userMetaData();
+        dispatch(getUserMetaData(userId))
+        // userMetaData();
         setTimeout(() => {
             setIsPresentationOpen(false)
         }, 1500);
@@ -250,13 +253,13 @@ const updateUserMetaData=async(e)=>{
     }
 }
 // get user metaData
-const userMetaData = async()=>{
-    await axios.get(`https://mern-recipes.herokuapp.com/users/metadata/${userId}`).then(response=>{
-        // console.log(response);
-        setUserData(response.data);
-    })
-}
-// console.log(userData)
+// const userMetaData = async()=>{
+//     await axios.get(`https://mern-recipes.herokuapp.com/users/metadata/${userId}`).then(response=>{
+//         // console.log(response);
+//         setUserData(response.data);
+//     })
+// }
+console.log(userData)
     useEffect(()=>{
         setTest(successMsg);
     }, [successMsg]);
@@ -314,7 +317,8 @@ const userMetaData = async()=>{
     useEffect(()=>{
         JSON.parse(localStorage.getItem('myUser'));
         localStorage.getItem('userToken');
-        userMetaData();
+        dispatch(getUserMetaData(userId))
+        // userMetaData();
         setTest('');   
     }, [])
 

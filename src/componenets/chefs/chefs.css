@@ -1,85 +1,34 @@
 .chefsDiv{
-    background-color: rgb(63, 67, 71);
+    /* background-color: rgb(63, 67, 71); */
     color: #fff;
-    padding: 20px 10px;
-}
-
-.chefDiv{
-    /* height: 200px; */
-    margin-bottom: 12px;
-    border: rgb(11, 208, 235) solid 1px ;
-    /* display: inline-block; */
-    padding: 1%;
+    padding: 15px;
 }
 
 .chefCrad{
-    background-color: rgb(55, 81, 105);
+    background-color: rgb(32, 32, 30);
     color: rgb(255, 255, 255); 
     display: inline-block;
-    margin:auto; 
-    padding: 5px;
+    margin: 0.5rem; 
+    /* padding: 5px; */
     align-items: center;
     justify-content: center;
-    /* text-align: center;  */
-}
-#chefCard{
-    background-color: green;
-    /* width: 80%; */
-    margin: auto;
-    align-items: center;
-    justify-content: center;
-}
-
-.chefRealisations{
-    margin: auto;
-    display: flex;
-    overflow-x: scroll;
-    /* text-align: center;
-    flex-direction: row; */
-    /* overflow: scroll; */
-}
-
-.recipeCard{
-    height: 180px;
-    max-width: 200px ;
-    margin-inline: 5px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    color: rgb(22, 2, 53);
-    overflow: hidden;
-}
-
-.emptyRecipeCard{
-    /* height: 100px; */
-    width: 90%;
-    margin: auto;
-    color: rgb(0, 0, 0);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    text-align: center; 
 }
 .card-subtitle {
     margin-top: -.275rem;
     margin-left: 5px;
 }
-#titleCardRealisation{
-    padding-left: 6px;
-    overflow: hidden;
-}
 .chefPic{
     width: 65%;
-    height: 95px;
+    height: 120px;
     border-radius: 50%;
     margin-left: 8px;
 }
 
-.recipeChefPic{
-    width: 180px;
-    height: 120px;
-    border-radius: 4px;
-    /* display: flex; */
-}
 #titreRealisation{
     color: grey;
+}
+.textCard{
+    color: rgb(234, 238, 12);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }

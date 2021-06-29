@@ -12,7 +12,6 @@ import "./recipes.css";
 const Recipes =(props)=>{
     // const dispatch = useDispatch();
     const [recipes, setRecipes] =useState([]);
-    // const [currentPath, setCurrentPath] = useState(window.location.pathname);
     // const [recipes, setRecipes] = useState(useSelector(state=>state.recipeReducer.recipes));
     // const user = useSelector(state=>state.userReducer.user);
     const user = JSON.parse(localStorage.getItem('myUser'));
@@ -96,21 +95,6 @@ const Recipes =(props)=>{
         fetchRecipes();
         setCategories(newCategories);
         checkboxList();
-        // setCurrentPath(pathname);
-        // console.log(window.location)
-        // if(categories.length === 0){
-        //     setFiltredCategories(recipes)
-        //     console.log(filtredCategories);
-        //     console.log(categories);
-        // }else{
-        //     setFiltredCategories(
-        //         recipes.filter(categorie =>
-        //             categories.some(category => [categorie.recipeCategory].flat().includes(category))
-        //             )
-        //     )
-        //     console.log(filtredCategories);
-        //     console.log(categories);
-        // };
     }
     ,[]); 
 

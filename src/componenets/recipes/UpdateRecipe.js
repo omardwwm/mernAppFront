@@ -118,7 +118,7 @@ const UpdateRecipe = (props)=>{
     const addIngredient =(event)=>{
         event.preventDefault();
         if(ingredientName ==="" || quantity ===""){
-            setIngredientsError("Vous devez enter un nom et une (quantité unité) pour l\'ingredient avant de cliquer sur ajouter")
+            setIngredientsError("Vous devez enter un nom et une (quantité unité) pour l'ingredient avant de cliquer sur ajouter")
         }else{
             const newIngredient = {
             ingredientName:ingredientName,

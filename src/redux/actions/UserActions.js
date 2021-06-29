@@ -8,9 +8,9 @@ export const registerUser = (formData, Headers)=>{
     return async(dispatch)=>{
         try {
             // const formData = new FormData();
-            console.log(formData);
+            // console.log(formData);
             const response =  await axios.post('https://mern-recipes.herokuapp.com/users/register', formData, Headers);
-            console.log(response);
+            // console.log(response);
             dispatch({
                 type: "REGISTER",
                 user: response.data.savedNewUser,
@@ -57,7 +57,7 @@ export const login =(email, password)=>{
             email: email,
             password: password
         });
-        console.log(response);
+        // console.log(response);
         dispatch({
             type: "LOGIN",
             user: response.data.user,
@@ -84,10 +84,23 @@ export const login =(email, password)=>{
     }
 }
 
+export const getUserMetaData =(userId)=>{
+    return async(dispatch)=>{
+        try {
+            const response = await axios.get(`https://mern-recipes.herokuapp.com/users/metadata/${userId}`);
+            dispatch({
+                type: "GET-USERMETADATA-SUCCESS",
+                userMetaData: response.data
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
 // Update password 
 export const changePassword=(userId, token, newPassword, newPasswordConfirm)=>{
     return async(dispatch)=>{
-        console.log(newPassword);
         try {
             const headers = {
                 Accept:'*/*',
@@ -102,7 +115,6 @@ export const changePassword=(userId, token, newPassword, newPasswordConfirm)=>{
             const response = await axios.put(`https://mern-recipes.herokuapp.com/users/changePassword/${userId}`, data,
             {headers}
             );
-            console.log(response.data.message)
             dispatch({
                 type:"CHANGE-PASSWORD-SUCCESS",
                 successMsgPasswordChange:response.data.message
@@ -163,7 +175,7 @@ export const deletUser =(userId, myCurrentProfilePicture, token)=>{
                   }, 
                 data:data
             })
-            console.log(response);
+            // console.log(response);
             dispatch({
                 type: "DELETE-USER-SUCCESS",
                 modalBodyDeleteUser: response.data.message

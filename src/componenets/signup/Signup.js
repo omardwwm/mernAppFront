@@ -56,7 +56,7 @@ const Signup =(props)=>{
         // TODO: add checkbox to form
         // const isCheckBox = event.target.type === "checkbox";
         // console.log(event.target.name);
-        const { name, value, checked} = event.target; 
+        const { name, value} = event.target; 
         let errors = form.errors;
         switch (name) {
             case 'username': 

@@ -1,6 +1,7 @@
 
 const initialState = {
     user: null,
+    userMetaData:{},
     professionnals:[],
     userToken: null,
     isUserLogged: false,
@@ -62,6 +63,12 @@ export const userReducer = (state = initialState, action) =>{
                 // showModale:action.showModale,
                 // modalTitle:action.modalTitle,
                 modalBody:action.modalBody 
+            };
+            
+        case "GET-USERMETADATA-SUCCESS":
+            return{
+                ...state,
+                userMetaData: action.userMetaData
             };
 
         case "GET-PRO-SUCCESS":

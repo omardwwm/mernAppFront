@@ -13,6 +13,7 @@ import RecipeDetails from "./componenets/recipes/recipeDetails";
 import UpdateRecipe from "./componenets/recipes/UpdateRecipe";
 import Profile from "./componenets/profile/Profile";
 import Chefs from "./componenets/chefs/Chefs";
+import ChefProfile from "./componenets/chefs/ChefProfile";
 import ForgotPassword from "./componenets/login/ForgotPaasword";
 import ResetPassword from "./componenets/login/ResetPassword";
 import NavBar, {} from "../src/componenets/navBar/navBar";
@@ -36,6 +37,7 @@ function App() {
             <Route exact path="/updateRecipe/:id" component={UpdateRecipe} />
             <Route exact path="/recipes" component={Recipes} />
             <Route exact path="/chefs" component={Chefs} />
+            <Route exact path="/chef/:_id" component={ChefProfile} />
             <Route exact path="/recipesDetails/:_id" component={RecipeDetails} />
           </Switch>
           <Footer/>

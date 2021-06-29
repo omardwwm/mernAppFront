@@ -4,7 +4,7 @@ export const createRecipe = (formData, config)=>{
     return async(dispatch)=>{
         try {
             const response = await axios.post('https://mern-recipes.herokuapp.com/recipes/add-recipe', formData, config);
-            console.log(response);
+            // console.log(response);
             dispatch({
                 type: "CREATE-RECIPE",
                 recipe: response.data,
@@ -70,7 +70,7 @@ export const updateRecipe=(recipeId, formData,config)=>{
     return async(dispatch)=>{
         try {
             const response = await axios.put(`https://mern-recipes.herokuapp.com/recipes/update/${recipeId}`,formData, config);
-            console.log(response);
+            // console.log(response);
             dispatch({
                 type: "UPDATE-RECIPE-SUCCESS",
                 recipe: response.data,
@@ -94,7 +94,7 @@ export const postComment =(recipeId, userId, commentContent, config)=>{
     return async(dispatch)=>{
         try {
             const response = await axios.post(`https://mern-recipes.herokuapp.com/comments/add/${recipeId}/${userId}`, {commentContent}, config);
-            console.log(response);
+            // console.log(response);
             dispatch({
                 type:"POST-COMMENT-SUCCES",
                 comment: response.data,
@@ -121,8 +121,7 @@ export const deleteRecipe = (recipeId, dataToDelete, token)=>{
                 params: {dataToDelete: dataToDelete}
             }
             );
-            console.log(response);
-            
+            // console.log(response);   
             dispatch({
                 type: "DELETE-RECIPES-SUCCESS",
                 showModale:true,
