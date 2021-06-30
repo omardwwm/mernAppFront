@@ -183,7 +183,7 @@ const checkCompleteFields =()=>{
         }else{
             setLoginCheckMessage('Vous devez renseigner tous les champs !')
         }
-        console.log(isUserLogged);
+        // console.log(isUserLogged);
     }
     useEffect(()=>{
         if(isUserLogged){
@@ -193,7 +193,7 @@ const checkCompleteFields =()=>{
             }, 2500)
         }
     }, [isUserLogged])
-    console.log(isUserLogged);
+    // console.log(isUserLogged);
     useEffect(()=>{
         localStorage.getItem("userToken");
         // setModal(showModale);
