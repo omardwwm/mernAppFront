@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from "react-redux";
 import { Link } from "react-router-dom";
 import { Card, CardTitle, CardSubtitle, CardText} from "reactstrap";
 import {getProfessionnals} from "../../redux/actions/UserActions";
+import avatar from "../../../src/assets/avatar-unisex.png";
 import "./chefs.css";
 
 
@@ -35,7 +36,7 @@ const Chefs = ()=>{
                             </CardTitle>
                             <img className="img-fluid chefPic"
                                 // src={`https://mern-recipes.herokuapp.com${chef.profilePicture}`}
-                                src={chef.profilePicture}
+                                src={chef.profilePicture? chef.profilePicture : avatar}
                                 alt="illustration-profile-chef"
                             />
                             {chef.recipes.length ===0 ?(

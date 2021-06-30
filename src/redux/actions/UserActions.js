@@ -12,7 +12,7 @@ export const registerUser = (formData, Headers)=>{
             const response =  await axios.post('https://mern-recipes.herokuapp.com/users/register', formData, Headers);
             // console.log(response);
             dispatch({
-                type: "REGISTER",
+                type: "REGISTER-SUCCES",
                 user: response.data.savedNewUser,
                 token: response.data.token,
                 showModale:true,
@@ -27,11 +27,12 @@ export const registerUser = (formData, Headers)=>{
         } catch (error) {
             console.log(error)
             dispatch({
-                type: "REGISTER",
+                type: "REGISTER-FAILLUR",
                 showModale:true,
                 modalTitle: "Sever error redux test",
                 modalBody: error.response.data.message,
-                modalImage:modalImgFailed             
+                modalImage:modalImgFailed,
+                isUserLogged: false           
             })
             
         }

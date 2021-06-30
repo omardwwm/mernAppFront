@@ -18,7 +18,7 @@ const initialState = {
 
 export const userReducer = (state = initialState, action) =>{
     switch(action.type){
-        case "REGISTER":
+        case "REGISTER-SUCCES":
             return {
                 ...state,
                 user: action.user,
@@ -30,7 +30,18 @@ export const userReducer = (state = initialState, action) =>{
                 modalImage:action.modalImage,
                 isUserLogged: action.isUserLogged
             };
-            
+        case "REGISTER-FAILLUR":
+            return{
+                ...state,
+                user:null,
+                userToken: null,
+                showModale: action.showModale,
+                modalTitle: action.modalTitle,
+                modalBody: action.modalBody,
+                modalImage:action.modalImage,
+                isUserLogged: action.isUserLogged
+
+            }
         case "SHOW_CONDITIONS":
             return {
                 ...state,

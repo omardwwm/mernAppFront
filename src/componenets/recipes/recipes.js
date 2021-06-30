@@ -6,6 +6,7 @@ import axios from "axios";
 import { Form, Button} from 'reactstrap';
 import {GiCook} from 'react-icons/gi';
 import {AiOutlineLike} from 'react-icons/ai';
+import ClipLoader from "react-spinners/ClipLoader";
 // import {SiCodechef} from 'react-icons/si';
 import "./recipes.css";
 
@@ -101,7 +102,10 @@ const Recipes =(props)=>{
     if(!recipes){
         return <p>Looding ...</p>
     }else if(recipes.length === 0){ 
-        return <p>Pas de recettes pour le moment</p>
+        return <p>
+                Pas de recettes pour le moment
+                {/* <ClipLoader color='#fff' loading={true} size={48} /> */}
+            </p>
     }else
     return (
         <div className="recipes">

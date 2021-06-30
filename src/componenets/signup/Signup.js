@@ -41,15 +41,12 @@ const Signup =(props)=>{
     // const [ModalTitle, setModalTitle] = useState("");
     const modalTitle = useSelector(state=> state.userReducer.modalTitle);
     const modalButtonDisabled = useSelector(state=>state.userReducer.modalButtonDisabled);
-    // const isUserLogged = useSelector(state=>state.userReducer.isUserLogged);
+    const isUserLogged = useSelector(state=>state.userReducer.isUserLogged);
     const [loginCheckMessage, setLoginCheckMessage] = useState('');
     // const [modalButtonDisabled, setModalButtonDisabled] = useState(false)
     // const [myImage, setMyImage] = useState(modalImage)
-
     const validEmailRegex = RegExp(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i);
-    
     const [profilePicture, setProfilePicture] = useState("");
-
 
     const onChangeValue=(event)=>{
         event.preventDefault();
@@ -133,6 +130,27 @@ const Signup =(props)=>{
         // setModalButtonDisabled(true)
         // setModalBody(<Conditions onClick={()=>setModalButtonDisabled(!setModalButtonDisabled)} />)  
     }
+// check if all form fields are complete
+const checkCompleteFields =()=>{
+    let formIsValid = true;
+    if(!form.email){
+        formIsValid = false;
+        form.errors.emailError = 'L\'adresse mail est obligatoire';
+    };
+    if(!form.username){
+        formIsValid = false;
+        form.errors.usernameError = 'Ce champs est obligatoire';
+    };
+    if(!form.password){
+        formIsValid = false;
+        form.errors.passwordError = 'Le mot de passe est obligatoire';
+    };
+    if(!form.passwordConfirm){
+        formIsValid = false;
+        form.errors.passwordConfirmError = 'Vous devez confirmer le mot de passe';
+    }
+    return formIsValid;
+}
 
     const userCreate = (event)=>{
         event.preventDefault();
@@ -148,28 +166,34 @@ const Signup =(props)=>{
         formData.append('profilePicture',profilePicture);
         // formData.append('role',form.role);
         formData.append('isPro', form.isPro);
-        // console.log(formData);
-        if(!form.email || !form.username || !form.password || !form.passwordConfirm){
-            setLoginCheckMessage('Vous devez renseigner tous les champs !')
-        }else{
+        if(checkCompleteFields()){
             dispatch(registerUser(formData, config));
-            // console.log(profilePicture);
             setModal(true);
             localStorage.getItem("userToken");
+            // setTimeout(() => {
+            //     setModal(false);
+            //     history.push("/recipes");
+            // }, 2500)
+            if(isUserLogged){
+                setTimeout(() => {
+                    setModal(false);
+                    history.push("/recipes");
+                }, 2500)
+            }
+        }else{
+            setLoginCheckMessage('Vous devez renseigner tous les champs !')
+        }
+        console.log(isUserLogged);
+    }
+    useEffect(()=>{
+        if(isUserLogged){
             setTimeout(() => {
                 setModal(false);
                 history.push("/recipes");
-            }, 3000)
-            }
-        
-        // if(isUserLogged === true){
-        //     setTimeout(() => {
-        //         history.push("/recipes")
-        //     }, 3000);}
-        // setMyImage(modalImage)
-        // const isValid = validation();
-    }
-    
+            }, 2500)
+        }
+    }, [isUserLogged])
+    console.log(isUserLogged);
     useEffect(()=>{
         localStorage.getItem("userToken");
         // setModal(showModale);
@@ -238,7 +262,7 @@ const Signup =(props)=>{
                                 type="checkbox" label="isPro" name="isPro" id="isPro" checked={form.isPro}
                                 onClick={onCheckCheckBox} 
                                 /> 
-                                 Etes vous un professionnel <br></br>                       
+                                 Etes vous un professionnel ou un chef <br></br>                       
                             </Label>
                         </FormGroup>
                         <FormGroup check>
