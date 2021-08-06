@@ -239,15 +239,26 @@ const RecipeDetails = (props)=>{
                         <div className="likeDiv">
                         {testRecipe.likes? (
                                 <>
-                                    {testRecipe.likes.length}&nbsp;&nbsp;{testRecipe.likes.length ===1 ? 'LIKE' : 'LIKES'} 
+                                    {/* {testRecipe.likes.length}&nbsp;&nbsp;{testRecipe.likes.length ===1 ? 'LIKE' : 'LIKES'}  */}
                                     {testRecipe.likes.includes(userId)?(
-                                        <AiOutlineLike onClick={unlikeRecipe} style={{color:'#0ed4f7', fontSize:'30px'}}/>
-                                    ):<AiOutlineLike onClick={likeRecipe} style={{color:'grey', fontSize:'30px'}}/>}
+                                        <p>
+                                            {testRecipe.likes.length -1 ===0 ?
+                                                <p><AiOutlineLike onClick={unlikeRecipe} style={{color:'#0ed4f7', fontSize:'30px'}}/> Vous aimez</p> :
+                                                <p><AiOutlineLike onClick={unlikeRecipe} style={{color:'#0ed4f7', fontSize:'30px'}}/>vous et {testRecipe.likes.length -1 ===1? <span> 1 autre personne</span>:<span>{testRecipe.likes.length -1 }&nbsp;autres personnes</span>}</p>
+                                            }
+                                            
+                                        </p>
+                                        // <AiOutlineLike onClick={unlikeRecipe} style={{color:'#0ed4f7', fontSize:'30px'}}/>
+                                    ):
+                                    <p>{testRecipe.likes && testRecipe.likes.length}&nbsp;<AiOutlineLike onClick={likeRecipe} style={{color:'grey', fontSize:'30px'}}/></p>
+                                        }
                                     
                                 </> 
                                 
                             ):
-                                <AiOutlineLike onClick={likeRecipe} style={{color:'grey', fontSize:'30px'}}/>
+                                <>
+                                    <p>0&nbsp;<AiOutlineLike onClick={likeRecipe} style={{color:'grey', fontSize:'30px'}}/></p>        
+                                </>    
                             }  
                         </div>  
                     </div>            
